@@ -4,10 +4,10 @@ User.create(name: 'Hanvid', username: 'hanvid_lee', email: 'hanvid@lee.com', pas
 # User.create(name: 'Nelson', username: 'nelsonn', email: 'nelson@chang.com', password: 'password')
 
 # create workouts
-Workout.create(picture: 'https://randomuser.me/api/portraits/women/1.jpg', descripition: 'today was hard, i did like soo much work #sweat')
-Workout.create(picture: 'https://randomuser.me/api/portraits/men/2.jpg', descripition: 'Wow, I feel so energized and refreshed after that workout! Its amazing how much better I feel when I take care of my body.')
-Workout.create(picture: 'https://randomuser.me/api/portraits/women/3.jpg', descripition: 'My muscles are definitely feeling the burn, but it was totally worth it. I know Im making progress towards my fitness goals.')
-Workout.create(picture: 'https://randomuser.me/api/portraits/men/4.jpg', descripition: 'I was really dreading going to the gym today, but I pushed through and I feel proud of myself for sticking to my routine.')
+Workout.create(picture: 'https://randomuser.me/api/portraits/women/1.jpg', description: 'today was hard, i did like soo much work #sweat')
+Workout.create(picture: 'https://randomuser.me/api/portraits/men/2.jpg', description: 'Wow, I feel so energized and refreshed after that workout! Its amazing how much better I feel when I take care of my body.')
+Workout.create(picture: 'https://randomuser.me/api/portraits/women/3.jpg', description: 'My muscles are definitely feeling the burn, but it was totally worth it. I know Im making progress towards my fitness goals.')
+Workout.create(picture: 'https://randomuser.me/api/portraits/men/4.jpg', description: 'I was really dreading going to the gym today, but I pushed through and I feel proud of myself for sticking to my routine.')
 
 # create days
 Day.create(month: 'May', day: 1, year: 2023, empty: false)
