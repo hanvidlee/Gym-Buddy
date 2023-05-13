@@ -10,10 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_05_13_195354) do
+ActiveRecord::Schema.define(version: 2023_05_13_215947) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "day_workouts", force: :cascade do |t|
+    t.bigint "day_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "workout_id", null: false
+    t.index ["day_id"], name: "index_day_workouts_on_day_id"
+    t.index ["workout_id"], name: "index_day_workouts_on_workout_id"
+  end
 
   create_table "days", force: :cascade do |t|
     t.string "month"
@@ -48,6 +57,24 @@ ActiveRecord::Schema.define(version: 2023_05_13_195354) do
     t.index ["exercise_set_id"], name: "index_reps_on_exercise_set_id"
   end
 
+  create_table "set_workouts", force: :cascade do |t|
+    t.bigint "exercise_set_id", null: false
+    t.bigint "workout_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["exercise_set_id"], name: "index_set_workouts_on_exercise_set_id"
+    t.index ["workout_id"], name: "index_set_workouts_on_workout_id"
+  end
+
+  create_table "user_workouts", force: :cascade do |t|
+    t.bigint "workout_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_user_workouts_on_user_id"
+    t.index ["workout_id"], name: "index_user_workouts_on_workout_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
@@ -67,7 +94,13 @@ ActiveRecord::Schema.define(version: 2023_05_13_195354) do
     t.index ["day_id"], name: "index_workouts_on_day_id"
   end
 
+  add_foreign_key "day_workouts", "days"
+  add_foreign_key "day_workouts", "workouts"
   add_foreign_key "exercise_sets", "exercises"
   add_foreign_key "reps", "exercise_sets"
+  add_foreign_key "set_workouts", "exercise_sets"
+  add_foreign_key "set_workouts", "workouts"
+  add_foreign_key "user_workouts", "users"
+  add_foreign_key "user_workouts", "workouts"
   add_foreign_key "workouts", "days"
 end
