@@ -10,10 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_05_13_174230) do
+ActiveRecord::Schema.define(version: 2023_05_13_183523) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "days", force: :cascade do |t|
+    t.string "month"
+    t.integer "day"
+    t.integer "year"
+    t.boolean "empty"
+    t.datetime "deleted_at"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "name"
@@ -24,4 +34,15 @@ ActiveRecord::Schema.define(version: 2023_05_13_174230) do
     t.string "password"
   end
 
+  create_table "workouts", force: :cascade do |t|
+    t.bigint "day_id", null: false
+    t.text "picture"
+    t.string "description"
+    t.datetime "deleted_at"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["day_id"], name: "index_workouts_on_day_id"
+  end
+
+  add_foreign_key "workouts", "days"
 end
