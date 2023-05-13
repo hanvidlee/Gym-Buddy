@@ -24,7 +24,7 @@ default: &default
 development:
   <<: *default
   database: gymbuddy_development
-  username: labber
+  username: vagrant
   password: 123
 
 
