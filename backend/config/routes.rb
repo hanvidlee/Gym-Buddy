@@ -17,7 +17,7 @@ Rails.application.routes.draw do
 
     resources :set_workouts
 
-    
+    resources :days
 
   end
 end
