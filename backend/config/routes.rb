@@ -14,6 +14,10 @@ Rails.application.routes.draw do
     resources :reps, only: [:index, :show, :new, :create, :delete]
 
     resources :exercise_sets
+
+    resources :set_workouts
+
     
+
   end
 end
