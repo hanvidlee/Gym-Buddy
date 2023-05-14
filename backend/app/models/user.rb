@@ -1,5 +1,6 @@
 class User < ApplicationRecord
-  # user information (columns)
-  # user data
-  # user validations
+  has_many :user_workouts
+  has_many :workouts, through: :user_workouts
+
+  validates :name, :username, :email, :password, presence: true
 end
