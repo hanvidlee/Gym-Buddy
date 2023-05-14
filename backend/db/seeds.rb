@@ -1,7 +1,7 @@
 # create users
 User.create(name: 'Hanvid', username: 'hanvid_lee', email: 'hanvid@lee.com', password: 'password')
-# User.create(name: 'Dina', username: 'dinasaur', email: 'dina@saur.com', password: 'password')
-# User.create(name: 'Nelson', username: 'nelsonn', email: 'nelson@chang.com', password: 'password')
+User.create(name: 'Dina', username: 'dinasaur', email: 'dina@saur.com', password: 'password')
+User.create(name: 'Nelson', username: 'nelsonn', email: 'nelson@cheng.com', password: 'password')
 
 # create days
 day1 = Day.create(month: 'May', day: 1, year: 2023, empty: false)
@@ -51,16 +51,16 @@ ExerciseSet.create(exercise_id: 9, weight: 1000, quantity: 2)
 ExerciseSet.create(exercise_id: 10, weight: 10, quantity: 6)
 
 # create exercises
-Exercise.create(name: 'Push Ups')           #1
-Exercise.create(name: 'Bench Press')        #2
-Exercise.create(name: 'Bentover Rows')      #3
-Exercise.create(name: 'Sit Ups')            #4
-Exercise.create(name: 'Shoulder Press')     #5
-Exercise.create(name: 'Squats')             #6
-Exercise.create(name: 'Pull Ups')           #7
-Exercise.create(name: 'Deadlifts')          #8
-Exercise.create(name: 'Hip Thrusts')        #9
-Exercise.create(name: 'Cable Flys')         #10
+Exercise.create(name: 'Push Ups')       
+Exercise.create(name: 'Bench Press')    
+Exercise.create(name: 'Bentover Rows')  
+Exercise.create(name: 'Sit Ups')        
+Exercise.create(name: 'Shoulder Press') 
+Exercise.create(name: 'Squats')         
+Exercise.create(name: 'Pull Ups')       
+Exercise.create(name: 'Deadlifts')      
+Exercise.create(name: 'Hip Thrusts')    
+Exercise.create(name: 'Cable Flys')     
 
 # create reps
 Rep.create(exercise_set_id: 1, quantity: 10)
@@ -70,7 +70,6 @@ Rep.create(exercise_set_id: 3, quantity: 5)
 Rep.create(exercise_set_id: 3, quantity: 8)
 Rep.create(exercise_set_id: 4, quantity: 30)
 Rep.create(exercise_set_id: 5, quantity: 8)
-
 Rep.create(exercise_set_id: 8, quantity: 5)
 Rep.create(exercise_set_id: 9, quantity: 15)
 Rep.create(exercise_set_id: 10, quantity: 12)
