@@ -57,7 +57,7 @@ ActiveRecord::Schema.define(version: 2023_05_13_221257) do
     t.index ["exercise_set_id"], name: "index_reps_on_exercise_set_id"
   end
 
-  create_table "set_workout", force: :cascade do |t|
+  create_table "set_workouts", force: :cascade do |t|
     t.bigint "exercise_set_id", null: false
     t.bigint "workout_id", null: false
     t.datetime "created_at", precision: 6, null: false
