@@ -19,5 +19,7 @@ Rails.application.routes.draw do
 
     resources :days
 
+    resources :day_workouts
+
   end
 end
