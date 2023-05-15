@@ -7,6 +7,9 @@ const DropdownMenu = () => {
   const [open, setOpen] = useState(false);
   const menuRef = useRef();
 
+  // hook for setting value to the menu-trigger
+  const [selectedValue, setSelectedValue] = useState('');
+
   // fetch exercise api from backend
   useEffect(() => {
     fetch('/api/exercises')
@@ -31,6 +34,12 @@ const DropdownMenu = () => {
     };
   }, []);
 
+  const itemClickHandler = (event) => {
+    setSelectedValue(event.target.innerText);
+    setOpen(false);
+  }
+
+
   return (
     <div className="menu-container" ref={menuRef}>
       <div
@@ -39,14 +48,14 @@ const DropdownMenu = () => {
           setOpen(!open);
         }}
       >
-        <p>Select Exercises</p>
+        <p>{selectedValue ? selectedValue : 'Select Exercise'}</p>
       </div>
 
       <div className={`dropdown-menu ${open ? 'active' : 'inactive'}`}>
         <h3>Filter</h3>
         <ul>
           {exercises.map((exercise) => (
-            <DropdownItem key={exercise.id} text={exercise.name} handleClick={() => {setOpen(false)}}/>
+            <DropdownItem key={exercise.id} text={exercise.name} handleClick={itemClickHandler}/>
           ))}
         </ul>
       </div>
