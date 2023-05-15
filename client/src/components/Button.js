@@ -1,6 +1,8 @@
 import React from 'react';
 import classNames from 'classnames';
-import { Button } from '@material-ui/core';
+import Button from '@mui/material/Button';
+import './Button.scss'
+
 
 export default function customButton(props) {
     const buttonClass = classNames('button', {
@@ -12,8 +14,10 @@ export default function customButton(props) {
     return (
        <>
          <Button
+           variant="filledTonal"
            className={buttonClass}
            onClick={props.onClick}
+          
         //    disabled={props.disabled}
          >
            {props.children}
