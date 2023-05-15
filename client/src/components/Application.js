@@ -1,6 +1,7 @@
 import '../App.css';
 import useApplicationData from '../hooks/useApplicationData';
-import Button from '../Button'
+import Button from './Button'
+import React, { useReducer } from 'react';
 
 function Application(props) {
   const checkConfirm = () => {
@@ -17,7 +18,8 @@ function Application(props) {
 ));
 return (<div className="App" >
 <h1> Users </h1>
-<Button onClick={checkConfirm} confirm>Confirm</Button>
+<Button 
+onClick={checkConfirm} confirm>Confirm</Button>
 <Button onClick={checkDanger} danger>Danger</Button>
 <ul> {userList} </ul>
 </div >
