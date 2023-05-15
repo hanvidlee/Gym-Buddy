@@ -2,7 +2,7 @@ import '../App.css';
 import useApplicationData from '../hooks/useApplicationData';
 import Button from './Button'
 import React, { useReducer } from 'react';
-import DropdownMenu from './ExerciseDropdownMenu';
+import Navigation from './Navigation';
 
 function Application(props) {
   const checkConfirm = () => {
@@ -18,6 +18,7 @@ function Application(props) {
   const userList = state.users.map((user) => (<li key={user.id} > {user.name} {user.email} </li>
 ));
 return (<div className="App" >
+<Navigation/>
 <h1> Users </h1>
 <Button 
 onClick={checkConfirm} confirm>Confirm</Button>
