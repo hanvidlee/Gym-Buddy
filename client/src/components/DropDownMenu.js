@@ -1,70 +1,86 @@
-import React, { useState } from 'react';
-import Dropdown from 'react-bootstrap/Dropdown';
-import Form from 'react-bootstrap/Form';
+import React, { useState, useEffect, useRef } from 'react';
 
-function DropdownMenu(props) {
-  // The forwardRef is important!!
-  // Dropdown needs access to the DOM node in order to position the Menu
-  const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
-    <a
-      href=""
-      ref={ref}
-      onClick={(e) => {
-        e.preventDefault();
-        onClick(e);
-      }}
-    >
-      {children}
-      &#x25bc;
-    </a>
-  ));
+const DropdownMenu = () => {
+  const [exercises, setExercises] = useState([]);
+  const [records, setRecords] = useState([]);
 
-  // forwardRef again here!
-  // Dropdown needs access to the DOM of the Menu to measure it
-  const CustomMenu = React.forwardRef(
-    ({ children, style, className, 'aria-labelledby': labeledBy }, ref) => {
-      const [value, setValue] = useState('');
+  // hook for opening the menu
+  const [open, setOpen] = useState(false);
+  const menuRef = useRef();
 
-      return (
-        <div
-          ref={ref}
-          style={style}
-          className={className}
-          aria-labelledby={labeledBy}
-        >
-          <Form.Control
-            autoFocus
-            className="mx-3 my-2 w-auto"
-            placeholder="Type to filter..."
-            onChange={(e) => setValue(e.target.value)}
-            value={value}
-          />
-          <ul className="list-unstyled">
-            {React.Children.toArray(children).filter(
-              (child) =>
-                !value || child.props.children.toLowerCase().startsWith(value)
-            )}
-          </ul>
-        </div>
-      );
-    }
+  // hook for setting value to the menu-trigger
+  const [selectedValue, setSelectedValue] = useState('');
+
+  // fetch exercise api from backend
+  useEffect(() => {
+    fetch('/api/exercises')
+      .then((response) => response.json())
+      .then((data) => {
+        setExercises(data);
+        setRecords(data);
+      })
+      .catch((error) => console.log(error));
+  }, []);
+
+  useEffect(() => {
+    const handler = (event) => {
+      if (menuRef.current && !menuRef.current.contains(event.target)) {
+        setOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handler);
+
+    return () => {
+      document.removeEventListener('mousedown', handler);
+    };
+  }, []);
+
+  const itemClickHandler = (event) => {
+    setSelectedValue(event.target.innerText);
+    setOpen(false);
+  };
+
+  const filter = (event) => {
+    const searchItemText = event.target.value.toLowerCase();
+    setRecords(exercises.filter((f) => {
+        return f.name.toLowerCase().includes(searchItemText);
+      })
+    );
+    console.log(event.target.value);
+  };
+
+  return (
+    <div className="menu-container" ref={menuRef}>
+      <div
+        className="menu-trigger"
+        onClick={() => {
+          setOpen(!open);
+        }}
+      >
+        <p>{selectedValue ? selectedValue : 'Select Exercise'}</p>
+      </div>
+
+      <div className={`dropdown-menu ${open ? 'active' : 'inactive'}`}>
+        <input type="text" className="form-control" placeholder='Search' onChange={filter} />
+        <ul>
+          {records.map((exercise) => (
+            <DropdownItem
+              key={exercise.id}
+              text={exercise.name}
+              handleClick={itemClickHandler}
+            />
+          ))}
+        </ul>
+      </div>
+    </div>
   );
+};
 
-  return(
-    <Dropdown>
-      <Dropdown.Toggle as={CustomToggle} id="dropdown-custom-components">
-        {props.children}
-      </Dropdown.Toggle>
-
-      <Dropdown.Menu as={CustomMenu}>
-        <Dropdown.Item eventKey="1">Red</Dropdown.Item>
-        <Dropdown.Item eventKey="2">Blue</Dropdown.Item>
-        <Dropdown.Item eventKey="3" active>
-          Orange
-        </Dropdown.Item>
-        <Dropdown.Item eventKey="1">Red-Orange</Dropdown.Item>
-      </Dropdown.Menu>
-    </Dropdown>
+function DropdownItem(props) {
+  return (
+    <li className="dropdownItem">
+      <p onClick={props.handleClick}>{props.text}</p>
+    </li>
   );
 }
 
