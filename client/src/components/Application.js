@@ -1,6 +1,7 @@
 import '../App.css';
 import useApplicationData from '../hooks/useApplicationData';
 import Button from '../Button';
+import Navigation from './Navigation';
 import DropdownMenu from './DropDownMenu';
 
 
@@ -20,6 +21,7 @@ function Application(props) {
   ));
   return (
     <div className="App">
+    <Navigation/>
       <h1> Users </h1>
       <Button onClick={checkConfirm} confirm>
         Confirm

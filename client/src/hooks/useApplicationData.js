@@ -31,7 +31,7 @@
 
 // export default useApplicationData;
 
-import {
+import React, {
   useEffect,
   useReducer
 } from 'react';

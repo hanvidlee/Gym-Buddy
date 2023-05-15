@@ -5,9 +5,8 @@ class CreateDays < ActiveRecord::Migration[6.1]
       t.integer :day
       t.integer :year
       t.boolean :empty
-      t.datetime :deleted_at
-
       t.timestamps
+      t.timestamp :deleted_at
     end
   end
 end
