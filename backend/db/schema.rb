@@ -49,55 +49,12 @@ ActiveRecord::Schema.define(version: 2023_05_13_221257) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "favourites", id: :serial, force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "product_id"
-    t.datetime "created_at", default: -> { "now()" }, null: false
-    t.datetime "deleted_at"
-    t.index ["user_id", "product_id"], name: "test", unique: true
-  end
-
-  create_table "messages", id: :serial, force: :cascade do |t|
-    t.integer "session_id", null: false
-    t.integer "sender_id", null: false
-    t.text "message"
-    t.datetime "created_at", default: -> { "now()" }
-  end
-
-  create_table "orders", id: :serial, force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "product_id"
-    t.datetime "purchase_time", default: -> { "now()" }, null: false
-    t.boolean "purchased", default: false, null: false
-    t.boolean "removed", default: false, null: false
-  end
-
-  create_table "products", id: :serial, force: :cascade do |t|
-    t.integer "user_id"
-    t.string "title", limit: 255, null: false
-    t.text "description"
-    t.string "picture_url", limit: 255, null: false
-    t.string "thumbnail_url", limit: 255, null: false
-    t.integer "price", default: 0, null: false
-    t.string "condition", limit: 255, null: false
-    t.string "category", limit: 255, null: false
-    t.datetime "created_at"
-    t.boolean "available", default: true, null: false
-    t.boolean "deleted", default: false, null: false
-  end
-
   create_table "reps", force: :cascade do |t|
     t.bigint "exercise_set_id", null: false
     t.integer "quantity"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["exercise_set_id"], name: "index_reps_on_exercise_set_id"
-  end
-
-  create_table "sessions", id: :serial, force: :cascade do |t|
-    t.integer "customer_id"
-    t.integer "product_id"
-    t.text "seller_id"
   end
 
   create_table "set_workouts", force: :cascade do |t|
@@ -138,11 +95,7 @@ ActiveRecord::Schema.define(version: 2023_05_13_221257) do
   add_foreign_key "day_workouts", "days"
   add_foreign_key "day_workouts", "workouts"
   add_foreign_key "exercise_sets", "exercises"
-  add_foreign_key "favourites", "products", name: "favourites_product_id_fkey", on_delete: :cascade
-  add_foreign_key "messages", "sessions", name: "messages_session_id_fkey", on_delete: :cascade
-  add_foreign_key "orders", "products", name: "orders_product_id_fkey", on_delete: :cascade
   add_foreign_key "reps", "exercise_sets"
-  add_foreign_key "sessions", "products", name: "sessions_product_id_fkey", on_delete: :cascade
   add_foreign_key "set_workouts", "exercise_sets"
   add_foreign_key "set_workouts", "workouts"
   add_foreign_key "user_workouts", "users"
