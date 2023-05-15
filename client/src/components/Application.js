@@ -2,6 +2,7 @@ import '../App.css';
 import useApplicationData from '../hooks/useApplicationData';
 import Button from './Button'
 import React, { useReducer } from 'react';
+import DropdownMenu from './ExerciseDropdownMenu';
 
 function Application(props) {
   const checkConfirm = () => {
