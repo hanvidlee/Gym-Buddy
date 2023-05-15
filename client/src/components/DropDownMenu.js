@@ -3,6 +3,9 @@ import React, { useState, useEffect } from 'react';
 const DropdownMenu = () => {
   const [exercises, setExercises] = useState([]);
 
+  // hook for opening the menu
+  const [open, setOpen] = useState(false);
+
   // fetch exercise api from backend
   useEffect(() => {
     fetch('/api/exercises')
@@ -16,11 +19,16 @@ const DropdownMenu = () => {
 
   return (
     <div className="menu-container">
-      <div className="menu-trigger" >
+      <div
+        className="menu-trigger"
+        onClick={() => {
+          setOpen(!open);
+        }}
+      >
         <p>Select Exercises</p>
       </div>
 
-      <div className='dropdown-menu'>
+      <div className={`dropdown-menu ${open ? 'active' : 'inactive'}`}>
         <h3>Filter</h3>
         <ul>
           {exercises.map((exercise) => (
@@ -41,3 +49,4 @@ function DropdownItem(props) {
 }
 
 export default DropdownMenu;
+
