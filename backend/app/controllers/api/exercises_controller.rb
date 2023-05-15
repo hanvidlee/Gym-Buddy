@@ -1,4 +1,4 @@
-class ExercisesController < ApplicationController
+class Api::ExercisesController < ApplicationController
   def index
     muscle = params[:muscle]
     @exercises = ExerciseAPI.get_exercises_by_muscle(muscle)

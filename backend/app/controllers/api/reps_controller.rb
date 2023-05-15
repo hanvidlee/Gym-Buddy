@@ -1,4 +1,4 @@
-class RepsController < ApplicationController
+class Api::RepsController < ApplicationController
   def index
   end
 
