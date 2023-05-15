@@ -3,6 +3,7 @@ import useApplicationData from '../hooks/useApplicationData';
 import Button from '../Button';
 import DropdownMenu from './DropDownMenu';
 
+
 function Application(props) {
   const checkConfirm = () => {
     console.log('CONFIRMED!');
@@ -27,7 +28,7 @@ function Application(props) {
         Danger
       </Button>
       <ul> {userList} </ul>
-      <DropdownMenu>OPTIONS</DropdownMenu>
+      <DropdownMenu/>
     </div>
   );
 }
