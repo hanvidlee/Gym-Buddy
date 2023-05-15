@@ -9,7 +9,7 @@ class Api::ExercisesController < ApplicationController
     http.use_ssl = true
 
     request = Net::HTTP::Get.new(url)
-    request["X-RapidAPI-Key"] = '786ef654bemsh89a3687e7153b6fp13579ejsn98b50a66d1f2'
+    request["X-RapidAPI-Key"] = process.env.API_KEY;
     request["X-RapidAPI-Host"] = 'exercisedb.p.rapidapi.com'
 
     response = http.request(request)
