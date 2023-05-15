@@ -1,8 +1,8 @@
 class CreateUserWorkouts < ActiveRecord::Migration[6.1]
   def change
     create_table :user_workouts do |t|
-      t.references :workout, null: false, foreign_key: true
-      t.references :user, null: false, foreign_key: true
+      t.integer :workout_id
+      t.integer :user_id
 
       t.timestamps
     end
