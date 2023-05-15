@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 const DropdownMenu = () => {
   const [exercises, setExercises] = useState([]);
 
   // hook for opening the menu
   const [open, setOpen] = useState(false);
+  const menuRef = useRef();
 
   // fetch exercise api from backend
   useEffect(() => {
@@ -18,14 +19,20 @@ const DropdownMenu = () => {
   }, []);
 
   useEffect(() => {
-    const handler = () => {
-      setOpen(false);
+    const handler = (event) => {
+      if(menuRef.current && !menuRef.current.contains(event.target)) {
+        setOpen(false);
+      }
     };
     document.addEventListener('mousedown', handler);
-  });
+
+    return () => {
+      document.removeEventListener('mousedown', handler);
+    };
+  }, []);
 
   return (
-    <div className="menu-container">
+    <div className="menu-container" ref={menuRef}>
       <div
         className="menu-trigger"
         onClick={() => {
@@ -39,7 +46,7 @@ const DropdownMenu = () => {
         <h3>Filter</h3>
         <ul>
           {exercises.map((exercise) => (
-            <DropdownItem key={exercise.id} text={exercise.name} />
+            <DropdownItem key={exercise.id} text={exercise.name} handleClick={() => {setOpen(false)}}/>
           ))}
         </ul>
       </div>
@@ -50,7 +57,7 @@ const DropdownMenu = () => {
 function DropdownItem(props) {
   return (
     <li className="dropdownItem">
-      <p>{props.text}</p>
+      <p onClick={props.handleClick}>{props.text}</p>
     </li>
   );
 }
