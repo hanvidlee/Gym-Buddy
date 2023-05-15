@@ -17,6 +17,13 @@ const DropdownMenu = () => {
       .catch((error) => console.log(error));
   }, []);
 
+  useEffect(() => {
+    const handler = () => {
+      setOpen(false);
+    };
+    document.addEventListener('mousedown', handler);
+  });
+
   return (
     <div className="menu-container">
       <div
