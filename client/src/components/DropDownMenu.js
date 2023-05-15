@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 
 const DropdownMenu = () => {
   const [exercises, setExercises] = useState([]);
+  const [records, setRecords] = useState([]);
 
   // hook for opening the menu
   const [open, setOpen] = useState(false);
@@ -15,15 +16,15 @@ const DropdownMenu = () => {
     fetch('/api/exercises')
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
         setExercises(data);
+        setRecords(data);
       })
       .catch((error) => console.log(error));
   }, []);
 
   useEffect(() => {
     const handler = (event) => {
-      if(menuRef.current && !menuRef.current.contains(event.target)) {
+      if (menuRef.current && !menuRef.current.contains(event.target)) {
         setOpen(false);
       }
     };
@@ -37,8 +38,16 @@ const DropdownMenu = () => {
   const itemClickHandler = (event) => {
     setSelectedValue(event.target.innerText);
     setOpen(false);
-  }
+  };
 
+  const filter = (event) => {
+    const searchItemText = event.target.value.toLowerCase();
+    setRecords(exercises.filter((f) => {
+        return f.name.toLowerCase().includes(searchItemText);
+      })
+    );
+    console.log(event.target.value);
+  };
 
   return (
     <div className="menu-container" ref={menuRef}>
@@ -52,10 +61,14 @@ const DropdownMenu = () => {
       </div>
 
       <div className={`dropdown-menu ${open ? 'active' : 'inactive'}`}>
-        <h3>Filter</h3>
+        <input type="text" className="form-control" placeholder='Search' onChange={filter} />
         <ul>
-          {exercises.map((exercise) => (
-            <DropdownItem key={exercise.id} text={exercise.name} handleClick={itemClickHandler}/>
+          {records.map((exercise) => (
+            <DropdownItem
+              key={exercise.id}
+              text={exercise.name}
+              handleClick={itemClickHandler}
+            />
           ))}
         </ul>
       </div>
@@ -72,4 +85,3 @@ function DropdownItem(props) {
 }
 
 export default DropdownMenu;
-
