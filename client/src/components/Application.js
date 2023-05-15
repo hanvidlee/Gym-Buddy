@@ -1,6 +1,6 @@
 import '../App.css';
 import useApplicationData from '../hooks/useApplicationData';
-import Button from '../Button';
+import Button from './Button';
 import Navigation from './Navigation';
 import DropdownMenu from './DropDownMenu';
 
