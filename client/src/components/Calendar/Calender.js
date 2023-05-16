@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { generateDate } from './calendarUtil';
+import { generateDate, months } from './calendarUtil';
 import cn from './cn';
 import dayjs from 'dayjs';
+import { GrFormPrevious, GrFormNext } from 'react-icons/gr';
 
 export default function Calendar() {
   console.log(generateDate());
@@ -13,10 +14,18 @@ export default function Calendar() {
   const [today, setToday] = useState(currentDate);
 
   return (
-    <div className='flex w-1/2 mx-auto divide-x-2 gap-10 h-screen items-center bg-white'>
+    <div className="flex w-2/3 mx-auto divide-x-2 gap-10 h-screen items-center bg-white">
       <div className="w-96 h-96">
-        <div>
-          <h1>{today.month()}</h1>
+        <div className="flex justify-between">
+          <h1>
+            {months[today.month()]}, {today.year()}
+          </h1>
+
+          <div className="flex items-center gap-5">
+            <GrFormPrevious className="w-5 h-5 cursor-pointer" />
+            <h1 className="cursor-pointer">Today</h1>
+            <GrFormNext className="w-5 h-5 cursor-pointer" />
+          </div>
         </div>
 
         <div className="w-full grid grid-cols-7 text-gray-500">
@@ -51,7 +60,7 @@ export default function Calendar() {
         </div>
       </div>
 
-      <div className='w-96 h-96 px-5'>
+      <div className="w-96 h-96 px-5">
         <h1>Workout for the day.</h1>
         <p>No workout for today.</p>
       </div>
