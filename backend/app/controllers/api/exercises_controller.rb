@@ -9,7 +9,7 @@ class Api::ExercisesController < ApplicationController
     http.use_ssl = true
 
     request = Net::HTTP::Get.new(url)
-    request["X-RapidAPI-Key"] = process.env.API_KEY;
+    request["X-RapidAPI-Key"] = Rails.application.config.api_key
     request["X-RapidAPI-Host"] = 'exercisedb.p.rapidapi.com'
 
     response = http.request(request)
