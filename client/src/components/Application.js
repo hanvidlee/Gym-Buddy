@@ -1,8 +1,9 @@
 import '../App.css';
 import useApplicationData from '../hooks/useApplicationData';
 import Button from './Button';
+import Navigation from './Navigation';
 import DropdownMenu from './DropDownMenu';
-import React, { useReducer } from 'react';
+
 
 function Application(props) {
   const checkConfirm = () => {
@@ -20,16 +21,16 @@ function Application(props) {
   ));
   return (
     <div className="App">
+    <Navigation/>
       <h1> Users </h1>
-      <Button 
-      onClick={checkConfirm} confirm>
+      <Button onClick={checkConfirm} confirm>
         Confirm
       </Button>
       <Button onClick={checkDanger} danger>
         Danger
       </Button>
       <ul> {userList} </ul>
-      <DropdownMenu>OPTIONS</DropdownMenu>
+      <DropdownMenu/>
     </div>
   );
 }

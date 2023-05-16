@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   namespace :api do
     resources :users
     post 'login', to: 'users#login'
+    post 'register', to: 'users#register'
 
     resources :workouts
     

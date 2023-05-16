@@ -1,9 +1,11 @@
 class CreateWorkouts < ActiveRecord::Migration[6.1]
   def change
     create_table :workouts do |t|
-      t.string :picture
+      t.references :day, null: false, foreign_key: true
+      t.text :picture
       t.string :description
-      t.timestamp :deleted_at
+      t.datetime :deleted_at
+
       t.timestamps
     end
   end
