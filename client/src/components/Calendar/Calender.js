@@ -1,5 +1,6 @@
 import React from 'react';
 import { generateDate } from './calendarUtil';
+import cn from './cn';
 
 export default function Calendar() {
   console.log(generateDate());
@@ -23,7 +24,12 @@ export default function Calendar() {
         {generateDate().map(({ date, currentMonth, today }, index) => {
           return (
             <div key={index} className="h-14 grid place-content-center">
-              <h1>{date.date()}</h1>
+              <h1 className={cn(
+                currentMonth ? '' : 'text-gray-400',
+                today ? 'bg-red-600 text-white' :  '',
+                'h-10 w-10 grid place-content-center rounded-full hover:bg-black hover:text-white transition-all cursor-pointer'
+              )}>
+                {date.date()}</h1>
             </div>
           );
         })}
