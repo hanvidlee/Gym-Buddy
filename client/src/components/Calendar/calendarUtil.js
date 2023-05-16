@@ -13,9 +13,9 @@ export const generateDate = (
 
   // create prefix date
   for (let i = 0; i < firstDateOfMonth.day(); i++) {
-    arrayOfDate.push({ 
+    arrayOfDate.push({
       date: firstDateOfMonth.day(i),
-      currentMonth: false
+      currentMonth: false,
     });
   }
 
@@ -28,7 +28,9 @@ export const generateDate = (
     arrayOfDate.push({
       date: firstDateOfMonth.date(i),
       currentMonth: true,
-      today: firstDateOfMonth.date(i).toDate().toDateString() === day.js().toDate().toDateString()
+      today:
+        firstDateOfMonth.date(i).toDate().toDateString() ===
+        dayjs().toDate().toDateString(), // dayjs() returns current date and time as object
     });
   }
 
