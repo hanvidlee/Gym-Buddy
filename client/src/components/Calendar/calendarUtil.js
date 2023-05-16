@@ -25,5 +25,12 @@ export const generateDate = (
     arrayOfDate.push(firstDateOfMonth.date(i));
   }
 
-  return [arrayOfDate];
+  // generate suffix date
+  const remaining = 42 - arrayOfDate.length
+
+  for (let i = lastDateOfMonth.date() + 1; i <= lastDateOfMonth.date() + remaining; i++) {
+    arrayOfDate.push(lastDateOfMonth.date(i))
+  }
+
+  return arrayOfDate;
 };
