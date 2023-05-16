@@ -14,5 +14,5 @@ export default function Navigation(props) {
         <Button variant="outline-success">Logout</Button>
       </Container>
     </Navbar>
-  )
-  }
+  );
+}
