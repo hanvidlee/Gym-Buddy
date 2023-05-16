@@ -3,6 +3,7 @@ import useApplicationData from '../hooks/useApplicationData';
 import Button from './Button';
 import Navigation from './Navigation';
 import DropdownMenu from './DropDownMenu';
+import Calendar from './Calendar/calendarUtil';
 
 
 function Application(props) {
@@ -31,6 +32,7 @@ function Application(props) {
       </Button>
       <ul> {userList} </ul>
       <DropdownMenu/>
+      <Calendar/>
     </div>
   );
 }
