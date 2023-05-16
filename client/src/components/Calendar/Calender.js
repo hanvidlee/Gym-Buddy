@@ -1,16 +1,25 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { generateDate } from './calendarUtil';
 import cn from './cn';
+import dayjs from 'dayjs';
 
 export default function Calendar() {
   console.log(generateDate());
 
   const days = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
 
+  const currentDate = dayjs();
+
+  const [today, setToday] = useState(currentDate);
+
   return (
-    <div>
+    <div className='flex w-1/2 mx-auto divide-x-2 gap-10 h-screen items-center bg-white'>
       <div className="w-96 h-96">
-        <div className="w-full grid grid-cols-7">
+        <div>
+          <h1>{today.month()}</h1>
+        </div>
+
+        <div className="w-full grid grid-cols-7 text-gray-500">
           {days.map((day, index) => {
             return (
               <h1
@@ -42,7 +51,7 @@ export default function Calendar() {
         </div>
       </div>
 
-      <div>
+      <div className='w-96 h-96 px-5'>
         <h1>Workout for the day.</h1>
         <p>No workout for today.</p>
       </div>
