@@ -5,15 +5,22 @@ export const generateDate = (
   month = dayjs().month(),
   year = dayjs().year()
 ) => {
-  const firstDateOfMonth = dayjs().year(year).month(month).startOf('month'); // Mon May 01 2023 00:00
+  const firstDateOfMonth = dayjs().year(year).month(month).startOf('month'); // Mon May 01 2023 00:00  => object
   const lastDateOfMonth = dayjs().year(year).month(month).endOf('month'); // Wed May 31 2023 23:59
 
   // loop to generate dates for the entire month
   const arrayOfDate = [];
 
-  // i = 1; i <= 31, i ++
-  // set the day of the month by passingg current day 'i' as argument
-  // create new Date.js date object and push it to array
+  // create prefix date
+  for (let i = 0; i < firstDateOfMonth.day(); i++) {
+    arrayOfDate.push(firstDateOfMonth.day(i));
+  }
+
+  /*** generate current date
+   * i = 1; i <= 31, i ++
+   * set the day of the month by passing current day 'i' as argument
+   * create new Date.js date object and push it to array
+   */
   for (let i = firstDateOfMonth.date(); i <= lastDateOfMonth.date(); i++) {
     arrayOfDate.push(firstDateOfMonth.date(i));
   }
