@@ -11,9 +11,9 @@ Exercise.create(name: 'Hip Thrusts')
 Exercise.create(name: 'Cable Flys')
 
 # Create users
-User.create(name: 'Hanvid', username: 'hanvid_lee', email: 'hanvid@lee.com', password: 'password')
-User.create(name: 'Dina', username: 'dinasaur', email: 'dina@saur.com', password: 'password')
-User.create(name: 'Nelson', username: 'nelsonn', email: 'nelson@cheng.com', password: 'password')
+User.create(name: 'Hanvid', username: 'hanvid_lee', email: 'hanvid@lee.com', password: 'password', password_confirmation: 'password')
+User.create(name: 'Dina', username: 'dinasaur', email: 'dina@saur.com', password: 'password', password_confirmation: 'password')
+User.create(name: 'Nelson', username: 'nelsonn', email: 'nelson@cheng.com', password: 'password', password_confirmation: 'password')
 
 # Create workouts
 Workout.create(picture: 'https://randomuser.me/api/portraits/women/1.jpg', description: 'Today was hard, I did like so much work. #sweat')
