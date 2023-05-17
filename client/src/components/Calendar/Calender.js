@@ -64,16 +64,18 @@ export default function Calendar() {
         <div className="w-full grid grid-cols-7">
           {generateDate(today.month(), today.year()).map(
             ({ date, currentMonth, today }, index) => {
+              const dateString = date.toDate().toDateString();
+              const isCurrentDate = selectDate.toDate().toDateString() === dateString;
+              const isActiveDate = today && isCurrentDate;
+
               return (
                 <div key={index} className="h-14 grid place-content-center">
                   <h1
                     className={cn(
                       currentMonth ? '' : 'text-gray-400',
                       today ? 'text-red-600' : '',
-                      selectDate.toDate().toDateString() ===
-                        date.toDate().toDateString()
-                        ? 'bg-black text-white'
-                        : '',
+                      isActiveDate ? 'bg-red text-white' : '', // not working...unsure why
+                      isCurrentDate ? 'bg-black text-white' : '',
                       'h-10 w-10 grid place-content-center rounded-full hover:bg-black hover:text-white transition-all cursor-pointer'
                     )}
                     onClick={() => {
