@@ -13,6 +13,8 @@ export default function Calendar() {
 
   const [today, setToday] = useState(currentDate);
 
+  console.log(` THIS IS TODAY: ${today}`)
+
   return (
     <div className="flex w-2/3 mx-auto divide-x-2 gap-10 h-screen items-center bg-white">
       <div className="w-96 h-96">
@@ -22,7 +24,10 @@ export default function Calendar() {
           </h1>
 
           <div className="flex items-center gap-5">
-            <GrFormPrevious className="w-5 h-5 cursor-pointer" />
+            <GrFormPrevious 
+            className="w-5 h-5 cursor-pointer" 
+            onClick={() => {setToday(today.month(today.month() - 1))}}
+            /> 
             <h1 className="cursor-pointer">Today</h1>
             <GrFormNext className="w-5 h-5 cursor-pointer" />
           </div>
@@ -42,7 +47,7 @@ export default function Calendar() {
         </div>
 
         <div className="w-full grid grid-cols-7">
-          {generateDate().map(({ date, currentMonth, today }, index) => {
+          {generateDate(today.month(), today.year()).map(({ date, currentMonth, today }, index) => {
             return (
               <div key={index} className="h-14 grid place-content-center">
                 <h1
