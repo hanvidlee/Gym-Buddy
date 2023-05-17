@@ -7,3 +7,5 @@ const ProtectedRoute = ({user, children}) => {
   //let them go where they were intending to go
   return children
 }
+
+export default ProtectedRoute;
