@@ -70,25 +70,28 @@ class Api::WorkoutsController < ApplicationController
     end
   end
 
-  def update_exercise_sets(exercise_sets_params, workout_id)
-    return unless exercise_sets_params
+  def update_workout
+    @workout.update(workout_params)
+  end
+
+  def update_exercise_sets
+    exercise_sets_params = params[:exercise_sets]
   
-    exercise_set_ids = exercise_sets_params.map { |exercise_set_params| exercise_set_params[:id] }
-  
-    existing_exercise_sets = ExerciseSet.where(workout_id: workout_id, id: exercise_set_ids)
+    return false unless exercise_sets_params
   
     exercise_sets_params.each do |exercise_set_params|
-      exercise_set = existing_exercise_sets.find { |existing_exercise_set| existing_exercise_set.id == exercise_set_params[:id] }
+      exercise_set = ExerciseSet.find_by(id: exercise_set_params[:id])
   
       if exercise_set
-        exercise_set.update(exercise_set_params)
-        existing_exercise_sets = existing_exercise_sets.reject { |existing_exercise_set| existing_exercise_set.id == exercise_set_params[:id] }
+        exercise_set.update(exercise_set_params.except(:id))
       else
         new_exercise_set = ExerciseSet.new(exercise_set_params)
-        new_exercise_set.workout_id = workout_id
+        new_exercise_set.workout_id = @workout.id
         new_exercise_set.save
       end
     end
+  
+    true
   end
 
   def delete_set_workouts(workout)

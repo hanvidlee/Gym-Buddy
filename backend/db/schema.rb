@@ -33,11 +33,12 @@ ActiveRecord::Schema.define(version: 2023_05_16_202856) do
   end
 
   create_table "exercise_sets", force: :cascade do |t|
-    t.integer "exercise_id"
     t.integer "weight"
     t.integer "quantity"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "exercise"
+    t.integer "reps"
   end
 
   create_table "exercises", force: :cascade do |t|
@@ -71,10 +72,10 @@ ActiveRecord::Schema.define(version: 2023_05_16_202856) do
     t.string "name"
     t.string "username"
     t.string "email"
-    t.string "password"
     t.datetime "deleted_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "password_digest"
   end
 
   create_table "workouts", force: :cascade do |t|
