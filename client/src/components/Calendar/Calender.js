@@ -12,12 +12,14 @@ export default function Calendar() {
   const days = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
 
   const currentDate = dayjs();
-
+  
   const [today, setToday] = useState(currentDate);
   const [selectDate, setSelectDate] = useState(currentDate);
-
+  
   const parsedSelectDate =  selectDate.toDate().toDateString();
-
+  const parsedToday = today.toDate().toDateString()
+  
+  console.log('this is current date', parsedToday)
   const workouts = getWorkoutForDayPerUser(database, 1, parsedSelectDate)
 
   const allWorkouts = getAllWorkoutsPerUser(database, 1)
