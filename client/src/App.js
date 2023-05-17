@@ -2,13 +2,14 @@ import './App.css';
 // import useApplicationData from './hooks/useApplicationData';
 import { Route, Routes, BrowserRouter as Router } from "react-router-dom";
 import Navigation from "./components/Navigation";
+import Calendar from './components/Calendar/Calender';
 import Home from "./components/Home"
 import Login from "./components/Login"
 import Register from "./components/Register"
 import History from "./components/History"
 import Form from "./components/Form"
 import FormView from "./components/FormView"
-import 'bootstrap/dist/css/bootstrap.css';
+
 
 
 function App() {
@@ -23,7 +24,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/history" element={<History />} />
-          {/* <Route path="/calendar" element={<Calendar />} /> */}
+          <Route path="/calendar" element={<Calendar />} />
           <Route path="/log/new" element={<Form />} />
           <Route path="/log/view" element={<FormView />} />
         </Routes>
