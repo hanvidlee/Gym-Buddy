@@ -4,10 +4,10 @@ User.create(name: 'Dina', username: 'dinasaur', email: 'dina@saur.com', password
 User.create(name: 'Nelson', username: 'nelsonn', email: 'nelson@cheng.com', password: 'password', password_confirmation: 'password')
 
 # Create workouts
-Workout.create(picture: 'https://randomuser.me/api/portraits/women/1.jpg', description: 'Today was hard, I did like so much work. #sweat')
-Workout.create(picture: 'https://randomuser.me/api/portraits/men/2.jpg', description: 'Wow, I feel so energized and refreshed after that workout! It\'s amazing how much better I feel when I take care of my body.')
-Workout.create(picture: 'https://randomuser.me/api/portraits/women/3.jpg', description: 'My muscles are definitely feeling the burn, but it was totally worth it. I know I\'m making progress towards my fitness goals.')
-Workout.create(picture: 'https://randomuser.me/api/portraits/men/4.jpg', description: 'I was really dreading going to the gym today, but I pushed through, and I feel proud of myself for sticking to my routine.')
+Workout.create(picture: 'https://randomuser.me/api/portraits/women/1.jpg', description: 'Today was hard, I did so much work. #sweat', title: 'Intense Workout')
+Workout.create(picture: 'https://randomuser.me/api/portraits/men/2.jpg', description: 'Wow, I feel so energized and refreshed after that workout! It\'s amazing how much better I feel when I take care of my body.', title: 'Rejuvenating Exercise')
+Workout.create(picture: 'https://randomuser.me/api/portraits/women/3.jpg', description: 'My muscles are definitely feeling the burn, but it was totally worth it. I know I\'m making progress towards my fitness goals.', title: 'Muscle-Building Session')
+Workout.create(picture: 'https://randomuser.me/api/portraits/men/4.jpg', description: 'I was really dreading going to the gym today, but I pushed through, and I feel proud of myself for sticking to my routine.', title: 'Overcoming Challenges')
 
 # Create days
 Day.create(month: 'May', day: 1, year: 2023, empty: false)
