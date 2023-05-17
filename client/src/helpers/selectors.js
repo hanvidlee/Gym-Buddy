@@ -17,8 +17,8 @@ export default function getWorkoutForDayPerUser(state, userId, selectedDate) {
   // parsedDate 
   const parsedSelectedDate = dayjs(selectedDate);
 
-  // matchedDate
-  const matchedDate = state.days.filter((day) => {
+  // matchedDays return shallow copy of days (should only return an array of 1 object)
+  const matchedDays = state.days.filter((day) => {
     return (
       parsedSelectedDate.year() === day.year &&
       parsedSelectedDate.format('MMM') === day.month &&
@@ -26,10 +26,14 @@ export default function getWorkoutForDayPerUser(state, userId, selectedDate) {
     )
   })
 
-  // workoutForDay
-  console.log(`this is my currentUser: ${currentUser.id}`)
+  // workoutsForDay
+  const workoutsForDay = state.day_workouts.filter((dayWorkout) => {
+    return dayWorkout.day_id === matchedDays[0].id //retrieve first and only element from matchedDays
+  })
+
   console.log(`workoutforUSER!: `, workoutsForUser)
-  console.log('this is matched date!', matchedDate)
+  console.log('this is matched date!', matchedDays)
+  console.log('workoutsForDAY= ', workoutsForDay)
 }
 
 // getDaysPerExercise - to be used in history
