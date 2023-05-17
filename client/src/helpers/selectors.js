@@ -56,12 +56,16 @@ export function getWorkoutForDayPerUser(state, userId, selectedDate) {
   return workouts;
 }
 
-// export function getAllWorkoutsPerUser(state, userId) {
-
-// }
 // getAllWorkoutsPerUser - to be used in dashboard and calendar
+export function getAllWorkoutsPerUser(state, userId) {
+  const workoutsForUser = getWorkoutsRelatedToUser(state, userId);
 
+  const workouts = state.workouts.filter((workout) => {
+    return workoutsForUser.some((userWorkout) => userWorkout.workout_id === workout.id);
+  });
+
+  return workouts;
+}
 
 // getDaysPerExercise - to be used in history
 // geteExerciseSetsPerWorkout - to be used in log/show
-
