@@ -174,7 +174,7 @@ const state = {
   ],
 };
 
-getWorkoutForDayPerUser(state, 1, 'Wed May 17 2023');
+getWorkoutForDayPerUser(state, 1, 'Wed May 03 2023');
 
 
 function Application(props) {

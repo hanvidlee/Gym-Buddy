@@ -1,3 +1,5 @@
+import dayjs from 'dayjs';
+
 // getWorkoutForDayPerUser - to be used in dashboard, log/new, and log/show
 export default function getWorkoutForDayPerUser(state, userId, selectedDate) {
   // currentUser returns the first element that meets the condition
@@ -12,11 +14,22 @@ export default function getWorkoutForDayPerUser(state, userId, selectedDate) {
     return userWorkout.user_id === currentUser.id
   })
 
-  // currrentDate
+  // parsedDate 
+  const parsedSelectedDate = dayjs(selectedDate);
+
+  // matchedDate
+  const matchedDate = state.days.filter((day) => {
+    return (
+      parsedSelectedDate.year() === day.year &&
+      parsedSelectedDate.format('MMM') === day.month &&
+      parsedSelectedDate.date() === day.day
+    )
+  })
 
   // workoutForDay
   console.log(`this is my currentUser: ${currentUser.id}`)
   console.log(`workoutforUSER!: `, workoutsForUser)
+  console.log('this is matched date!', matchedDate)
 }
 
 // getDaysPerExercise - to be used in history
