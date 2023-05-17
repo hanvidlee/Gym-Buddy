@@ -48,10 +48,10 @@ export function getWorkoutForDayPerUser(state, userId, selectedDate) {
     );
   });
 
-  console.log(`workoutforUSER!: `, workoutsForUser);
-  console.log('this is matched date!', matchedDays);
-  console.log('workoutsForDAY= ', workoutsForDay);
-  console.log('MY FINAL WORKOUTS!!!', workouts);
+  // console.log(`workoutforUSER!: `, workoutsForUser);
+  // console.log('this is matched date!', matchedDays);
+  // console.log('workoutsForDAY= ', workoutsForDay);
+  // console.log('MY FINAL WORKOUTS!!!', workouts);
 
   return workouts;
 }
@@ -64,6 +64,7 @@ export function getAllWorkoutsPerUser(state, userId) {
     return workoutsForUser.some((userWorkout) => userWorkout.workout_id === workout.id);
   });
 
+  console.log('getting workouts for all users!!', workouts)
   return workouts;
 }
 
