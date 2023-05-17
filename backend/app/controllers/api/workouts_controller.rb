@@ -1,7 +1,8 @@
 class Api::WorkoutsController < ApplicationController
   def index
     @workouts = Workout.all
-    render json: @workouts
+    @exercise_sets = ExerciseSet.all
+    render json: {workouts: @workouts, exercise_sets: @exercise_sets }
   end
 
   def show
@@ -12,7 +13,6 @@ class Api::WorkoutsController < ApplicationController
   def create
     @workout = Workout.new(workout_params)
     
-    #install postman make request to create route see if we are getting the correct data
     if @workout.save
       create_exercise_sets(params[:exercise_sets])
       create_set_workouts(@workout)
@@ -28,14 +28,13 @@ class Api::WorkoutsController < ApplicationController
   end
 
   def update
-    @workout = Workout.find(params[:id])
+  @workout = Workout.find(params[:id])
 
-    if @workout.update(workout_params)
-      update_exercise_sets(params[:exercise_sets], @workout.id)
-      render json: @workout
-    else
-      render json: @workout.errors
-    end
+  if update_workout || update_exercise_sets
+    render json: @workout
+  else
+    render json: @workout.errors
+  end
   end
 
   def destroy
@@ -45,6 +44,7 @@ class Api::WorkoutsController < ApplicationController
       delete_set_workouts(@workout)
     else
       render json: @workout.errors
+    end
   end
 
   private
@@ -70,17 +70,23 @@ class Api::WorkoutsController < ApplicationController
     end
   end
 
-  def update_exercise_sets(exercise_sets_params)
+  def update_exercise_sets(exercise_sets_params, workout_id)
     return unless exercise_sets_params
-
+  
+    exercise_set_ids = exercise_sets_params.map { |exercise_set_params| exercise_set_params[:id] }
+  
+    existing_exercise_sets = ExerciseSet.where(workout_id: workout_id, id: exercise_set_ids)
+  
     exercise_sets_params.each do |exercise_set_params|
-      exercise_set = ExerciseSet.find(exercise_set_params[:id])
-
-      if exercise_set.update(exercise_set_params)
-        # Any additional actions or validations after updating the exercise set can be added here
+      exercise_set = existing_exercise_sets.find { |existing_exercise_set| existing_exercise_set.id == exercise_set_params[:id] }
+  
+      if exercise_set
+        exercise_set.update(exercise_set_params)
+        existing_exercise_sets = existing_exercise_sets.reject { |existing_exercise_set| existing_exercise_set.id == exercise_set_params[:id] }
       else
-        render json: exercise_set.errors
-        return
+        new_exercise_set = ExerciseSet.new(exercise_set_params)
+        new_exercise_set.workout_id = workout_id
+        new_exercise_set.save
       end
     end
   end
