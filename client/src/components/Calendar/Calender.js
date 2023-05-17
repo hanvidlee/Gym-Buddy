@@ -74,7 +74,7 @@ export default function Calendar() {
       </div>
 
       <div className="w-96 h-96 px-5">
-        <h1>Workout for the day.</h1>
+        <h1>Workout for {today.toDate().toDateString()}.</h1>
         <p>No workout for today.</p>
       </div>
     </div>
