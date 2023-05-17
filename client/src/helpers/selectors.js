@@ -64,8 +64,10 @@ export function getAllWorkoutsPerUser(state, userId) {
     return workoutsForUser.some((userWorkout) => userWorkout.workout_id === workout.id);
   });
 
+  const workoutDays = state.day_workouts
+
   console.log('getting workouts for all users!!', workouts)
-  return workouts;
+  return workouts
 }
 
 // getDaysPerExercise - to be used in history

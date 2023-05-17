@@ -20,8 +20,18 @@ export default function Calendar() {
 
   const workouts = getWorkoutForDayPerUser(database, 1, parsedSelectDate)
 
-  getAllWorkoutsPerUser(database, 1)
-  
+  const allWorkouts = getAllWorkoutsPerUser(database, 1)
+
+  function Workout({ workout }) {
+    return (
+      <li>
+        <div>I did workout today! Workout-id is {workout.id}</div>
+         <div>Title</div>
+     </li>
+    )
+  }
+
+  //dayFlag[day] && <Cylogn/>
 
   return (
     <div className="flex w-2/3 mx-auto divide-x-2 gap-10 h-screen items-center bg-white">
@@ -91,13 +101,15 @@ export default function Calendar() {
                   >
                     {date.date()}
                   </h1>
-                  {/* <div>
-                    {filteredWorkouts.some((workout) =>
-                      dayjs(workout.created_at).isSame(date, 'day')
+                  
+                  {/* <div classsName="w-1 h-1 mx-auto mt-1" >
+                    {allWorkouts.some((workout) =>
+                      dayjs(workout.).isSame(date, 'day')
                     ) && (
-                      <div classsName="w-1 h-1 mx-auto mt-1 roundded-full bg-sky-500"></div>
+                      <div classsName="w-1 h-1 rounded-full bg-sky-500"></div>
                     )}
                   </div> */}
+                  <CgGym/>
                 </div>
               );
             }
@@ -110,10 +122,7 @@ export default function Calendar() {
         {workouts.length > 0 ? (
           <ol>
             {workouts.map((workout) => (
-              <li key={workout.id}>
-                <div>I did workout today! Workout-id is {workout.id}</div>
-                <div>Title</div>
-              </li>
+              <Workout workout={workout} key={workout.id}/>
             ))}
           </ol>
         ) : (
