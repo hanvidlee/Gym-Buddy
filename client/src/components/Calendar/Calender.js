@@ -31,6 +31,8 @@ export default function Calendar() {
     )
   }
 
+  const calendarDates = generateDate(today.month(), today.year());
+
   //dayFlag[day] && <Cylogn/>
 
   return (
@@ -79,7 +81,7 @@ export default function Calendar() {
         </div>
 
         <div className="w-full grid grid-cols-7">
-          {generateDate(today.month(), today.year()).map(
+          {calendarDates.map(
             ({ date, currentMonth, today }, index) => {
               // const dateString = date.toDate().toDateString();
               const isCurrentDate = selectDate.isSame(date, 'day');
