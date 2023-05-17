@@ -37,8 +37,6 @@ ActiveRecord::Schema.define(version: 2023_05_17_014818) do
     t.integer "quantity"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "exercise"
-    t.integer "reps"
   end
 
   create_table "set_workouts", force: :cascade do |t|
@@ -73,5 +71,4 @@ ActiveRecord::Schema.define(version: 2023_05_17_014818) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "title"
   end
-
 end
