@@ -3,8 +3,8 @@ import useApplicationData from '../hooks/useApplicationData';
 import Button from './Button';
 import Navigation from './Navigation';
 import DropdownMenu from './DropDownMenu';
+import Login from './Login';
 import UserRegistration from './Register';
-
 
 function Application(props) {
   const checkConfirm = () => {
@@ -24,6 +24,7 @@ function Application(props) {
     <div className="App">
     <UserRegistration/>
     <Navigation/>
+    <Login/>
       <h1> Users </h1>
       <Button onClick={checkConfirm} confirm>
         Confirm
