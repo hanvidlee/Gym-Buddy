@@ -1,5 +1,6 @@
 import React from 'react';
 import { Navbar, Nav, Container, Button } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
 export default function Navigation(props) {
   return (
@@ -7,11 +8,11 @@ export default function Navigation(props) {
       <Container>
         <Navbar.Brand href="#home">Gym Buddy</Navbar.Brand>
         <Nav className="me-auto">
-          <Nav.Link href="#home">Home</Nav.Link>
-          <Nav.Link href="#history">History</Nav.Link>
-          <Nav.Link href="#calendar">Calendar</Nav.Link>
+          <Link to={'/'}>Home</Link>
+          <Link to={'/history'}>History</Link>
+          <Link to={'/calendar'}> Calendar</Link>
         </Nav>
-        <Button variant="outline-success">Logout</Button>
+        <Link to={'/login'}><Button variant="outline-success">Logout</Button></Link>
       </Container>
     </Navbar>
   );

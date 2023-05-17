@@ -7,11 +7,13 @@ function App() {
   return (
     <div className="App">
       <Router>
-        <Navigation />
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/home" element={<Home />} />
+        </Routes>
+        <Navigation />
+        <Routes>
+          <Route path="/" element={<Home />} />
           <Route path="/history" element={<History />} />
           <Route path="/calendar" element={<Calendar />} />
           <Route path="/log/new" element={<Form />} />
