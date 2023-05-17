@@ -12,8 +12,9 @@ export default function Calendar() {
   const currentDate = dayjs();
 
   const [today, setToday] = useState(currentDate);
+  const [selectDate, setSelectDate] = useState(currentDate);
 
-  console.log(` THIS IS TODAY: ${today}`)
+  console.log(` THIS IS TODAY: ${today}`);
 
   return (
     <div className="flex w-2/3 mx-auto divide-x-2 gap-10 h-screen items-center bg-white">
@@ -24,19 +25,25 @@ export default function Calendar() {
           </h1>
 
           <div className="flex items-center gap-5">
-            <GrFormPrevious 
-            className="w-5 h-5 cursor-pointer" 
-            onClick={() => {setToday(today.month(today.month() - 1))}}
-            /> 
-            <h1 
-            className="cursor-pointer"
-            onClick={() => {setToday(currentDate)}}
+            <GrFormPrevious
+              className="w-5 h-5 cursor-pointer"
+              onClick={() => {
+                setToday(today.month(today.month() - 1));
+              }}
+            />
+            <h1
+              className="cursor-pointer"
+              onClick={() => {
+                setToday(currentDate);
+              }}
             >
               Today
             </h1>
-            <GrFormNext 
-            className="w-5 h-5 cursor-pointer" 
-            onClick={() => {setToday(today.month(today.month() + 1))}}
+            <GrFormNext
+              className="w-5 h-5 cursor-pointer"
+              onClick={() => {
+                setToday(today.month(today.month() + 1));
+              }}
             />
           </div>
         </div>
@@ -55,26 +62,35 @@ export default function Calendar() {
         </div>
 
         <div className="w-full grid grid-cols-7">
-          {generateDate(today.month(), today.year()).map(({ date, currentMonth, today }, index) => {
-            return (
-              <div key={index} className="h-14 grid place-content-center">
-                <h1
-                  className={cn(
-                    currentMonth ? '' : 'text-gray-400',
-                    today ? 'bg-red-600 text-white' : '',
-                    'h-10 w-10 grid place-content-center rounded-full hover:bg-black hover:text-white transition-all cursor-pointer'
-                  )}
-                >
-                  {date.date()}
-                </h1>
-              </div>
-            );
-          })}
+          {generateDate(today.month(), today.year()).map(
+            ({ date, currentMonth, today }, index) => {
+              return (
+                <div key={index} className="h-14 grid place-content-center">
+                  <h1
+                    className={cn(
+                      currentMonth ? '' : 'text-gray-400',
+                      today ? 'text-red-600' : '',
+                      selectDate.toDate().toDateString() ===
+                        date.toDate().toDateString()
+                        ? 'bg-black text-white'
+                        : '',
+                      'h-10 w-10 grid place-content-center rounded-full hover:bg-black hover:text-white transition-all cursor-pointer'
+                    )}
+                    onClick={() => {
+                      setSelectDate(date);
+                    }}
+                  >
+                    {date.date()}
+                  </h1>
+                </div>
+              );
+            }
+          )}
         </div>
       </div>
 
       <div className="w-96 h-96 px-5">
-        <h1>Workout for {today.toDate().toDateString()}.</h1>
+        <h1>Workout for {selectDate.toDate().toDateString()}.</h1>
         <p>No workout for today.</p>
       </div>
     </div>
