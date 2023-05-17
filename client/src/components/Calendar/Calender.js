@@ -43,14 +43,17 @@ export default function Calendar() {
   ];
 
   console.log(workouts.map((workout) => dayjs(workout.created_at)));
-  
-  console.log("this is the selecteedate!!!!", selectDate.toDate().toDateString())
+
+  console.log(
+    'this is the selecteedate!!!!',
+    selectDate.toDate().toDateString()
+  );
 
   const filteredWorkouts = workouts.filter((workout) =>
     dayjs(workout.created_at).isSame(selectDate.toDate().toDateString(), 'day')
   );
 
-  console.log(filteredWorkouts)
+  console.log(filteredWorkouts);
 
   return (
     <div className="flex w-2/3 mx-auto divide-x-2 gap-10 h-screen items-center bg-white">
@@ -130,17 +133,17 @@ export default function Calendar() {
 
       <div className="w-96 h-96 px-5">
         <h1>Workout for {selectDate.format('dddd, MMMM D, YYYY')}.</h1>
-        {/* {filteredWorkouts.length > 0 ? ( */}
-        <ol>
-          {filteredWorkouts.map((workout) => (
-            <li key={workout.id}>
-              <div>I did workout today! Workout-id is {workout.id}</div>
-            </li>
-          ))}
-        </ol>
-        {/* ) : (
+        {filteredWorkouts.length > 0 ? (
+          <ol>
+            {filteredWorkouts.map((workout) => (
+              <li key={workout.id}>
+                <div>I did workout today! Workout-id is {workout.id}</div>
+              </li>
+            ))}
+          </ol>
+        ) : (
           <p>No workout for today.</p>
-        )} */}
+        )}
       </div>
     </div>
   );
