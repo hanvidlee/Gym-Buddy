@@ -1,7 +1,8 @@
 class Api::UsersController < ApplicationController
   def index
     @users = User.all
-    render json: @users
+    @userworkouts = UserWorkout.all
+    render json: @userworkouts
   end
 
   def login

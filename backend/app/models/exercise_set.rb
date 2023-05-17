@@ -1,7 +1,7 @@
 class ExerciseSet < ApplicationRecord
   has_many :set_workouts
   has_many :workouts, through: :set_workouts
-
+  
   validates :weight, presence: true
   validates :quantity, presence: true
   validates :exercise, presence: true

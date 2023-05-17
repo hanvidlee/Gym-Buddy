@@ -1,21 +1,36 @@
-// import logo from './logo.svg';
-// import './App.css';
+import './App.css';
 // import useApplicationData from './hooks/useApplicationData';
+import { Route, Routes, BrowserRouter as Router } from "react-router-dom";
+import Navigation from "./components/Navigation";
+import Home from "./components/Home"
+import Login from "./components/Login"
+import Register from "./components/Register"
+import History from "./components/History"
+import Form from "./components/Form"
+import FormView from "./components/FormView"
+import 'bootstrap/dist/css/bootstrap.css';
 
-// function App() {
-//   const {
-//     state,
-//     dispatch
-// } = useApplicationData();
-//   const userList = state.users.map((user) => (<li key={user.id} > {user.first_name} {user.last_name} {user.email} </li>
-// ));
-// return (<div className="App" >
-// <h1> Users </h1>
 
-// <ul> {userList} </ul>
-// </div >
-// );
-// }
+function App() {
+  return (
+    <div className="App">
+      <Router>
+        <Routes>
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+        </Routes>
+        <Navigation />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/history" element={<History />} />
+          {/* <Route path="/calendar" element={<Calendar />} /> */}
+          <Route path="/log/new" element={<Form />} />
+          <Route path="/log/view" element={<FormView />} />
+        </Routes>
+      </Router>
+    </div>
+  );
+}
 
-// export default App;
+export default App;
 

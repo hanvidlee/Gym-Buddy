@@ -1,7 +1,9 @@
 class Api::WorkoutsController < ApplicationController
   def index
     @workouts = Workout.all
-    render json: @workouts
+    @exercise_sets = ExerciseSet.all
+    @dayworkout = DayWorkout.all
+    render json: {workouts: @workouts, exercise_sets: @exercise_sets }
   end
 
   def show
@@ -12,7 +14,6 @@ class Api::WorkoutsController < ApplicationController
   def create
     @workout = Workout.new(workout_params)
     
-    #install postman make request to create route see if we are getting the correct data
     if @workout.save
       create_exercise_sets(params[:exercise_sets])
       create_set_workouts(@workout)
@@ -28,14 +29,13 @@ class Api::WorkoutsController < ApplicationController
   end
 
   def update
-    @workout = Workout.find(params[:id])
+  @workout = Workout.find(params[:id])
 
-    if @workout.update(workout_params)
-      update_exercise_sets(params[:exercise_sets], @workout.id)
-      render json: @workout
-    else
-      render json: @workout.errors
-    end
+  if update_workout || update_exercise_sets
+    render json: @workout
+  else
+    render json: @workout.errors
+  end
   end
 
   def destroy
@@ -45,19 +45,22 @@ class Api::WorkoutsController < ApplicationController
       delete_set_workouts(@workout)
     else
       render json: @workout.errors
+    end
   end
 
   private
 
   def workout_params
-    params.require(:workout).permit(:picture, :description) 
+    params.require(:workout).permit(:title)
   end
 
-  def create_exercise_sets(exercise_sets_params, workout_id)
+  def create_exercise_sets(exercise_sets_params)
     return unless exercise_sets_params
-
+  
     exercise_sets_params.each do |exercise_sets_param|
-      exercise_set = ExerciseSet.new(exercise_sets_params)
+      permitted_params = exercise_sets_param.permit(:repetitions, :weight, :quantity)
+      exercise_set = ExerciseSet.new(permitted_params)
+      exercise_set.workout_id = @workout.id
       exercise_set.save
     end
   end
@@ -70,19 +73,28 @@ class Api::WorkoutsController < ApplicationController
     end
   end
 
-  def update_exercise_sets(exercise_sets_params)
-    return unless exercise_sets_params
+  def update_workout
+    @workout.update(workout_params)
+  end
 
+  def update_exercise_sets
+    exercise_sets_params = params[:exercise_sets]
+  
+    return false unless exercise_sets_params
+  
     exercise_sets_params.each do |exercise_set_params|
-      exercise_set = ExerciseSet.find(exercise_set_params[:id])
-
-      if exercise_set.update(exercise_set_params)
-        # Any additional actions or validations after updating the exercise set can be added here
+      exercise_set = ExerciseSet.find_by(id: exercise_set_params[:id])
+  
+      if exercise_set
+        exercise_set.update(exercise_set_params.except(:id))
       else
-        render json: exercise_set.errors
-        return
+        new_exercise_set = ExerciseSet.new(exercise_set_params)
+        new_exercise_set.workout_id = @workout.id
+        new_exercise_set.save
       end
     end
+  
+    true
   end
 
   def delete_set_workouts(workout)
