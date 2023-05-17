@@ -34,15 +34,19 @@ export default function getWorkoutForDayPerUser(state, userId, selectedDate) {
   // workouts return an array of workouts for the currentUser and selectedDate
   const workouts = state.workouts.filter((workout) => {
     return (
-      workoutsForUser.some((userWorkout) => userWorkout.workout_id === workout.id) &&
+      workoutsForUser.some(
+        (userWorkout) => userWorkout.workout_id === workout.id
+      ) &&
       workoutsForDay.some((dayWorkout) => dayWorkout.workout_id === workout.id)
-    )
+    );
   });
 
   console.log(`workoutforUSER!: `, workoutsForUser);
   console.log('this is matched date!', matchedDays);
   console.log('workoutsForDAY= ', workoutsForDay);
-  console.log('MY FINAL WORKOUTS!!!', workouts)
+  console.log('MY FINAL WORKOUTS!!!', workouts);
+
+  return workouts;
 }
 
 // getDaysPerExercise - to be used in history
