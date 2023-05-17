@@ -5,5 +5,12 @@ class Day < ApplicationRecord
   validates :month, presence: true
   validates :day, presence: true
   validates :year, presence: true
-  validates :empty, default: true
+
+  before_validation :set_default_empty
+
+  private
+
+  def set_default_empty
+    self.empty = true if empty.nil?
+  end
 end
