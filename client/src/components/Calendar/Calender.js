@@ -98,3 +98,31 @@ export default function Calendar() {
     </div>
   );
 }
+
+
+const workouts = [
+  {
+  id: 1,
+  picture: "https://randomuser.me/api/portraits/women/1.jpg",
+  description: "Today was hard, I did like so much work. #sweat",
+  deleted_at: null,
+  created_at: "2023-05-17T00:12:08.109Z",
+  updated_at: "2023-05-17T00:12:08.109Z"
+  },
+  {
+  id: 2,
+  picture: "https://randomuser.me/api/portraits/men/2.jpg",
+  description: "Wow, I feel so energized and refreshed after that workout! It's amazing how much better I feel when I take care of my body.",
+  deleted_at: null,
+  created_at: "2023-05-17T00:12:08.117Z",
+  updated_at: "2023-05-17T00:12:08.117Z"
+  },
+  {
+  id: 3,
+  picture: "https://randomuser.me/api/portraits/women/3.jpg",
+  description: "My muscles are definitely feeling the burn, but it was totally worth it. I know I'm making progress towards my fitness goals.",
+  deleted_at: null,
+  created_at: "2023-05-17T00:12:08.122Z",
+  updated_at: "2023-05-17T00:12:08.122Z"
+  }
+];
