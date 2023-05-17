@@ -1,6 +1,6 @@
 import dayjs from 'dayjs';
 
-// getWorkoutForDayPerUser - to be used in dashboard, log/new, and log/show
+// getWorkoutForDayPerUser - to be used in dashboard, calendar, and log/show
 export default function getWorkoutForDayPerUser(state, userId, selectedDate) {
   // currentUser returns the first element that meets the condition
   const currentUser = state.users.find((user) => user.id === userId);
@@ -28,7 +28,7 @@ export default function getWorkoutForDayPerUser(state, userId, selectedDate) {
 
   // workoutsForDay
   const workoutsForDay = state.day_workouts.filter((dayWorkout) => {
-    return dayWorkout.day_id === matchedDays[0].id; //retrieve first and only element from matchedDays
+    return matchedDays.length > 0 && dayWorkout.day_id === matchedDays[0].id; //retrieve first and only element from matchedDays
   });
 
   // workouts return an array of workouts for the currentUser and selectedDate
@@ -48,6 +48,9 @@ export default function getWorkoutForDayPerUser(state, userId, selectedDate) {
 
   return workouts;
 }
+
+// getAllWorkoutsPerUser - to be used in dashboard and calendar
+
 
 // getDaysPerExercise - to be used in history
 // geteExerciseSetsPerWorkout - to be used in log/show

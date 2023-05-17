@@ -6,7 +6,7 @@ import DropdownMenu from './DropDownMenu';
 import Calendar from './Calendar/Calender';
 import getWorkoutForDayPerUser from '../helpers/selectors';
 
-const state = {
+export const database = {
   users: [
     {
         "id": 1,
@@ -174,7 +174,7 @@ const state = {
   ],
 };
 
-getWorkoutForDayPerUser(state, 2, 'Wed May 03 2023');
+// getWorkoutForDayPerUser(database, 1, 'Wed May 01 2023');
 
 
 function Application(props) {
