@@ -8,4 +8,5 @@ class Workout < ApplicationRecord
 
   validates :picture, presence: true
   validates :description, presence: true
+  validates :title, presence: true
 end
