@@ -18,7 +18,6 @@ const Form = () => {
       quantity: 4,
       weight: 100
     }
-
   ]);
 
  const onSubmit = (e) => {
@@ -69,7 +68,8 @@ const Form = () => {
                   placeholder="quantity"
                   value={es.quantity}
                   onChange={(e) => {
-                    //to do for quantity
+                    exerciseSets[idx] = {...exerciseSets[idx], quantity: e.target.value}
+                    setExerciseSets([...exerciseSets])
                   }}
                 />
               </div>
