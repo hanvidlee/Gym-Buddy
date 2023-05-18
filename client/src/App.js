@@ -8,9 +8,7 @@ import Login from "./components/Login"
 import Register from "./components/Register"
 import History from "./components/History"
 import Form from "./components/Form"
-import FormView from "./components/FormView"
-
-
+import FormShow from "./components/FormShow"
 
 function App() {
   return (
@@ -26,7 +24,7 @@ function App() {
           <Route path="/history" element={<History />} />
           <Route path="/calendar" element={<Calendar />} />
           <Route path="/log/new" element={<Form />} />
-          <Route path="/log/view" element={<FormView />} />
+          <Route path="/log/show" element={<FormShow />} />
         </Routes>
       </Router>
     </div>
