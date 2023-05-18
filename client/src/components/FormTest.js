@@ -84,7 +84,10 @@ export default function FormTest () {
                       endAdornment: <InputAdornment position="start">lbs</InputAdornment>
                     }}
                     value={es.weight}
-                    
+                    onChange={(event) => {
+                      exerciseSets[index] = {...exerciseSets[index], weight: event.target.value}
+                      setExerciseSets([...exerciseSets])
+                    }}
                   />
                   <TextField 
                     required
