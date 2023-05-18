@@ -1,6 +1,6 @@
 import './App.css';
 // import useApplicationData from './hooks/useApplicationData';
-import { Route, Routes, BrowserRouter as Router } from "react-router-dom";
+import { Route, Routes, BrowserRouter as Router, useLocation } from "react-router-dom";
 import Navigation from "./components/Navigation";
 import Calendar from './components/Calendar/Calender';
 import Home from "./components/Home"
@@ -10,16 +10,24 @@ import History from "./components/History"
 import Form from "./components/Form"
 import FormShow from "./components/FormShow"
 
+function NavBar() {
+  const location = useLocation();
+
+  if (location.pathname === "/login" || location.pathname === "/register") {
+    return null;
+  }
+
+  return <Navigation />;
+}
+
 function App() {
   return (
     <div className="App">
       <Router>
+        <NavBar />
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-        </Routes>
-        <Navigation />
-        <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/history" element={<History />} />
           <Route path="/calendar" element={<Calendar />} />
@@ -32,4 +40,3 @@ function App() {
 }
 
 export default App;
-
