@@ -4,6 +4,7 @@ import cn from './cn';
 import dayjs from 'dayjs';
 import { GrFormPrevious, GrFormNext } from 'react-icons/gr';
 import { CgGym } from 'react-icons/cg';
+import { BsCalendarPlusFill } from "react-icons/bs";
 import {
   getWorkoutForDayPerUser,
   getAllWorkoutsPerUserAndDates,
@@ -21,12 +22,10 @@ export default function Calendar() {
   const parsedSelectDate = selectDate.toDate().toDateString();
   const parsedToday = today.toDate().toDateString();
 
-  // console.log('this is current date', parsedToday)
+ 
   const userWorkouts = getWorkoutForDayPerUser(database, 1, parsedSelectDate);
 
   const { workouts, workoutDays } = getAllWorkoutsPerUserAndDates(database, 1);
-  // console.log('this is my workouts ', workouts)
-  // console.log('this is my day!!', workoutDays)
 
   function Workout({ workout }) {
     return (
@@ -38,7 +37,6 @@ export default function Calendar() {
   }
 
   const convertedDays = workoutDays.map((day) => {
-    // console.log(day.year, day.month, day.day);
     if (!day) {
       return false;
     }
@@ -49,7 +47,6 @@ export default function Calendar() {
 
     return formattedDate;
   });
-  // date i have right now: Mon May 01 2023
 
   const calendarDates = generateDate(today.month(), today.year());
 
@@ -145,7 +142,8 @@ export default function Calendar() {
             ))}
           </ol>
         ) : (
-          <p>No workout for today.</p>
+          // <p>No workout for today.</p>
+          <BsCalendarPlusFill onClick={handleClick}/>
         )}
       </div>
     </div>
