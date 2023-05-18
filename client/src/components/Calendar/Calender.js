@@ -143,7 +143,7 @@ export default function Calendar() {
           </ol>
         ) : (
           // <p>No workout for today.</p>
-          <BsCalendarPlusFill onClick={handleClick}/>
+          <BsCalendarPlusFill/>
         )}
       </div>
     </div>
