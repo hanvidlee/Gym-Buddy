@@ -30,7 +30,7 @@ app.use(express.static('public'));
 // Note: Feel free to replace the example routes below with your own
 const userRoutes = require('./routes/users');
 const workoutRoutes = require('./routes/workouts');
-const exerciseRoutes = require('./routes/exercises');
+const dayRoutes = require('./routes/days');
 const setRoutes = require('./routes/sets');
 
 // Mount all resource routes
@@ -38,8 +38,8 @@ const setRoutes = require('./routes/sets');
 // Note: Endpoints that return data (eg. JSON) usually start with `/api`
 // app.use('/api/users', userRoutes);
 app.use('/api/workouts', workoutRoutes);
-// app.use('/api/sets', setRoutes);
-// app.use('/api/exercises', exerciseRoutes);
+app.use('/api/sets', setRoutes);
+// app.use('/api/days', exerciseRoutes);
 
 // Note: mount other resources here, using the same pattern above
 // Home page
