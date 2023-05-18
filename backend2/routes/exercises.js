@@ -1,9 +1,9 @@
 const express = require('express');
 const router = express.Router();
-const { getUsernameFromUser } = require('../db/queries/users')
+const { getAllDetailsPerExercise } = require('../db/queries/exercises')
 
 router.get('/', (req, res) => {
-  getUsernameFromUser(1).then((data) => {
+  getAllDetailsPerExercise(1, 'Push Ups').then((data) => {
     console.log('data', data);
     return res.send(data);
   });
