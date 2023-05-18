@@ -9,6 +9,7 @@ import History from "./components/History"
 import Form from "./components/Form"
 import FormView from "./components/FormView"
 import Calendar from "./components/Calendar/Calender"
+import FormTest from './components/FormTest';
 
 
 
@@ -27,6 +28,7 @@ function App() {
           <Route path="/calendar" element={<Calendar />} /> 
           <Route path="/log/new" element={<Form />} />
           <Route path="/log/view" element={<FormView />} />
+          <Route path="log/test" element={<FormTest/>}/>
         </Routes>
       </Router>
     </div>
