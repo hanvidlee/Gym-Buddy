@@ -47,7 +47,7 @@ export default function Calendar() {
       'M-D-YYYY'
     ).format('ddd MMM DD YYYY');
 
-    return formattedDate
+    return formattedDate;
   });
   // date i have right now: Mon May 01 2023
 
@@ -107,7 +107,7 @@ export default function Calendar() {
                 return dayjs(date).isSame(convertedDay, 'day');
               });
             });
-  
+
             console.log(hasWorkout);
 
             return (
@@ -116,7 +116,7 @@ export default function Calendar() {
                   className={cn(
                     currentMonth ? '' : 'text-gray-400',
                     today ? 'text-red-600' : '',
-                    isActiveDate ? 'bg-red text-white' : '', // not working...unsure why
+                    isActiveDate ? 'bg-red-600 text-white' : '',
                     isCurrentDate ? 'bg-black text-white' : '',
                     'h-10 w-10 grid place-content-center rounded-full hover:bg-black hover:text-white transition-all cursor-pointer'
                   )}
@@ -128,12 +128,8 @@ export default function Calendar() {
                 </h1>
 
                 <div classsName="w-1 h-1 mx-auto mt-1">
-                  {/* {workouts.some((workout) =>
-                      hasWorkout &&
-                      <div classsName="w-1 h-1 rounded-full bg-sky-500"></div>
-                    )} */}
+                  {hasWorkout && <CgGym />}
                 </div>
-                <CgGym />
               </div>
             );
           })}
