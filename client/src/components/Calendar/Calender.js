@@ -4,34 +4,49 @@ import cn from './cn';
 import dayjs from 'dayjs';
 import { GrFormPrevious, GrFormNext } from 'react-icons/gr';
 import { CgGym } from 'react-icons/cg';
-import { getWorkoutForDayPerUser,  getAllWorkoutsPerUser } from '../../helpers/selectors';
+import {
+  getWorkoutForDayPerUser,
+  getAllWorkoutsPerUserAndDates,
+} from '../../helpers/selectors';
 import { database } from '../Application';
-
 
 export default function Calendar() {
   const days = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
 
   const currentDate = dayjs();
-  
+
   const [today, setToday] = useState(currentDate);
   const [selectDate, setSelectDate] = useState(currentDate);
-  
-  const parsedSelectDate =  selectDate.toDate().toDateString();
-  const parsedToday = today.toDate().toDateString()
-  
-  console.log('this is current date', parsedToday)
-  const workouts = getWorkoutForDayPerUser(database, 1, parsedSelectDate)
 
-  const allWorkouts = getAllWorkoutsPerUser(database, 1)
+  const parsedSelectDate = selectDate.toDate().toDateString();
+  const parsedToday = today.toDate().toDateString();
+
+  // console.log('this is current date', parsedToday)
+  const userWorkouts = getWorkoutForDayPerUser(database, 1, parsedSelectDate);
+
+  const { workouts, workoutDays } = getAllWorkoutsPerUserAndDates(database, 1);
+  // console.log('this is my workouts ', workouts)
+  // console.log('this is my day!!', workoutDays)
 
   function Workout({ workout }) {
     return (
       <li>
         <div>I did workout today! Workout-id is {workout.id}</div>
-         <div>Title</div>
-     </li>
-    )
+        <div>Title</div>
+      </li>
+    );
   }
+
+  const mappedDays = workoutDays.map((day) => {
+    // console.log(day.year, day.month, day.day);
+
+    const formattedDate = dayjs(
+      `${day.month}-${day.day}-${day.year}`,
+      'M-D-YYYY'
+    ).format('ddd MMM DD YYYY');
+  });
+  // date i have right now: Mon May 01 2023
+
 
   const calendarDates = generateDate(today.month(), today.year());
 
@@ -83,50 +98,56 @@ export default function Calendar() {
         </div>
 
         <div className="w-full grid grid-cols-7">
-          {calendarDates.map(
-            ({ date, currentMonth, today }, index) => {
-              // const dateString = date.toDate().toDateString();
-              const isCurrentDate = selectDate.isSame(date, 'day');
-              const isActiveDate = today && isCurrentDate;
+          {calendarDates.map(({ date, currentMonth, today }, index) => {
+            // const dateString = date.toDate().toDateString();
+            const isCurrentDate = selectDate.isSame(date, 'day');
+            const isActiveDate = today && isCurrentDate;
+            // console.log('this is the calendar dates', date.toDate())
+            // const hasWorkout = workoutDays.some((workoutDay) => {
 
-              return (
-                <div key={index} className="h-14 grid place-content-center">
-                  <h1
-                    className={cn(
-                      currentMonth ? '' : 'text-gray-400',
-                      today ? 'text-red-600' : '',
-                      isActiveDate ? 'bg-red text-white' : '', // not working...unsure why
-                      isCurrentDate ? 'bg-black text-white' : '',
-                      'h-10 w-10 grid place-content-center rounded-full hover:bg-black hover:text-white transition-all cursor-pointer'
-                    )}
-                    onClick={() => {
-                      setSelectDate(date);
-                    }}
-                  >
-                    {date.date()}
-                  </h1>
-                  
-                  {/* <div classsName="w-1 h-1 mx-auto mt-1" >
-                    {allWorkouts.some((workout) =>
-                      dayjs(workout.).isSame(date, 'day')
-                    ) && (
+            //     return dayjs(date).isSame(workoutDate, 'day');
+            //   })
+            // });
+
+            // console.log(hasWorkout)
+            console.log(date.toDate().toDateString());
+
+            return (
+              <div key={index} className="h-14 grid place-content-center">
+                <h1
+                  className={cn(
+                    currentMonth ? '' : 'text-gray-400',
+                    today ? 'text-red-600' : '',
+                    isActiveDate ? 'bg-red text-white' : '', // not working...unsure why
+                    isCurrentDate ? 'bg-black text-white' : '',
+                    'h-10 w-10 grid place-content-center rounded-full hover:bg-black hover:text-white transition-all cursor-pointer'
+                  )}
+                  onClick={() => {
+                    setSelectDate(date);
+                  }}
+                >
+                  {date.date()}
+                </h1>
+
+                <div classsName="w-1 h-1 mx-auto mt-1">
+                  {/* {workouts.some((workout) =>
+                      hasWorkout &&
                       <div classsName="w-1 h-1 rounded-full bg-sky-500"></div>
-                    )}
-                  </div> */}
-                  <CgGym/>
+                    )} */}
                 </div>
-              );
-            }
-          )}
+                <CgGym />
+              </div>
+            );
+          })}
         </div>
       </div>
 
       <div className="w-96 h-96 px-5">
         <h1>Workout for {selectDate.format('dddd, MMMM D, YYYY')}.</h1>
-        {workouts.length > 0 ? (
+        {userWorkouts.length > 0 ? (
           <ol>
-            {workouts.map((workout) => (
-              <Workout workout={workout} key={workout.id}/>
+            {userWorkouts.map((workout) => (
+              <Workout workout={workout} key={workout.id} />
             ))}
           </ol>
         ) : (

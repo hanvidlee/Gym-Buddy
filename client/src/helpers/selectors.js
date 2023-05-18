@@ -57,7 +57,7 @@ export function getWorkoutForDayPerUser(state, userId, selectedDate) {
 }
 
 // getAllWorkoutsPerUser - to be used in dashboard and calendar
-export function getAllWorkoutsPerUser(state, userId) {
+export function getAllWorkoutsPerUserAndDates(state, userId) {
   const workoutsForUser = getWorkoutsRelatedToUser(state, userId);
 
   const workouts = state.workouts.filter((workout) => {
@@ -66,27 +66,28 @@ export function getAllWorkoutsPerUser(state, userId) {
     );
   });
 
-  // what do i need? I need the days where the user has worked out on
-  // I already have the workouts related to the user stored in workoutsForUser. It contains array of object [{id: 1, user_id: 1, workout_id: 1}]
-  // Now I need to find the days => compare the workout_id in worksoutForUser against workout_id in day_workout, if true, it returns copy of day_workout. [{id: 1, day_id: 1, workout_id: 1}]
-  // => then with the returned day_workout, we find the days worked out on by comparing the day_id to day.id in days table. If this is true then return the day
+  /** JSDOC
+   * what do i need? I need the days where the user has worked out on
+   * I already have the workouts related to the user stored in workoutsForUser. It contains array of object [{id: 1, user_id: 1, workout_id: 1}]
+   * Now I need to find the days => compare the workout_id in worksoutForUser against workout_id in day_workout, if true, it returns copy of day_workout. [{id: 1, day_id: 1, workout_id: 1}]
+   * => then with the returned day_workout, we find the days worked out on by comparing the day_id to day.id in days table. If this is true then return the day
+   */
   const workoutDays = state.day_workouts
     .filter((dayWorkout) =>
       workoutsForUser.some(
         (userWorkout) => userWorkout.workout_id === dayWorkout.workout_id
-      )
-    )
+      ))
     .map((dayWorkout) => {
       const day = state.days.find((day) => day.id === dayWorkout.day_id);
       return day ? day : null;
     });
 
-  console.log(
-    'getting workouts where wokrout id in user_workout and day_workout matches!:',
-    workoutDays
-  );
+  // console.log(
+  //   'getting workouts where wokrout id in user_workout and day_workout matches!:',
+  //   workoutDays
+  // );
 
-  console.log('this is all workouts', workouts)
+  // console.log('this is all workouts', workouts)
   return { workouts, workoutDays };
 }
 
