@@ -31,8 +31,8 @@ export default function Calendar() {
   function Workout({ workout }) {
     return (
       <li>
-        <div>I did workout today! Workout-id is {workout.id}</div>
-        <div>Title</div>
+        <div>Workout ID: {workout.id}</div>
+        <div>Title: {workout.title}</div>
       </li>
     );
   }
