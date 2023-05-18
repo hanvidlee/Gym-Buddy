@@ -1,7 +1,7 @@
 const db = require('../connection');
 
 // dashboard, calendar 
-const getAllWorkoutsForUser = function (userId) {
+const getAllWorkoutsForUser = function(userId) {
   return db
     .query(
       `
@@ -21,5 +21,7 @@ const getAllWorkoutsForUser = function (userId) {
       console.error(error.message);
     });
 };
+
+// const addWorkoutForUser = function(userId, )
 
 module.exports = { getAllWorkoutsForUser };

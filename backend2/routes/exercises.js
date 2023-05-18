@@ -3,7 +3,10 @@ const router = express.Router();
 const { getAllDetailsPerExercise } = require('../db/queries/exercises')
 
 router.get('/', (req, res) => {
-  getAllDetailsPerExercise(1, 'Push Ups').then((data) => {
+  const user_id = req.session.userId;
+  const exercise = req.body.exercise;
+
+  getAllDetailsPerExercise(user_id, exercise).then((data) => {
     console.log('data', data);
     return res.send(data);
   });
