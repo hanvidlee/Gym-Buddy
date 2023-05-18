@@ -1,4 +1,4 @@
-import { React, useState } from 'react';
+import React, { useState } from 'react';
 import Box from '@mui/material/Box';
 import IconButton from '@mui/material/IconButton';
 import Input from '@mui/material/Input';
@@ -15,9 +15,10 @@ import Button from '@mui/material/Button';
 import DropdownMenu from './DropDownMenu';
 
 
+
 export default function FormTest () {
   const [workout, setWorkout] = useState({
-    title: "title name",
+    title: "",
     picture: "",
     description: ""
   });
@@ -43,35 +44,82 @@ export default function FormTest () {
   }
 
   return (
-    <Box sx={{ display: 'flex', flexWrap: 'wrap' }}>
-    <div>
-      <DropdownMenu/>
-        <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
-          <OutlinedInput
-            id="outlined-adornment-weight"
-            endAdornment={<InputAdornment position="end">Reps</InputAdornment>}
-            aria-describedby="outlined-weight-helper-text"
-            inputProps={{
-              'aria-label': 'weight',
-            }}
-            defaultValue="0"
+    <React.Fragment>
+      <form onSubmit={onSubmit}>
+        <h2>Workout Form</h2>
+          <TextField 
+            required
+            label="Workout Title"
+            value={workout.title}
+            onChange={(event) => setWorkout({ ...workout, title: event.target.value })}
+            defaultValue=""
           />
-          <FormHelperText id="outlined-weight-helper-text">Number of Repetitions</FormHelperText>
-        </FormControl>
-        <FormControl sx={{ m: 1, width: '20ch' }} variant="outlined">
-          <OutlinedInput
-            id="outlined-adornment-weight"
-            endAdornment={<InputAdornment position="end">Sets</InputAdornment>}
-            aria-describedby="outlined-weight-helper-text"
-            inputProps={{
-              'aria-label': 'weight',
-            }}
-            defaultValue="0"
+          <TextField
+            label="Picture"
+            value={workout.picture}
+            onChange={(event) => setWorkout({...workout, picture: event.target.value})}
+            />
+          <TextField
+            label="Description"
+            value={workout.description}
+            onChange={(event) => setWorkout({...workout, description: event.target.value})}
           />
-          <FormHelperText id="outlined-weight-helper-text">Number of Times Reps is completed</FormHelperText>
-        </FormControl>
-  </div>
-  <Button>Submit</Button>
-  </Box>
-  )
-}
+          <div>
+            {exerciseSets.map((es, index) => {
+              return (
+                <React.Fragment>
+                  <TextField 
+                    required
+                    label="Exercise"
+                    value={es.exercise}
+                    onChange={(event) => {
+                      exerciseSets[index] = {...exerciseSets[index], exercise: event.target.value}
+                    setExerciseSets([...exerciseSets])
+                  }}
+                  />
+                  <TextField 
+                    required
+                    label="Weight"
+                    InputProps={{
+                      endAdornment: <InputAdornment position="start">lbs</InputAdornment>
+                    }}
+                    value={es.weight}
+                    
+                  />
+                  <TextField 
+                    required
+                    label="Reps"
+                    value={es.reps}
+                    onChange={(event) => {
+                      exerciseSets[index] = {...exerciseSets[index], reps: event.target.value}
+                      setExerciseSets([...exerciseSets])
+                    }}
+                  />
+                  <TextField
+                    required
+                    label="Sets"
+                    value={es.sets}
+                    onChange={(event) => {
+                      exerciseSets[index] = {...exerciseSets[index], sets: event.target.value}
+                      setExerciseSets([...exerciseSets])
+                    }}
+                  />
+                </React.Fragment>
+              )
+            })
+          }
+          </div>
+          <Button type="submit">Submit</Button>
+          <Button type="button" onClick={() => {
+            exerciseSets.push({
+              exercise: "",
+              reps: 0,
+              quantity: 0,
+              weight: 0
+            })
+            
+            setExerciseSets([...exerciseSets])
+          }}>Add row</Button>
+          </form>
+  </React.Fragment>
+)}

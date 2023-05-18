@@ -20,12 +20,12 @@ const Form = () => {
     }
   ]);
 
- const onSubmit = (e) => {
-    e.preventDefault()
+  const onSubmit = (e) => {
+    e.preventDefault();
     console.log({
       workout, exerciseSets
-    })
-  }
+    });
+  };
 
   return (
     <div>
@@ -58,8 +58,8 @@ const Form = () => {
                   placeholder="reps"
                   value={es.reps}
                   onChange={(e) => {
-                    exerciseSets[idx] = {...exerciseSets[idx], reps: e.target.value}
-                    setExerciseSets([...exerciseSets])
+                    exerciseSets[idx] = { ...exerciseSets[idx], reps: e.target.value };
+                    setExerciseSets([...exerciseSets]);
                   }
                   }
                 />
@@ -68,25 +68,25 @@ const Form = () => {
                   placeholder="quantity"
                   value={es.quantity}
                   onChange={(e) => {
-                    exerciseSets[idx] = {...exerciseSets[idx], quantity: e.target.value}
-                    setExerciseSets([...exerciseSets])
+                    exerciseSets[idx] = { ...exerciseSets[idx], quantity: e.target.value };
+                    setExerciseSets([...exerciseSets]);
                   }}
                 />
               </div>
             );
           })}
         </div>
-          <button type="submit">Submit</button>
-          <button type="button" onClick={() => {
-            exerciseSets.push({
-              exercise: "",
-              reps: 0,
-              quantity: 0,
-              weight: 0
-            })
+        <button type="submit">Submit</button>
+        <button type="button" onClick={() => {
+          exerciseSets.push({
+            exercise: "",
+            reps: 0,
+            quantity: 0,
+            weight: 0
+          });
 
-            setExerciseSets([...exerciseSets])
-          }}>Add exercise</button>
+          setExerciseSets([...exerciseSets]);
+        }}>Add exercise</button>
       </form>
     </div>
   );
