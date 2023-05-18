@@ -32,7 +32,7 @@ export default function FormShow() {
 
   return (
     <>
-      <Card sx={{ paddingBottom: "1em" }}>
+      <Card sx={{ paddingBottom: "1em", maxWidth: "425px", margin: "0 auto" }}>
         <CardHeader
           title="Chorizo"
           subheader="September 14, 2016"
