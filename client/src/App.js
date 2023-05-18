@@ -9,6 +9,7 @@ import Register from "./components/Register"
 import History from "./components/History"
 import Form from "./components/Form"
 import FormView from "./components/FormView"
+import DenseTable from './components/Test';
 
 function App() {
   return (

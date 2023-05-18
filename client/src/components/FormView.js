@@ -8,6 +8,12 @@ import Button from '@mui/material/Button';
 import { IconButton } from '@mui/material';
 import { Link } from 'react-router-dom';
 import AlarmIcon from '@mui/icons-material/Alarm';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
 
 const exercises = [
   { id: 1, exercise: 'Push Ups', weight: 0, quantity: 2, reps: 10 },
@@ -26,7 +32,7 @@ export default function FormView() {
 
   return (
     <>
-      <Card sx={{ maxWidth: 345 }}>
+      <Card>
         <CardHeader
           title="Chorizo"
           subheader="September 14, 2016"
@@ -42,28 +48,36 @@ export default function FormView() {
             Starting my weight loss journey!!
           </Typography>
         </CardContent>
-      </Card>
-      <Card sx={{ maxWidth: 345 }}>
         <CardHeader
           title="Workout"
         />
         <CardContent>
-          {exercises.map(e => {
-            return (
-              <>
-                <Typography variant="body2" color="text.secondary">
-                  {e.exercise} {e.weight} lbs {e.reps}x {e.quantity} sets
-                </Typography>
-                <IconButton color="secondary" aria-label="add an alarm">
-                  <AlarmIcon />
-                </IconButton>
-              </>
-            );
-          })}
-          <Link to="/log/new">
-            <Button variant="contained">Edit</Button>
-          </Link>
+          <TableContainer component={Paper}>
+            <Table size="small" aria-label="a dense table">
+              <TableBody>
+                {exercises.map(e => (
+                  <TableRow
+                    key={e.exercise}
+                    sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                  >
+                    <TableCell component="th" scope="row">
+                      {e.exercise}
+                    </TableCell>
+                    <TableCell align="right">{e.weight}lbs</TableCell>
+                    <TableCell align="right">{e.quantity}x</TableCell>
+                    <TableCell align="right">{e.reps} reps</TableCell>
+                    <IconButton color="secondary" aria-label="add an alarm">
+                      <AlarmIcon />
+                    </IconButton>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
         </CardContent>
+        <Link to="/log/new">
+          <Button variant="contained">Edit</Button>
+        </Link>
       </Card>
     </>
   );
