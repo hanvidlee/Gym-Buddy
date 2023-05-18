@@ -37,20 +37,21 @@ export default function Calendar() {
     );
   }
 
-  const mappedDays = workoutDays.map((day) => {
+  const convertedDays = workoutDays.map((day) => {
     // console.log(day.year, day.month, day.day);
-
+    if (!day) {
+      return false;
+    }
     const formattedDate = dayjs(
       `${day.month}-${day.day}-${day.year}`,
       'M-D-YYYY'
     ).format('ddd MMM DD YYYY');
+
+    return formattedDate
   });
   // date i have right now: Mon May 01 2023
 
-
   const calendarDates = generateDate(today.month(), today.year());
-
-  //dayFlag[day] && <Cylogn/>
 
   return (
     <div className="flex w-2/3 mx-auto divide-x-2 gap-10 h-screen items-center bg-white">
@@ -99,18 +100,15 @@ export default function Calendar() {
 
         <div className="w-full grid grid-cols-7">
           {calendarDates.map(({ date, currentMonth, today }, index) => {
-            // const dateString = date.toDate().toDateString();
             const isCurrentDate = selectDate.isSame(date, 'day');
             const isActiveDate = today && isCurrentDate;
-            // console.log('this is the calendar dates', date.toDate())
-            // const hasWorkout = workoutDays.some((workoutDay) => {
-
-            //     return dayjs(date).isSame(workoutDate, 'day');
-            //   })
-            // });
-
-            // console.log(hasWorkout)
-            console.log(date.toDate().toDateString());
+            const hasWorkout = workouts.some((workout) => {
+              return convertedDays.some((convertedDay) => {
+                return dayjs(date).isSame(convertedDay, 'day');
+              });
+            });
+  
+            console.log(hasWorkout);
 
             return (
               <div key={index} className="h-14 grid place-content-center">
