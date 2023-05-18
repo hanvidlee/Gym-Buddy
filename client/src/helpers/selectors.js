@@ -1,7 +1,7 @@
 import dayjs from 'dayjs';
 
-// getWorkoutForDayPerUser - to be used in dashboard, calendar, and log/show
-export default function getWorkoutForDayPerUser(state, userId, selectedDate) {
+// getWorkoutsRelatedToUser => shallow copy of user_workouts object
+function getWorkoutsRelatedToUser(state, userId) {
   // currentUser returns the first element that meets the condition
   const currentUser = state.users.find((user) => user.id === userId);
 
@@ -13,6 +13,13 @@ export default function getWorkoutForDayPerUser(state, userId, selectedDate) {
   const workoutsForUser = state.user_workouts.filter((userWorkout) => {
     return userWorkout.user_id === currentUser.id;
   });
+
+  return workoutsForUser;
+}
+
+// getWorkoutForDayPerUser - to be used in dashboard, calendar, and log/show
+export function getWorkoutForDayPerUser(state, userId, selectedDate) {
+  const workoutsForUser = getWorkoutsRelatedToUser(state, userId);
 
   // parsedDate
   const parsedSelectedDate = dayjs(selectedDate);
@@ -41,16 +48,25 @@ export default function getWorkoutForDayPerUser(state, userId, selectedDate) {
     );
   });
 
-  console.log(`workoutforUSER!: `, workoutsForUser);
-  console.log('this is matched date!', matchedDays);
-  console.log('workoutsForDAY= ', workoutsForDay);
-  console.log('MY FINAL WORKOUTS!!!', workouts);
+  // console.log(`workoutforUSER!: `, workoutsForUser);
+  // console.log('this is matched date!', matchedDays);
+  // console.log('workoutsForDAY= ', workoutsForDay);
+  // console.log('MY FINAL WORKOUTS!!!', workouts);
 
   return workouts;
 }
 
 // getAllWorkoutsPerUser - to be used in dashboard and calendar
+export function getAllWorkoutsPerUser(state, userId) {
+  const workoutsForUser = getWorkoutsRelatedToUser(state, userId);
 
+  const workouts = state.workouts.filter((workout) => {
+    return workoutsForUser.some((userWorkout) => userWorkout.workout_id === workout.id);
+  });
+
+  console.log('getting workouts for all users!!', workouts)
+  return workouts;
+}
 
 // getDaysPerExercise - to be used in history
 // geteExerciseSetsPerWorkout - to be used in log/show

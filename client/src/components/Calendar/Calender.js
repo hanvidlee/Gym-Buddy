@@ -4,7 +4,7 @@ import cn from './cn';
 import dayjs from 'dayjs';
 import { GrFormPrevious, GrFormNext } from 'react-icons/gr';
 import { CgGym } from 'react-icons/cg';
-import getWorkoutForDayPerUser from '../../helpers/selectors';
+import { getWorkoutForDayPerUser,  getAllWorkoutsPerUser } from '../../helpers/selectors';
 import { database } from '../Application';
 
 
@@ -20,6 +20,8 @@ export default function Calendar() {
 
   const workouts = getWorkoutForDayPerUser(database, 1, parsedSelectDate)
 
+  getAllWorkoutsPerUser(database, 1)
+  
 
   return (
     <div className="flex w-2/3 mx-auto divide-x-2 gap-10 h-screen items-center bg-white">
