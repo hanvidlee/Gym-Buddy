@@ -6,7 +6,7 @@ router.get('/', (req, res) => {
   const user_id = req.session.userId;
 
   getUsernameFromUser(user_id).then((data) => {
-    console.log('data', data);
+    // console.log('data', data);
     return res.send(data);
   });
 });

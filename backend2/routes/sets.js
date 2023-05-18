@@ -8,9 +8,9 @@ router.get('/', (req, res) => {
   const workout_id = req.body.workoutId;
 
   getAllSetsPerUser(user_id, workout_id).then((data) => {
-    console.log('data', data);
+    // console.log('data', data);
     return res.send(data);
   });
 });
 
-module.exports = { getAllSetsPerUser };
+module.exports = router;

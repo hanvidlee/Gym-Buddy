@@ -7,7 +7,7 @@ router.get('/', (req, res) => {
   const exercise = req.body.exercise;
 
   getAllDetailsPerExercise(user_id, exercise).then((data) => {
-    console.log('data', data);
+    // console.log('data', data);
     return res.send(data);
   });
 });
