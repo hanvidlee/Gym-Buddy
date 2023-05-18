@@ -28,11 +28,11 @@ const exercises = [
   { id: 10, exercise: 'Cable Flys', weight: 10, quantity: 6, reps: 12 }
 ];
 
-export default function FormView() {
+export default function FormShow() {
 
   return (
     <>
-      <Card>
+      <Card sx={{ paddingBottom: "1em" }}>
         <CardHeader
           title="Chorizo"
           subheader="September 14, 2016"
@@ -41,7 +41,6 @@ export default function FormView() {
           component="img"
           height="194"
           image="https://assets.pokemon.com/assets/cms2/img/pokedex/full/143.png"
-          alt="Paella dish"
         />
         <CardContent>
           <Typography variant="body2" color="text.secondary">
@@ -64,7 +63,7 @@ export default function FormView() {
                       {e.exercise}
                     </TableCell>
                     <TableCell align="right">{e.weight}lbs</TableCell>
-                    <TableCell align="right">{e.quantity}x</TableCell>
+                    <TableCell align="right">{e.quantity} x</TableCell>
                     <TableCell align="right">{e.reps} reps</TableCell>
                     <IconButton color="secondary" aria-label="add an alarm">
                       <AlarmIcon />

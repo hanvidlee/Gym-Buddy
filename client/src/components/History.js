@@ -27,7 +27,7 @@ const exercises = [
 export default function History() {
 
   return (
-    <Card>
+    <Card sx={{ paddingBottom: "1em" }}>
       <CardHeader
         title="Chorizo"
         subheader="September 14, 2016"
@@ -45,17 +45,17 @@ export default function History() {
                     {e.exercise}
                   </TableCell>
                   <TableCell align="right">{e.weight}lbs</TableCell>
-                  <TableCell align="right">{e.quantity}x</TableCell>
+                  <TableCell align="right">{e.quantity} x</TableCell>
                   <TableCell align="right">{e.reps} reps</TableCell>
                 </TableRow>
               ))}
             </TableBody>
           </Table>
         </TableContainer>
-        <Link to="/log/view">
-          <Button variant="contained">View Details</Button>
-        </Link>
       </CardContent>
+      <Link to="/log/view">
+        <Button variant="contained">View Details</Button>
+      </Link>
     </Card>
   );
 }
