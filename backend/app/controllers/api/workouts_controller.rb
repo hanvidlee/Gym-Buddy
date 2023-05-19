@@ -2,7 +2,6 @@ class Api::WorkoutsController < ApplicationController
   def index
     @workouts = Workout.all
     @exercise_sets = ExerciseSet.all
-    @dayworkout = DayWorkout.all
     render json: {workouts: @workouts, exercise_sets: @exercise_sets }
   end
 
@@ -58,7 +57,7 @@ class Api::WorkoutsController < ApplicationController
     return unless exercise_sets_params
   
     exercise_sets_params.each do |exercise_sets_param|
-      permitted_params = exercise_sets_param.permit(:repetitions, :weight, :quantity)
+      permitted_params = exercise_sets_param.permit(:reps, :weight, :quantity)
       exercise_set = ExerciseSet.new(permitted_params)
       exercise_set.workout_id = @workout.id
       exercise_set.save

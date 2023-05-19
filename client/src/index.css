@@ -1,9 +1,9 @@
-@tailwind base;
+/* @tailwind base;
 @tailwind components;
-@tailwind utilities;
+@tailwind utilities; */
 
 :root {
-  --primary-bg: #242526;
+  /* --primary-bg: #242526; */
   --secondary-bg: #fff;
   --primary-text-color: #555;
   --secondary-text-color: #cecece;
@@ -35,9 +35,9 @@ a {
 }
 
 .menu-trigger p{
-  position: absolute;
+  /* position: absolute;
   top: 20px;
-  right: 20px;
+  right: 20px; */
   min-width: 150px;
   max-width: 300px;
   max-height: 2em;
@@ -49,9 +49,9 @@ a {
 }
 
 .dropdown-menu{
-  position: absolute;
+  /* position: absolute;
   top: 100px;
-  right: 20px;
+  right: 20px; */
   background-color: #fff;
   border-radius: var(--border-radius);
   padding: 10px 20px;
