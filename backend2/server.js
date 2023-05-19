@@ -32,6 +32,7 @@ const userRoutes = require('./routes/users');
 const workoutRoutes = require('./routes/workouts');
 const exerciseRoutes = require('./routes/exercises');
 const setRoutes = require('./routes/sets');
+const loginRoutes = require('./routes/login');
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
@@ -40,6 +41,7 @@ app.use('/api/users', userRoutes);
 app.use('/api/workouts', workoutRoutes);
 app.use('/api/sets', setRoutes);
 app.use('/api/exercises', exerciseRoutes);
+app.use('/api/login', loginRoutes);
 
 // Note: mount other resources here, using the same pattern above
 // Home page
