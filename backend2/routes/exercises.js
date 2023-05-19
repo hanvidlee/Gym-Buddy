@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { getAllDetailsPerExercise } = require('../db/queries/exercises')
+const { getAllDetailsPerExercise } = require('../db/queries/exercises');
 
 router.get('/', (req, res) => {
   const user_id = req.session.userId;

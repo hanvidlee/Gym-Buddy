@@ -41,4 +41,36 @@ const addWorkoutForUser = function (userId, dayId, picture_url, description, tit
   })
 };
 
-module.exports = { getAllWorkoutsForUser, addWorkoutForUser };
+const updateWorkout = function (workoutId, picture_url, description, title) {
+  const queryString = `
+  UPDATE workouts
+  SET picture_url = $2,
+      description = $3,
+      title = $4
+  WHERE id = $1
+  `;
+
+  const values = [workoutId, picture_url, description, title]
+
+  return db.query(queryString, values)
+  .then((result) => {
+    console.log('QUERY UPDATE: ', result.rows)
+    return result.rows;
+  })
+  .catch((error) => {
+    console.error(error.message)
+  })
+}
+
+const removeWorkout = function (workoutId) {
+  return db.query(`
+  DELETE FROM workouts
+  WHERE id = $1
+  RETURNING *
+  `, [workoutId])
+  .then((result) => {
+    console.log('QUERY DELETE: ', result.rows)
+  })
+}
+
+module.exports = { getAllWorkoutsForUser, addWorkoutForUser, updateWorkout, removeWorkout };

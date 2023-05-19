@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { getUsernameFromUser } = require('../db/queries/users')
+const { getUsernameFromUser } = require('../db/queries/users');
 
 router.get('/', (req, res) => {
   const user_id = req.session.userId;
