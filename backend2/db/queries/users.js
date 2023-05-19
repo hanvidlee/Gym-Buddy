@@ -15,6 +15,16 @@ const getUsernameFromUser = function(userId) {
   })
 }
 
+const getUserWithEmail = function(email) {
+  return db.query(`SELECT * FROM users WHERE email = $1`, [email.toLowerCase()])
+  .then((result) => {
+    return result.rows[0];
+  })
+  .catch((error) => {
+    console.error(error.message)
+  })
+}
+
 // create register route
 const storeUserInformation = function (username, email, password) {
   return db
@@ -24,4 +34,4 @@ const storeUserInformation = function (username, email, password) {
     ,[username, email, password]);
 };
 
-module.exports = { getUsernameFromUser, storeUserInformation };
+module.exports = { getUsernameFromUser, getUserWithEmail, storeUserInformation };
