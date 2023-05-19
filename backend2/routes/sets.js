@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const { getAllSetsPerUser, addSetsPerWorkout, removeSetFromWorkout } = require('../db/queries/sets')
+const { getAllSetsPerUser, addSetsPerWorkout, removeSetFromWorkout, updateSetInWorkout } = require('../db/queries/sets')
 
-// log/show
+// GET
 router.get('/', (req, res) => {
   // const user_id = req.session.userId;
   // const workout_id = req.body.workoutId;
@@ -13,7 +13,7 @@ router.get('/', (req, res) => {
   });
 });
 
-// log/new
+// ADD
 router.post('/', (req, res) => {
   // const user_id = req.session.userId;
   // const {workout_id, weight, reps, quantity, exercise } = req.body
@@ -25,12 +25,25 @@ router.post('/', (req, res) => {
   })
 })
 
-router.post('/remove', (req, res) => {
-  // const workout_id = req.sessions.workoutId;
+// ASK AHANA ABOUT THIS. Can I have this post route to '/' ?? Or do I use PUT here instead.
+// UPDATE
+router.post('/edit', (req, res) => {
+  // const set_id = req.sessions.setId;
+  // const { weight, reps, quantity, exercise }
 
-  removeSetFromWorkout(5)
+  updateSetInWorkout(1, 0, 20, 3, "Sit Ups")
   .then((data) => {
-    res.send(200, { message: 'OK' });
+    res.status(200).send({ message: 'OK. Update successful.' })
+  })
+})
+
+// DELETE
+router.post('/remove', (req, res) => {
+  // const set_id = req.sessions.setId;
+
+  removeSetFromWorkout(10)
+  .then((data) => {
+    res.send(200, { message: 'OK. Delete Sucessful.' });
   })
 })
 

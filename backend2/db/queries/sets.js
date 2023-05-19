@@ -44,14 +44,34 @@ const addSetsPerWorkout = function(workoutId, weight, reps, quantity, exercise) 
   })
 }
 
-const removeSetFromWorkout = function(workoutId) {
-  return db.query(`DELETE FROM sets
-  WHERE workout_id = $1
+const updateSetInWorkout = function(setId, weight, reps, quantity, exercise) {
+  const queryString = `
+  UPDATE sets
+  SET weight = $2,
+      reps = $3,
+      quantity = $4,
+      exercise = $5
+  WHERE id = $1
   RETURNING *
-  `, [workoutId])
+  `;
+
+  const values = [setId, weight, reps, quantity, exercise];
+
+  return db.query(queryString, values)
   .then((result) => {
-    console.log('DELETE QUERY: ', result.rows)
+    console.log('QUERY UPDATE: ', result.rows)
+    return result.rows;
   })
+  .catch((error) => {
+    console.error(error.message)
+  })
+}
+
+const removeSetFromWorkout = function(setId) {
+  return db.query(`DELETE FROM sets
+  WHERE id = $1
+  RETURNING *
+  `, [setId])
 };
 
-module.exports = { getAllSetsPerUser, addSetsPerWorkout, removeSetFromWorkout };
+module.exports = { getAllSetsPerUser, addSetsPerWorkout, removeSetFromWorkout, updateSetInWorkout };
