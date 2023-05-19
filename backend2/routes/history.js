@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { getAllDetailsPerExercise, getAllExercisesPerDay } = require('../db/queries/history');
+const { getAllDetailsPerExercise, getAllExercisesPerDay } = require('../db/queries/exercises');
 
 router.get('/details', (req, res) => {
   // const user_id = req.session.userId;
@@ -33,4 +33,4 @@ router.get('/', (req, res) => {
   })
 });
 
-module.exports(router);
+module.exports = router;
