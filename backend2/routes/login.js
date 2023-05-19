@@ -15,7 +15,6 @@ router.post('/', (req, res) => {
     }
 
     const samePassword = bcrypt.compareSync('password', result.password);
-    console.log('samePassword: ', samePassword)
 
     if (!samePassword) {
       console.log("Error: Password doesn't match");

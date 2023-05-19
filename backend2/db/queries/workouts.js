@@ -10,7 +10,7 @@ const getAllWorkoutsForUser = function (userId) {
   JOIN users ON users.id = workouts.user_id
   JOIN days ON days.id = workouts.day_id
   WHERE users.id = $1
-  ORDER BY date
+  ORDER BY date DESC
   `,
       [userId]
     )

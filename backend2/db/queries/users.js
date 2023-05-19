@@ -25,13 +25,12 @@ const getUserWithEmail = function(email) {
   })
 }
 
-// create register route
 const storeUserInformation = function (username, email, password) {
   return db
     .query(`
   INSERT INTO users (username, email, password)
   VALUES ($1, $2, $3) RETURNING *`
-    ,[username, email, password]);
+    ,[username, email, password])
 };
 
 module.exports = { getUsernameFromUser, getUserWithEmail, storeUserInformation };
