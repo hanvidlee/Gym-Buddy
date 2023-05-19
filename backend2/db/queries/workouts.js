@@ -23,26 +23,24 @@ const getAllWorkoutsForUser = function (userId) {
 };
 
 // picture_url, description, title, sets ==> reps, quantity, weight, exercise
-const addWorkoutForUser = function (userId, picture_url, description, title) {
+const addWorkoutForUser = function (userId, dayId, picture_url, description, title) {
   const queryString = `
-      INSERT INTO workouts (picture_url, description, title)
-      JOIN users ON users.id = workouts.user_id
-      WHERE users.id = $1
-      VALUES ($2, $3, $4)
+      INSERT INTO workouts (user_id, day_id, picture_url, description, title)
+      VALUES ($1, $2, $3, $4, $5)
       RETURNING *;
       `;
 
-  const values = [userId, picture_url, description, title];
+  const values = [userId, dayId, picture_url, description, title];
 
   return db.query(queryString, values)
   .then((result) => {
-    console.log('QUERY CONSOLELOG', result.rows);
     return result.rows;
   })
   .catch((error) => {
     console.error(error.message);
   })
 };
+
 
 // addSetsToWorkouts
 // workoutId
