@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { getAllSetsPerUser, addSetsPerWorkout } = require('../db/queries/sets')
+const { getAllSetsPerUser, addSetsPerWorkout, removeSetFromWorkout } = require('../db/queries/sets')
 
 // log/show
 router.get('/', (req, res) => {
@@ -22,6 +22,15 @@ router.post('/', (req, res) => {
   addSetsPerWorkout(5, 0, 20, 5, 'Sit Ups')
   .then((data) => {
     return res.send('Added sets successfully');
+  })
+})
+
+router.post('/remove', (req, res) => {
+  // const workout_id = req.sessions.workoutId;
+
+  removeSetFromWorkout(5)
+  .then((data) => {
+    res.send(200, { message: 'OK' });
   })
 })
 

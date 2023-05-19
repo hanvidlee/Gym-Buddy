@@ -44,4 +44,14 @@ const addSetsPerWorkout = function(workoutId, weight, reps, quantity, exercise) 
   })
 }
 
-module.exports = { getAllSetsPerUser, addSetsPerWorkout };
+const removeSetFromWorkout = function(workoutId) {
+  return db.query(`DELETE FROM sets
+  WHERE workout_id = $1
+  RETURNING *
+  `, [workoutId])
+  .then((result) => {
+    console.log('DELETE QUERY: ', result.rows)
+  })
+};
+
+module.exports = { getAllSetsPerUser, addSetsPerWorkout, removeSetFromWorkout };
