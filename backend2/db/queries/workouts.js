@@ -41,8 +41,4 @@ const addWorkoutForUser = function (userId, dayId, picture_url, description, tit
   })
 };
 
-
-// addSetsToWorkouts
-// workoutId
-
 module.exports = { getAllWorkoutsForUser, addWorkoutForUser };

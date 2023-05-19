@@ -24,4 +24,24 @@ const getAllSetsPerUser = function (userId, workoutId) {
     });
 };
 
-module.exports = { getAllSetsPerUser };
+// log/new
+const addSetsPerWorkout = function(workoutId, weight, reps, quantity, exercise) {
+  const queryString = `
+  INSERT INTO sets (workout_id, weight, reps, quantity, exercise)
+  VALUES ($1, $2, $3, $4, $5)
+  RETURNING *
+  `;
+
+  const values = [workoutId, weight, reps, quantity, exercise];
+
+  return db.query(queryString, values)
+  .then ((result) => {
+    console.log('QUERY: ', result.rows);
+    return result.rows;
+  })
+  .catch((error) => {
+    console.error(error.message)
+  })
+}
+
+module.exports = { getAllSetsPerUser, addSetsPerWorkout };
