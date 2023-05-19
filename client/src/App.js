@@ -9,7 +9,8 @@ import Register from "./components/Register"
 import History from "./components/History"
 import Form from "./components/Form"
 import FormView from "./components/FormView"
-import FormTest from './components/FormTest';
+import FormTest from './components/FormTest'
+import HomeTest from "./components/homeTest"
 
 
 
@@ -29,6 +30,7 @@ function App() {
           <Route path="/log/new" element={<Form />} />
           <Route path="/log/view" element={<FormView />} />
           <Route path="log/test" element={<FormTest/>}/>
+          <Route path="/test" element={<HomeTest/>}/>
         </Routes>
       </Router>
     </div>

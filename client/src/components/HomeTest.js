@@ -7,27 +7,24 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import { Link } from 'react-router-dom';
 
-export default function HomeTest() {
+export default function homeTest() {
 
   return (
     <>
     <h1>Dashboard</h1>
     <p>Date</p>
     <Link to="/calendar"><Button>Add Workout</Button></Link>
-    {/* render  */}
+      <Card sx={{ paddingBottom: "1em", maxWidth: "425px", margin: "0 auto" }}>
         <CardHeader
+          title="Chorizo"
           subheader="September 14, 2016"
         />
-      <Card sx={{ paddingBottom: "1em", maxWidth: "425px", margin: "0 auto" }}>
-        <CardContent>
-          <Typography>
-            Title
-          </Typography>
         <CardMedia
           component="img"
           height="194"
           image="https://assets.pokemon.com/assets/cms2/img/pokedex/full/143.png"
         />
+        <CardContent>
           <Typography variant="body2" color="text.secondary">
             Starting my weight loss journey!!
           </Typography>
@@ -36,7 +33,6 @@ export default function HomeTest() {
           <Button variant="contained">View Details</Button>
         </>
       </Card>
-      {/* end of function */}
     </>
   );
 }
