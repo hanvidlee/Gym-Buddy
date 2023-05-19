@@ -15,7 +15,6 @@ import DropdownMenu from './DropDownMenu';
 import Autocomplete from '@mui/material/Autocomplete';
 
 
-
 export default function FormTest() {
   const [workout, setWorkout] = useState({
     title: "",
@@ -23,8 +22,6 @@ export default function FormTest() {
     description: ""
   });
 
- 
-  
   const [exercises, setExercises] = useState([
     "squat", "push ups", "sit ups"
   ]);
@@ -47,19 +44,6 @@ export default function FormTest() {
       workout, exerciseSets
     });
   };
-
-  // const onClickHandler = ((event) => {
-  //   setExercises(event.target.innerText)
-
-  //   const updatedExerciseSets = [...exerciseSets];
-  //   updatedExerciseSets[index] = {
-  //     ...updatedExerciseSets[index],
-  //     exercise: event.target.value
-  //   };
-  //   //need to setExercise
-  //   setExerciseSets(updatedExerciseSets);
-  // })
-
   return (
     <React.Fragment>
       <form onSubmit={onSubmit}>
@@ -99,11 +83,10 @@ export default function FormTest() {
                       ...updatedExerciseSets[index],
                       exercise: newValue
                     };
-                    //need to setExercise
                     setExerciseSets(updatedExerciseSets);
                   }}
-                  value={value}
-                  inputValue={inputValue}
+                  value={es.exercise || ""}
+                  inputValue={es.exercise}
                   onInputChange={(event, newInputValue) => {
                     setInputValue(newInputValue);
                   }}
@@ -158,7 +141,9 @@ export default function FormTest() {
 
           setExerciseSets([...exerciseSets]);
         }}>Add row</Button>
-        <DropdownMenu />
+        <Button type="button" onClick={() => {
+          exerciseSets.pop()
+          setExerciseSets([...exerciseSets])}}> Delete row </Button>
       </form>
     </React.Fragment>
   );
