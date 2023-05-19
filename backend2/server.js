@@ -8,7 +8,6 @@ const morgan = require('morgan');
 const cors = require("cors");
 const cookieSession = require('cookie-session');
 
-
 const PORT = process.env.PORT || 8080;
 const app = express();
 
@@ -33,28 +32,22 @@ app.use(cookieSession({
 }));
 
 // Separated Routes for each Resource
-// Note: Feel free to replace the example routes below with your own
 const userRoutes = require('./routes/users');
 const workoutRoutes = require('./routes/workouts');
 const exerciseRoutes = require('./routes/exercises');
 const setRoutes = require('./routes/sets');
 const loginRoutes = require('./routes/login');
 const registerRoutes = require('./routes/register');
+const historyRoutes = require('./routes/history')
 
 // Mount all resource routes
-// Note: Feel free to replace the example routes below with your own
-// Note: Endpoints that return data (eg. JSON) usually start with `/api`
 app.use('/api/users', userRoutes);
 app.use('/api/workouts', workoutRoutes);
 app.use('/api/sets', setRoutes);
 app.use('/api/exercises', exerciseRoutes);
 app.use('/api/login', loginRoutes);
 app.use('/api/register', registerRoutes);
-
-// Note: mount other resources here, using the same pattern above
-// Home page
-// Warning: avoid creating more routes in this file!
-// Separate them into separate routes files (see above).
+app.use('/api/history', historyRoutes);
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
