@@ -30,7 +30,7 @@ export default function FormTest() {
 
   const [exerciseSets, setExerciseSets] = useState([
     {
-      exercise: "squat",
+      exercise: "",
       reps: 10,
       quantity: 4,
       weight: 100
@@ -43,6 +43,18 @@ export default function FormTest() {
       workout, exerciseSets
     });
   };
+
+  // const onClickHandler = ((event) => {
+  //   setExercises(event.target.innerText)
+
+  //   const updatedExerciseSets = [...exerciseSets];
+  //   updatedExerciseSets[index] = {
+  //     ...updatedExerciseSets[index],
+  //     exercise: event.target.value
+  //   };
+  //   //need to setExercise
+  //   setExerciseSets(updatedExerciseSets);
+  // })
 
   return (
     <React.Fragment>
@@ -77,13 +89,16 @@ export default function FormTest() {
                   renderInput={(params) => <TextField {...params}
                   required
                   label="Exercises"
-                  value={es.exercises}
+                  value={es.exercise}
                   onChange={(event) => {
+                    setExercises(event.target.value)
+                
                     const updatedExerciseSets = [...exerciseSets];
                     updatedExerciseSets[index] = {
                       ...updatedExerciseSets[index],
                       exercise: event.target.value
                     };
+                    //need to setExercise
                     setExerciseSets(updatedExerciseSets);
                   }}
                   />}
