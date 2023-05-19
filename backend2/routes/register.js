@@ -6,7 +6,7 @@ const { storeUserInformation, getUserWithEmail } = require('../db/queries/users'
 router.post('/', (req, res) => {
   const { username, email, password } = req.body;
 
-  getUserWithEmail(email)
+  getUserWithEmail('pikachu@mail.com')
     .then((result) => {
       if (result) {
         res.status(400).send("Error 400: Sorry, that user already exists!");
