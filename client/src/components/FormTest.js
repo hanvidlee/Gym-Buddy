@@ -3,7 +3,6 @@ import Box from '@mui/material/Box';
 import IconButton from '@mui/material/IconButton';
 import Input from '@mui/material/Input';
 import FilledInput from '@mui/material/FilledInput';
-import OutlinedInput from '@mui/material/OutlinedInput';
 import InputLabel from '@mui/material/InputLabel';
 import InputAdornment from '@mui/material/InputAdornment';
 import FormHelperText from '@mui/material/FormHelperText';
@@ -24,10 +23,12 @@ export default function FormTest() {
     description: ""
   });
 
+ 
+  
   const [exercises, setExercises] = useState([
     "squat", "push ups", "sit ups"
   ]);
-
+  
   const [exerciseSets, setExerciseSets] = useState([
     {
       exercise: "",
@@ -37,6 +38,9 @@ export default function FormTest() {
     }
   ]);
 
+  const [value, setValue] = useState("");
+  const [inputValue, setInputValue] = useState('');
+  
   const onSubmit = (e) => {
     e.preventDefault();
     console.log({
@@ -82,25 +86,30 @@ export default function FormTest() {
             return (
               <React.Fragment>
                 <Autocomplete
+                  key={`combo-box-demo-${index}`}
                   disablePortal
                   id="combo-box-demo"
                   options={exercises}
                   sx={{ width: 300 }}
-                  renderInput={(params) => <TextField {...params}
-                  required
-                  label="Exercises"
-                  value={es.exercise}
-                  onChange={(event) => {
-                    setExercises(event.target.value)
-                
+                  onChange={(event, newValue) => {
+                    setValue(newValue);
+
                     const updatedExerciseSets = [...exerciseSets];
                     updatedExerciseSets[index] = {
                       ...updatedExerciseSets[index],
-                      exercise: event.target.value
+                      exercise: newValue
                     };
                     //need to setExercise
                     setExerciseSets(updatedExerciseSets);
                   }}
+                  value={value}
+                  inputValue={inputValue}
+                  onInputChange={(event, newInputValue) => {
+                    setInputValue(newInputValue);
+                  }}
+                  renderInput={(params) => <TextField {...params}
+                    required
+                    label="Exercises"
                   />}
                 />
                 <TextField
@@ -149,7 +158,7 @@ export default function FormTest() {
 
           setExerciseSets([...exerciseSets]);
         }}>Add row</Button>
-        <DropdownMenu/>
+        <DropdownMenu />
       </form>
     </React.Fragment>
   );
