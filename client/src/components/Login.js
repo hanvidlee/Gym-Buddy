@@ -1,15 +1,12 @@
 import React from 'react';
 import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
 import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-
-const defaultTheme = createTheme();
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
 
 export default function SignIn() {
   const handleSubmit = (event) => {
@@ -22,18 +19,17 @@ export default function SignIn() {
   };
 
   return (
-    <ThemeProvider theme={defaultTheme} sx={{ maxWidth: "425px", margin: "0 auto" }}>
-      <Container component="main" maxWidth="xs">
-        <CssBaseline />
-        <Box
-          sx={{
-            marginTop: 8,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-          }}
-        >
-          <Typography component="h1" variant="h5">
+    <Box
+      sx={{
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        height: '100vh'
+      }}
+    >
+      <Card sx={{ paddingBottom: "1em", maxWidth: "425px", margin: "0 auto" }}>
+        <CardContent>
+          <Typography component="h1" variant="h5" align="center">
             Log In
           </Typography>
           <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
@@ -57,22 +53,17 @@ export default function SignIn() {
               id="password"
               autoComplete="current-password"
             />
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}
-            >
+            <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
               Submit
             </Button>
             <Grid item>
-                <Link href="/register" variant="body2">
-                  {"Don't have an account? Sign Up"}
-                </Link>
-              </Grid>
+              <Link href="/register" variant="body2">
+                {"Don't have an account? Sign Up"}
+              </Link>
+            </Grid>
           </Box>
-        </Box>
-      </Container>
-    </ThemeProvider>
+        </CardContent>
+      </Card>
+    </Box>
   );
 }

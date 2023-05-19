@@ -53,7 +53,7 @@ export default function History() {
           </Table>
         </TableContainer>
       </CardContent>
-      <Link to="/log/view">
+      <Link to="/log/show">
         <Button variant="contained">View Details</Button>
       </Link>
     </Card>
