@@ -30,7 +30,7 @@ function NavBar() {
 
 function App() {
   const { state } = useApplicationData();
-  console.log('history details ', state.historyDetails)
+  
   return (
     <div className="App">
       <Router>
