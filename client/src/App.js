@@ -32,8 +32,6 @@ function App() {
   const { state } = useApplicationData();
 
   const dailyWorkouts = state.workouts
-  
-  console.log('THIS IS WHAT IM LOOKING FOR', dailyWorkouts)
 
   return (
     <div className="App">
