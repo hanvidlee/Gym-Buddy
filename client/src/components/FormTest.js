@@ -17,6 +17,14 @@ import Autocomplete from '@mui/material/Autocomplete';
 
 
 export default function FormTest(props) {
+    // user_id, day_id, picture_url, description, title
+    props.addWorkout()
+
+    //workout_id, weight,reps, quantity, exercise
+    props.addSet()
+
+    const exerciseList = props.exercises;
+    console.log('exercise list!!: ', exerciseList);
 
   const [workout, setWorkout] = useState({
     title: "",
@@ -46,12 +54,6 @@ export default function FormTest(props) {
       workout, exerciseSets
     });
   };
-    
-    // user_id, day_id, picture_url, description, title
-    props.addWorkout()
-
-    //workout_id, weight,reps, quantity, exercise
-    props.addSet()
 
   // const onClickHandler = ((event) => {
   //   setExercises(event.target.innerText)
