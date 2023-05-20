@@ -168,7 +168,7 @@ export default function useApplicationData() {
   }
 
    // UPDATE
-   function updateWorkout(set_id, weight, reps, quantity, exercise) {
+   function updateWorkout(workout_id, picture_url, description, title) {
     return axios
     .post('http://localhost:8080/api/workouts/edit', {
       workout_id,
@@ -182,7 +182,7 @@ export default function useApplicationData() {
   }
 
   // DELETE
-  function deleteWorkout(set_id) {
+  function deleteWorkout(workout_id) {
     return axios
     .post('http://localhost:8080/api/workouts/remove', {
       workout_id
