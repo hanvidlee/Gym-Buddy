@@ -5,12 +5,11 @@ const getAllWorkoutsForUser = function (userId) {
   return db
     .query(
       `
-  SELECT title, description, picture_url, users.id AS user, days.date_actual AS date
+  SELECT title, description, picture_url, users.id AS user, workouts.workout_date AS date
   FROM workouts
   JOIN users ON users.id = workouts.user_id
-  JOIN days ON days.id = workouts.day_id
   WHERE users.id = $1
-  ORDER BY date DESC
+  ORDER BY workouts.workout_date DESC
   `,
       [userId]
     )
@@ -23,14 +22,14 @@ const getAllWorkoutsForUser = function (userId) {
 };
 
 // picture_url, description, title, sets ==> reps, quantity, weight, exercise
-const addWorkoutForUser = function (userId, dayId, picture_url, description, title) {
+const addWorkoutForUser = function (userId, workout_date, picture_url, description, title) {
   const queryString = `
-      INSERT INTO workouts (user_id, day_id, picture_url, description, title)
+      INSERT INTO workouts (user_id, workout_date, picture_url, description, title)
       VALUES ($1, $2, $3, $4, $5)
       RETURNING *;
       `;
 
-  const values = [userId, dayId, picture_url, description, title];
+  const values = [userId, workout_date, picture_url, description, title];
 
   return db.query(queryString, values)
   .then((result) => {
