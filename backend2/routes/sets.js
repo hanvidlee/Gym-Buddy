@@ -12,7 +12,7 @@ router.get('/', (req, res) => {
   // const user_id = req.session.userId;
   // const workout_id = req.body.workoutId;
 
-  getAllSetsPerUser(1, 1).then((data) => {
+  getAllSetsPerUser(1).then((data) => {
     // console.log('data', data);
     return res.send(data);
   });
