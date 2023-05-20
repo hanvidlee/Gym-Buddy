@@ -17,7 +17,7 @@ import "./Form.scss";
 
 
 
-export default function FormTest() {
+export default function FormTest(props) {
 
   const [selectedImage, setSelectedImage] = useState(null);
 
@@ -45,6 +45,9 @@ export default function FormTest() {
 
   const onSubmit = (e) => {
     e.preventDefault();
+    const formData = {
+      
+    }
     console.log({
       workout, exerciseSets
     });
@@ -55,18 +58,6 @@ export default function FormTest() {
 
     //workout_id, weight,reps, quantity, exercise
     props.addSet()
-
-  // const onClickHandler = ((event) => {
-  //   setExercises(event.target.innerText)
-
-  //   const updatedExerciseSets = [...exerciseSets];
-  //   updatedExerciseSets[index] = {
-  //     ...updatedExerciseSets[index],
-  //     exercise: event.target.value
-  //   };
-  //   //need to setExercise
-  //   setExerciseSets(updatedExerciseSets);
-  // })
 
   return (
     <React.Fragment>
@@ -81,7 +72,7 @@ export default function FormTest() {
             value={workout.picture}
           />
           <br />
-          <button onClick={() => setSelectedImage(null)}>Remove</button>
+          <Button onClick={() => setSelectedImage(null)}>Remove</Button>
         </div>
       )}
 
@@ -94,6 +85,7 @@ export default function FormTest() {
         onChange={(event) => {
           console.log(event.target.files[0]);
           setSelectedImage(event.target.files[0]);
+          setWorkout({ ...workout, picture: {setSelectedImage} })
         }}
       />
         <Button
