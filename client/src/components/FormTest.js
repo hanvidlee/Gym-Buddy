@@ -15,11 +15,18 @@ import DropdownMenu from './DropDownMenu';
 import Autocomplete from '@mui/material/Autocomplete';
 import "./Form.scss";
 
+export default function FormTest(props) {
+    // user_id, day_id, picture_url, description, title
+    props.addWorkout()
 
+    //workout_id, weight,reps, quantity, exercise
+    props.addSet()
 
-export default function FormTest() {
+    const exerciseList = props.exercises;
+    console.log('exercise list!!: ', exerciseList);
 
   const [selectedImage, setSelectedImage] = useState(null);
+
 
   const [workout, setWorkout] = useState({
     title: "",
@@ -49,24 +56,6 @@ export default function FormTest() {
       workout, exerciseSets
     });
   };
-    
-    // user_id, day_id, picture_url, description, title
-    props.addWorkout()
-
-    //workout_id, weight,reps, quantity, exercise
-    props.addSet()
-
-  // const onClickHandler = ((event) => {
-  //   setExercises(event.target.innerText)
-
-  //   const updatedExerciseSets = [...exerciseSets];
-  //   updatedExerciseSets[index] = {
-  //     ...updatedExerciseSets[index],
-  //     exercise: event.target.value
-  //   };
-  //   //need to setExercise
-  //   setExerciseSets(updatedExerciseSets);
-  // })
 
   return (
     <React.Fragment>

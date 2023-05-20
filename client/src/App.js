@@ -43,7 +43,7 @@ function App() {
           <Route path="/calendar" element={<Calendar dailyWorkouts={state.workouts}/>} />
           <Route path="/log/new" element={<Form />} />
           <Route path="/log/show" element={<FormShow updateWorkout={updateWorkout} deleteWorkout={deleteWorkout} sets={state.sets} updateSet={updateSet} deleteSet={deleteSet}/>} />
-          <Route path="log/test" element={<FormTest addWorkout={addWorkout} addSet={addSet}/>} />
+          <Route path="log/test" element={<FormTest exercises={state.exercises} addWorkout={addWorkout} addSet={addSet}/>} />
           <Route path="/test" element={<HomeTest user={state.user} dailyWorkouts={state.workouts}/>} />
         </Routes>
       </Router>
