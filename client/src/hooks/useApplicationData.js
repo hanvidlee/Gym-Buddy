@@ -3,9 +3,9 @@ import axios from 'axios';
 
 export default function useApplicationData() {
   const [state, setState] = useState({
-    workouts: {},
+    workouts: [],
     history: {},
-    sets: {},
+    sets: [],
     user: [], // there's nothing in here
     historyDetails: {},
     exercises: []

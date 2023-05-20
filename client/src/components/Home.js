@@ -7,36 +7,37 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import { Link } from 'react-router-dom';
 
-export default function Home() {
-
+export default function Home({
+  workouts
+}) {
   return (
     <>
-    <h1>Dashboard</h1>
-    <p>Date</p>
-    <Link to="/calendar"><Button>Add Workout</Button></Link>
-    {/* render  */}
-        <CardHeader
-          subheader="September 14, 2016"
-        />
-      <Card sx={{ paddingBottom: "1em", maxWidth: "425px", margin: "0 auto" }}>
-        <CardContent>
-          <Typography>
-            Title
-          </Typography>
-        <CardMedia
-          component="img"
-          height="194"
-          image="https://assets.pokemon.com/assets/cms2/img/pokedex/full/143.png"
-        />
-          <Typography variant="body2" color="text.secondary">
-            Starting my weight loss journey!!
-          </Typography>
-        </CardContent>
-        <>
-          <Button variant="contained">View Details</Button>
-        </>
-      </Card>
-      {/* end of function */}
+      <h1>Dashboard</h1>
+      <p>Date</p>
+      <Link to="/calendar"><Button>Add Workout</Button></Link>
+      {workouts.map((workout) => {
+        return (
+          <Card key={`workout-${workout.id}`} sx={{ paddingBottom: "1em", maxWidth: "425px", margin: "0 auto" }}>
+            <CardHeader
+              subheader={workout.date}
+            />
+            <CardContent>
+              <Typography>
+                {workout.title}
+              </Typography>
+              <CardMedia
+                component="img"
+                height="100"
+                image={workout.picture_url}
+              />
+              <Typography variant="body2" color="text.secondary">
+                {workout.description}
+              </Typography>
+            </CardContent>
+            <Link to={`/log/show/${workout.id}`}><Button variant="contained">View Details</Button></Link>
+          </Card>
+        );
+      })}
     </>
   );
 }
