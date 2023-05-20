@@ -10,9 +10,8 @@ const getAllSetsPerUser = function (userId, workoutId) {
   FROM sets
   JOIN workouts ON workouts.id = sets.workout_id
   JOIN users ON users.id = workouts.user_id
-  JOIN days ON days.id = workouts.day_id
   WHERE users.id = $1 AND workouts.id = $2
-  ORDER BY days.date_actual
+  ORDER BY workouts.workout_date
   `,
       [userId, workoutId]
     )

@@ -20,9 +20,9 @@ router.get('/', (req, res) => {
 // ADD
 router.post('/', (req, res) => {
   // const user_id = req.session.userId;
-  // const {day_id, picture_url, description, title } = req.body
+  // const {workout_date, picture_url, description, title } = req.body
 
-  // (userId, dayId, picture_url, description, title)
+  // (userId, workout_date, picture_url, description, title)
   addWorkoutForUser(
     1,
     7,
@@ -36,7 +36,7 @@ router.post('/', (req, res) => {
 
 // UPDATE
 router.post('/edit', (req, res) => {
-  // const {day_id, picture_url, description, title } = req.body
+  // const {workout_id, picture_url, description, title } = req.body
 
   // (workout_id, picture_url, description, title)
   updateWorkout(

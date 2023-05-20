@@ -42,7 +42,11 @@ export default function FormShow({
   exercises = testExercises,
   title = testTitle,
   date,
-  description = testDescription
+  description = testDescription,
+  updateSet,
+  deleteSet,
+  updateWorkout,
+  deleteWorkout,
 }) {
   const [titleState, setTitleState] = useState(title);
   const [descriptionState, setDescriptionState] = useState(description);
