@@ -3,9 +3,9 @@ import axios from 'axios';
 
 export default function useApplicationData() {
   const [state, setState] = useState({
-    workouts: {},
+    workouts: [],
     history: {},
-    sets: {},
+    sets: [],
     user: [], // there's nothing in here
     historyDetails: {},
     exercises: []
@@ -81,11 +81,11 @@ export default function useApplicationData() {
 
   ///// WORKOUTS
   // ADD
-  function addWorkout(user_id, day_id, picture_url, description, title) {
+  function addWorkout(user_id, workout_date, picture_url, description, title) {
     const options = {
       url: 'http://localhost:8080/api/workouts',
       method: "POST",
-      data : { user_id, day_id, picture_url, description, title },
+      data : { user_id, workout_date, picture_url, description, title },
       headers: { 'content-type': 'application/x-www-form-urlencoded' },
     }
     console.log("options: ", options);

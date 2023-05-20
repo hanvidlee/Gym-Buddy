@@ -5,7 +5,7 @@ const getAllWorkoutsForUser = function (userId) {
   return db
     .query(
       `
-  SELECT title, description, picture_url, users.id AS user, workouts.workout_date AS date
+  SELECT workouts.*
   FROM workouts
   JOIN users ON users.id = workouts.user_id
   WHERE users.id = $1
@@ -14,6 +14,7 @@ const getAllWorkoutsForUser = function (userId) {
       [userId]
     )
     .then((result) => {
+      console.log('GET ALL WORKOUTS: ',result.rows)
       return result.rows;
     })
     .catch((error) => {
@@ -33,6 +34,7 @@ const addWorkoutForUser = function (userId, workout_date, picture_url, descripti
 
   return db.query(queryString, values)
   .then((result) => {
+    console.log('ADDING WORKOUTS ', result.rows)
     return result.rows;
   })
   .catch((error) => {
