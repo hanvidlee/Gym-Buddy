@@ -13,9 +13,14 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import Button from '@mui/material/Button';
 import DropdownMenu from './DropDownMenu';
 import Autocomplete from '@mui/material/Autocomplete';
+import "./Form.scss";
+
 
 
 export default function FormTest() {
+
+  const [selectedImage, setSelectedImage] = useState(null);
+
   const [workout, setWorkout] = useState({
     title: "",
     picture: "",
@@ -25,7 +30,7 @@ export default function FormTest() {
   const [exercises, setExercises] = useState([
     "squat", "push ups", "sit ups"
   ]);
-  
+
   const [exerciseSets, setExerciseSets] = useState([
     {
       exercise: "",
@@ -37,7 +42,7 @@ export default function FormTest() {
 
   const [value, setValue] = useState("");
   const [inputValue, setInputValue] = useState('');
-  
+
   const onSubmit = (e) => {
     e.preventDefault();
     console.log({
@@ -48,6 +53,41 @@ export default function FormTest() {
     <React.Fragment>
       <form onSubmit={onSubmit}>
         <h2>Workout Form</h2>
+        {selectedImage && (
+        <div>
+          <img
+            alt="not found"
+            width={"250px"}
+            src={URL.createObjectURL(selectedImage)}
+            value={workout.picture}
+          />
+          <br />
+          <button onClick={() => setSelectedImage(null)}>Remove</button>
+        </div>
+      )}
+
+      <br />
+      <br />
+      
+      <input
+        type="file"
+        name="myImage"
+        onChange={(event) => {
+          console.log(event.target.files[0]);
+          setSelectedImage(event.target.files[0]);
+        }}
+      />
+        <Button
+          variant="contained"
+          component="label"
+        >
+          Upload File
+          <input
+            type="file"
+            hidden
+          />
+        </Button>
+
         <TextField
           required
           label="Workout Title"
@@ -71,6 +111,7 @@ export default function FormTest() {
               <React.Fragment>
                 <Autocomplete
                   key={`combo-box-demo-${index}`}
+                  className="form-dropdown"
                   disablePortal
                   id="combo-box-demo"
                   options={exercises}
@@ -142,8 +183,9 @@ export default function FormTest() {
           setExerciseSets([...exerciseSets]);
         }}>Add row</Button>
         <Button type="button" onClick={() => {
-          exerciseSets.pop()
-          setExerciseSets([...exerciseSets])}}> Delete row </Button>
+          exerciseSets.pop();
+          setExerciseSets([...exerciseSets]);
+        }}> Delete row </Button>
       </form>
     </React.Fragment>
   );
