@@ -51,7 +51,6 @@ function App() {
               deleteSet={deleteSet}
             />}
           />
-          <Route path="/test" element={<HomeTest user={state.user} dailyWorkouts={state.workouts} />} />
           <Route path="/" element={<Home user={state.user} workouts={state.workouts}/>} />
           <Route path="/log/test" element={<FormTest exercises={state.exercises} addWorkout={addWorkout} addSet={addSet}/>} />
         </Routes>

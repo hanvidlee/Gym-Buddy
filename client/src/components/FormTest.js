@@ -1,26 +1,9 @@
 import React, { useState } from 'react';
-import Box from '@mui/material/Box';
-import IconButton from '@mui/material/IconButton';
-import Input from '@mui/material/Input';
-import FilledInput from '@mui/material/FilledInput';
-import InputLabel from '@mui/material/InputLabel';
 import InputAdornment from '@mui/material/InputAdornment';
-import FormHelperText from '@mui/material/FormHelperText';
-import FormControl from '@mui/material/FormControl';
 import TextField from '@mui/material/TextField';
-import Visibility from '@mui/icons-material/Visibility';
-import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import Button from '@mui/material/Button';
-import DropdownMenu from './DropDownMenu';
 import Autocomplete from '@mui/material/Autocomplete';
 import "./Form.scss";
-
-export default function FormTest(props) {
-    // user_id, day_id, picture_url, description, title
-    props.addWorkout()
-
-    //workout_id, weight,reps, quantity, exercise
-    props.addSet()
 
 export default function FormTest(props) {
     const exerciseList = props.exercises;
