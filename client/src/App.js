@@ -1,21 +1,27 @@
 import './App.css';
-// import useApplicationData from './hooks/useApplicationData';
-import { Route, Routes, BrowserRouter as Router, useLocation } from "react-router-dom";
-import Navigation from "./components/Navigation";
+
+import {
+  Route,
+  Routes,
+  BrowserRouter as Router,
+  useLocation,
+} from 'react-router-dom';
+import Navigation from './components/Navigation';
 import Calendar from './components/Calendar/Calender';
-import Home from "./components/Home"
-import Login from "./components/Login"
-import Register from "./components/Register"
-import History from "./components/History"
-import Form from "./components/Form"
-import FormShow from "./components/FormShow"
-import FormTest from './components/FormTest'
-import HomeTest from "./components/homeTest"
+import Home from './components/Home';
+import Login from './components/Login';
+import Register from './components/Register';
+import History from './components/History';
+import Form from './components/Form';
+import FormShow from './components/FormShow';
+import FormTest from './components/FormTest';
+import HomeTest from './components/HomeTest';
+import useApplicationData from './hooks/useApplicationData';
 
 function NavBar() {
   const location = useLocation();
 
-  if (location.pathname === "/login" || location.pathname === "/register") {
+  if (location.pathname === '/login' || location.pathname === '/register') {
     return null;
   }
 
@@ -23,6 +29,12 @@ function NavBar() {
 }
 
 function App() {
+  const { state } = useApplicationData();
+
+  const dailyWorkouts = state.workouts
+  
+  console.log('THIS IS WHAT IM LOOKING FOR', dailyWorkouts)
+
   return (
     <div className="App">
       <Router>
@@ -35,8 +47,8 @@ function App() {
           <Route path="/calendar" element={<Calendar />} />
           <Route path="/log/new" element={<Form />} />
           <Route path="/log/show" element={<FormShow />} />
-          <Route path="log/test" element={<FormTest/>}/>
-          <Route path="/test" element={<HomeTest/>}/>
+          <Route path="log/test" element={<FormTest />} />
+          <Route path="/test" element={<HomeTest workouts={dailyWorkouts}/>} />
         </Routes>
       </Router>
     </div>

@@ -1,71 +1,28 @@
-// import { useEffect, useState } from 'react';
-// import axios from 'axios';
-
-// const useApplicationData = () => {
-//   const [state, setState] = useState({
-//     users: [],
-//     loading: true,
-//   });
-
-//   useEffect(() => {
-//     axios({
-//       method: 'GET',
-//       url: '/api/users',
-//     })
-//     .then(({ data }) => {
-//       console.log(data);
-//       setState(prevState => ({
-//         ...prevState,
-//         users: data,
-//         loading: false, // set loading state to false when data has finished loading
-//       }));
-//     })
-//     .catch((err) => console.log(err));
-//   }, []);
-
-//   return {
-//     state,
-//     setState,
-//   };
-// };
-
-// export default useApplicationData;
-
-import React, {
-  useEffect,
-  useReducer
-} from 'react';
-import dataReducer, {
-  SET_USERS
-} from '../reducer/data_reducer';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 
-const useApplicationData = () => {
-  const [state, dispatch] = useReducer(dataReducer, {
-      users: [],
-      loading: true,
-  });
+export default function useApplicationData() {
+  const [state, setState] = useState({
+    workouts: {}
+  })
+
   useEffect(() => {
-      axios({
-              method: 'GET',
-              url: '/api/users',
-          })
-          .then(({
-              data
-          }) => {
-              console.log(data);
-              dispatch({
-                  type: SET_USERS,
-                  users: data
-              });
-          })
-          .catch((err) => console.log(err));
-  }, []);
+    console.log("Inside useEffect");
+    Promise.all([
+      axios.get('http://localhost:8080/api/workouts'),
+      // axios.get('http://localhost:8080/api/history'),
+      // axios.get('http://localhost:8080/api/exercises'),
+      // axios.get('http://localhost:8080/api/sets'),
+      // axios.get('http://localhost:8080/api/users')
+    ]).then((all) => {
+      setState((prev) => ({
+        ...prev,
+        workouts: all[0].data
+      }));
+    }).catch((error) => {
+      console.log("This is the error from connection: ", error)
+    })
+  }, [])
 
-  return {
-      state,
-      dispatch,
-  };
-};
-
-export default useApplicationData;
+  return { state }
+}
