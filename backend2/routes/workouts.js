@@ -20,17 +20,18 @@ router.get('/', (req, res) => {
 // ADD
 router.post('/', (req, res) => {
   // const user_id = req.session.userId;
-  // const {workout_date, picture_url, description, title } = req.body
+ 
+  const {  user_id, workout_date, picture_url, description, title  } = req.body
 
-  // (userId, workout_date, picture_url, description, title)
   addWorkoutForUser(
-    1,
-    7,
-    'https://randomuser.me/api/portraits/women/1.jpg',
-    'Today was fine',
-    'Day 7'
+    user_id,
+    workout_date,
+    picture_url,
+    description,
+    title
   ).then((data) => {
     return res.send('Added workout successfully');
+
   });
 });
 

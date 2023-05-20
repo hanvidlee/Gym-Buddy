@@ -52,7 +52,7 @@ export default function FormTest(props) {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    props.addWorkout(1, 1, selectedImage, "fdsafd", title)
+    props.addWorkout(1, '2023-05-20', selectedImage, 'description', title)
   };
 
   return (
