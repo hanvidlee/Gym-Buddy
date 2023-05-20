@@ -7,16 +7,21 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import { Link } from 'react-router-dom';
 
-export default function homeTest() {
+export default function homeTest(props) {
+  const user = props.user
+  // console.log('username:', user[0].username); // you have to grab the username like so in order to retrieve it
+
+  const workouts = props.dailyWorkouts // the output is array of objects, map over them and set id as key
+  console.log('workouts ', workouts);
 
   return (
     <>
     <h1>Dashboard</h1>
     <p>Date</p>
     <Link to="/calendar"><Button>Add Workout</Button></Link>
+      
       <Card sx={{ paddingBottom: "1em", maxWidth: "425px", margin: "0 auto" }}>
         <CardHeader
-          title="Chorizo"
           subheader="September 14, 2016"
         />
         <CardMedia

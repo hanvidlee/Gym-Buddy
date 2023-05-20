@@ -27,7 +27,16 @@ const exercises = [
   { id: 10, exercise: 'Cable Flys', weight: 10, quantity: 6, reps: 12 }
 ];
 
-export default function FormShow() {
+export default function FormShow(props) {
+
+  // Note from Dina - this is an array of objects, don't forget to loop over them and set id to key. 
+  console.log('sets ', props.sets)
+
+  // functions for post requests
+  props.updateSet();
+  props.deleteSet();
+  props.updateWorkout();
+  props.deleteWorkout();
 
   return (
     <>
