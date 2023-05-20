@@ -6,7 +6,7 @@ export default function useApplicationData() {
     workouts: {},
     history: {},
     sets: {},
-    users: [], // there's nothing in here
+    user: [], // there's nothing in here
     historyDetails: {}
   })
 
@@ -25,7 +25,7 @@ export default function useApplicationData() {
         workouts: all[0].data,
         history: all[1].data,
         sets: all[2].data,
-        users: all[3].data,
+        user: all[3].data,
         historyDetails: all[4].data
       }));
     }).catch((error) => {
