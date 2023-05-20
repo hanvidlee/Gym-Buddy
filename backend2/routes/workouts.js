@@ -36,7 +36,7 @@ router.post('/', (req, res) => {
 
 // UPDATE
 router.post('/edit', (req, res) => {
-  // const {day_id, picture_url, description, title } = req.body
+  // const {workout_id, picture_url, description, title } = req.body
 
   // (workout_id, picture_url, description, title)
   updateWorkout(

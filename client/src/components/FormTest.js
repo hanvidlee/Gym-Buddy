@@ -16,15 +16,14 @@ import Autocomplete from '@mui/material/Autocomplete';
 
 
 
-export default function FormTest() {
+export default function FormTest(props) {
+
   const [workout, setWorkout] = useState({
     title: "",
     picture: "",
     description: ""
   });
 
- 
-  
   const [exercises, setExercises] = useState([
     "squat", "push ups", "sit ups"
   ]);
@@ -47,6 +46,12 @@ export default function FormTest() {
       workout, exerciseSets
     });
   };
+    
+    // user_id, day_id, picture_url, description, title
+    props.addWorkout()
+
+    //workout_id, weight,reps, quantity, exercise
+    props.addSet()
 
   // const onClickHandler = ((event) => {
   //   setExercises(event.target.innerText)
