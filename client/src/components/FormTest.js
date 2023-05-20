@@ -6,11 +6,18 @@ import Autocomplete from '@mui/material/Autocomplete';
 import "./Form.scss";
 
 export default function FormTest(props) {
-    const exerciseList = props.exercises;
-    console.log('exercise list!!: ', exerciseList);
+
+  const {addWorkout, addSet} = props 
+  //workout_id, weight,reps, quantity, exercise
+  // props.addSet(workout_id, weight, reps, quantity, exercise);
+
+  const exerciseList = props.exercises;
+  console.log('exercise list!!: ', exerciseList);
+
 
   const [selectedImage, setSelectedImage] = useState(null);
 
+  const [title, setTitle] = useState('')
 
   const [workout, setWorkout] = useState({
     title: "",
@@ -36,9 +43,7 @@ export default function FormTest(props) {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    console.log({
-      workout, exerciseSets
-    });
+    props.addWorkout(1, '2023-05-20', selectedImage, 'description', title)
   };
 
   return (
@@ -46,29 +51,30 @@ export default function FormTest(props) {
       <form onSubmit={onSubmit}>
         <h2>Workout Form</h2>
         {selectedImage && (
-        <div>
-          <img
-            alt="not found"
-            width={"250px"}
-            src={URL.createObjectURL(selectedImage)}
-            value={workout.picture}
-          />
-          <br />
-          <button onClick={() => setSelectedImage(null)}>Remove</button>
-        </div>
-      )}
+          <div>
+            <img
+              alt="not found"
+              width={"250px"}
+              src={URL.createObjectURL(selectedImage)}
+              value={workout.picture}
+            />
+            <br />
+            <Button onClick={() => setSelectedImage(null)}>Remove</Button>
+          </div>
+        )}
 
-      <br />
-      <br />
-      
-      <input
-        type="file"
-        name="myImage"
-        onChange={(event) => {
-          console.log(event.target.files[0]);
-          setSelectedImage(event.target.files[0]);
-        }}
-      />
+        <br />
+        <br />
+
+        <input
+          type="file"
+          name="myImage"
+          onChange={(event) => {
+            console.log(event.target.files[0]);
+            setSelectedImage(event.target.files[0]);
+            setWorkout({ ...workout, picture: { setSelectedImage } });
+          }}
+        />
         <Button
           variant="contained"
           component="label"
@@ -83,8 +89,9 @@ export default function FormTest(props) {
         <TextField
           required
           label="Workout Title"
-          value={workout.title}
-          onChange={(event) => setWorkout({ ...workout, title: event.target.value })}
+          value={title}
+          onChange={(event) => setTitle(event.target.value)
+          }
           defaultValue=""
         />
         <TextField

@@ -20,30 +20,31 @@ router.get('/', (req, res) => {
 // ADD
 router.post('/', (req, res) => {
   // const user_id = req.session.userId;
-  // const {workout_date, picture_url, description, title } = req.body
+ 
+  const {  user_id, workout_date, picture_url, description, title  } = req.body
 
-  // (userId, workout_date, picture_url, description, title)
   addWorkoutForUser(
-    1,
-    7,
-    'https://randomuser.me/api/portraits/women/1.jpg',
-    'Today was fine',
-    'Day 7'
+    user_id,
+    workout_date,
+    picture_url,
+    description,
+    title
   ).then((data) => {
     return res.send('Added workout successfully');
+
   });
 });
 
 // UPDATE
 router.post('/edit', (req, res) => {
-  // const {workout_id, picture_url, description, title } = req.body
 
-  // (workout_id, picture_url, description, title)
+  const {workout_id, picture_url, description, title } = req.body
+
   updateWorkout(
-    2,
-    'https://randomuser.me/api/portraits/women/1.jpg',
-    'Not so good workout today, I hurt my back.',
-    'Bad back'
+    workout_id,
+    picture_url,
+    description,
+    title
   ).then((data) => {
     res.status(200).send({ message: 'OK. Update successful.' });
   });
