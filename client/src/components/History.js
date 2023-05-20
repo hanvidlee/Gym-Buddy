@@ -1,4 +1,5 @@
 import React from 'react';
+import { Autocomplete } from '@mui/material';
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
 import CardContent from '@mui/material/CardContent';
@@ -9,6 +10,7 @@ import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableRow from '@mui/material/TableRow';
+import TextField from '@mui/material/TextField';
 import Paper from '@mui/material/Paper';
 
 const exercises = [
@@ -27,35 +29,44 @@ const exercises = [
 export default function History() {
 
   return (
-    <Card sx={{ paddingBottom: "1em", maxWidth: "425px", margin: "0 auto" }}>
-      <CardHeader
-        title="Chorizo"
-        subheader="September 14, 2016"
+    <>
+      <Autocomplete
+        disablePortal
+        id="combo-box-demo"
+        options={exercises}
+        sx={{ width: 300 }}
+        renderInput={(params) => <TextField {...params} label="Exercises" />}
       />
-      <CardContent>
-        <TableContainer component={Paper}>
-          <Table size="small" aria-label="a dense table">
-            <TableBody>
-              {exercises.map(e => (
-                <TableRow
-                  key={e.exercise}
-                  sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                >
-                  <TableCell component="th" scope="row">
-                    {e.exercise}
-                  </TableCell>
-                  <TableCell align="right">{e.weight}lbs</TableCell>
-                  <TableCell align="right">{e.quantity} x</TableCell>
-                  <TableCell align="right">{e.reps} reps</TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
-      </CardContent>
-      <Link to="/log/show">
-        <Button variant="contained">View Details</Button>
-      </Link>
-    </Card>
+      <Card sx={{ paddingBottom: "1em", maxWidth: "425px", margin: "0 auto" }}>
+        <CardHeader
+          title="Chorizo"
+          subheader="September 14, 2016"
+        />
+        <CardContent>
+          <TableContainer component={Paper}>
+            <Table size="small" aria-label="a dense table">
+              <TableBody>
+                {exercises.map(e => (
+                  <TableRow
+                    key={e.exercise}
+                    sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                  >
+                    <TableCell component="th" scope="row">
+                      {e.exercise}
+                    </TableCell>
+                    <TableCell align="right">{e.weight}lbs</TableCell>
+                    <TableCell align="right">{e.quantity} x</TableCell>
+                    <TableCell align="right">{e.reps} reps</TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+        </CardContent>
+        <Link to="/log/show">
+          <Button variant="contained">View Details</Button>
+        </Link>
+      </Card>
+    </>
   );
 }

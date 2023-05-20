@@ -10,7 +10,7 @@ import History from "./components/History"
 import Form from "./components/Form"
 import FormShow from "./components/FormShow"
 import FormTest from './components/FormTest'
-import HomeTest from "./components/homeTest"
+import HomeTest from "./components/HomeTest"
 
 function NavBar() {
   const location = useLocation();
