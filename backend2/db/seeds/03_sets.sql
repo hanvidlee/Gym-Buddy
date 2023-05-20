@@ -9,3 +9,4 @@ VALUES ('Push Ups', 0, 2, 10, 1),
        ('Deadlifts', 285, 3, 5, 4),
        ('Hip Thrusts', 1000, 2, 15, 4),
        ('Cable Flys', 10, 6, 12, 4)
+       
