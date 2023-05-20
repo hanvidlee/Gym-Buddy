@@ -6,14 +6,15 @@ import Autocomplete from '@mui/material/Autocomplete';
 import "./Form.scss";
 
 export default function FormTest(props) {
-
+    //workout_id, weight,reps, quantity, exercise
+    props.addSet()
+    
   const {addWorkout, addSet} = props 
   //workout_id, weight,reps, quantity, exercise
   // props.addSet(workout_id, weight, reps, quantity, exercise);
 
   const exerciseList = props.exercises;
   console.log('exercise list!!: ', exerciseList);
-
 
   const [selectedImage, setSelectedImage] = useState(null);
 
