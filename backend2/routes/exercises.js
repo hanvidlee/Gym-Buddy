@@ -1,7 +1,7 @@
 const express = require('express');
 const axios = require('axios');
 const router = express.Router();
-const request = require('request');
+// const request = require('request');
 const { getAllDetailsPerExercise } = require('../db/queries/exercises');
 
 // router.get('/', async (req, res) => {

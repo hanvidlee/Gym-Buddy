@@ -9,6 +9,8 @@ router.get('/details', (req, res) => {
   const user_id = 1;
   const exercise = 'Push Ups';
 
+  console.log('Hi')
+
   getAllDetailsPerExercise(user_id, exercise)
   .then((data) => {
     console.log(data);
@@ -22,6 +24,8 @@ router.get('/details', (req, res) => {
 router.get('/', (req, res) => {
   // const user_id = req.session.userId;
   const user_id = 1;
+
+  console.log('Hello');
 
   getAllExercisesPerDay(user_id)
   .then((data) => {
