@@ -5,7 +5,7 @@ const getAllWorkoutsForUser = function (userId) {
   return db
     .query(
       `
-  SELECT title, description, picture_url, users.id AS user, workouts.workout_date AS date
+  SELECT workouts.*
   FROM workouts
   JOIN users ON users.id = workouts.user_id
   WHERE users.id = $1

@@ -30,7 +30,7 @@ function NavBar() {
 
 function App() {
   const { state, addWorkout, updateWorkout, deleteWorkout, addSet, updateSet, deleteSet } = useApplicationData();
-  
+
   return (
     <div className="App">
       <Router>
@@ -38,13 +38,23 @@ function App() {
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/" element={<Home />} />
-          <Route path="/history" element={<History exerciseDetails={state.historyDetails} exerciseHistory={state.history}/>} />
-          <Route path="/calendar" element={<Calendar dailyWorkouts={state.workouts}/>} />
+          <Route path="/" element={<Home workouts={state.workouts} />} />
+          <Route path="/history" element={<History exerciseDetails={state.historyDetails} exerciseHistory={state.history} />} />
+          <Route path="/calendar" element={<Calendar dailyWorkouts={state.workouts} />} />
           <Route path="/log/new" element={<Form />} />
-          <Route path="/log/show" element={<FormShow updateWorkout={updateWorkout} deleteWorkout={deleteWorkout} sets={state.sets} updateSet={updateSet} deleteSet={deleteSet}/>} />
-          <Route path="log/test" element={<FormTest addWorkout={addWorkout} addSet={addSet}/>} />
-          <Route path="/test" element={<HomeTest user={state.user} dailyWorkouts={state.workouts}/>} />
+          <Route path="/log/show/:id" element={
+            <FormShow
+              key={`workout-info-${JSON.stringify(state)}`}
+              workouts={state.workouts}
+              updateWorkout={updateWorkout}
+              deleteWorkout={deleteWorkout}
+              sets={state.sets}
+              updateSet={updateSet}
+              deleteSet={deleteSet}
+            />}
+          />
+          <Route path="log/test" element={<FormTest addWorkout={addWorkout} addSet={addSet} />} />
+          <Route path="/test" element={<HomeTest user={state.user} dailyWorkouts={state.workouts} />} />
         </Routes>
       </Router>
     </div>

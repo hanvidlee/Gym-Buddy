@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import moment from "moment";
+import { useParams } from "react-router-dom";
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
 import CardMedia from '@mui/material/CardMedia';
@@ -32,39 +34,37 @@ const testExercises = [
   { id: 10, exercise: 'Cable Flys', weight: 10, quantity: 6, reps: 12 }
 ];
 
-const testTitle = "Chorizo";
-
-// const testDate = "05/04/2022";
-
-const testDescription = "Starting my weight loss journey!!";
-
 export default function FormShow({
-  exercises = testExercises,
-  title = testTitle,
-  date,
-  description = testDescription,
+  sets,
+  workouts,
   updateSet,
   deleteSet,
   updateWorkout,
   deleteWorkout,
 }) {
-  const [titleState, setTitleState] = useState(title);
-  const [descriptionState, setDescriptionState] = useState(description);
-  const [dateState, setDateState] = useState(date);
-  const [exercisesState, setExercisesState] = useState(exercises);
+  const { id } = useParams();
+  const workout = workouts.find((w) => Number(w.id) === Number(id));
+  console.log("workout", workout);
+  const setsPerWorkout = sets.filter(s => Number(s.workout_id) === Number(id))
+  console.log("setsPerWorkout", setsPerWorkout)
+  const [titleState, setTitleState] = useState(workout?.title);
+  const [descriptionState, setDescriptionState] = useState(workout?.description);
+  const [dateState, setDateState] = useState(moment(workout?.workout_date)); // initialize
+  const [exercisesState, setExercisesState] = useState(setsPerWorkout);
+  const [imageState, setImageState] = useState(workout?.picture_url);
   const [isEditMode, setIsEditMode] = useState(false);
-  console.log('dateState', dateState)
+
   const onDateChange = (newDate) => {
     setDateState(newDate);
   };
 
   const onEditSubmit = (event) => {
-    for (let i = 0; i < exercises.length; i++) {
-      // console.log(event.target[`exercise-${i}`].value)
-      console.log(event.target[`weight-${i}`].value);
-      console.log(event.target[`quantity-${i}`].value);
-      console.log(event.target[`reps-${i}`].value);
-    }
+    // for (let i = 0; i < exercises.length; i++) {
+    //   // console.log(event.target[`exercise-${i}`].value)
+    //   console.log(event.target[`weight-${i}`].value);
+    //   console.log(event.target[`quantity-${i}`].value);
+    //   console.log(event.target[`reps-${i}`].value);
+    // }
     setIsEditMode(false);
   };
 
@@ -89,7 +89,7 @@ export default function FormShow({
 
   return (
     isEditMode ?
-      <Card sx={{ marginBottom: "1em", maxWidth: "425px", margin: "0 auto" }}>
+      <Card key={`workout-info-${id}`} sx={{ marginBottom: "1em", maxWidth: "425px", margin: "0 auto" }}>
         <CardContent>
           <TextField
             name="workout-title"
@@ -105,6 +105,26 @@ export default function FormShow({
                 fontSize: '13px',
                 padding: '4px 3px',
               },
+            }}
+          />
+        </CardContent>
+        <CardContent>
+          {/* {imageState && (
+            <div>
+              <img
+                alt="not found"
+                width={"250px"}
+                src={URL.createObjectURL(imageState)}
+              />
+              <br />
+              <button onClick={() => setImageState(null)}>Remove</button>
+            </div>
+          )} */}
+          <input
+            type="file"
+            name="myImage"
+            onChange={(event) => {
+              setImageState(event.target.files[0]);
             }}
           />
         </CardContent>
@@ -142,7 +162,7 @@ export default function FormShow({
             <form onSubmit={onEditSubmit}>
               <Table size="small" aria-label="a dense table">
                 <TableBody>
-                  {exercises.map((e, index) => (
+                  {exercisesState.map((e, index) => (
                     <TableRow
                       key={e.id}
                       sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
@@ -220,7 +240,7 @@ export default function FormShow({
         <Button type="submit" variant="contained" sx={{ backgroundColor: 'red' }}>DELETE</Button>
         <Button variant="contained" onClick={onCancel} >CANCEL</Button>
       </Card> :
-      <Card sx={{ marginBottom: "1em", maxWidth: "425px", margin: "0 auto" }}>
+      <Card key={`workout-info-${id}`} sx={{ marginBottom: "1em", maxWidth: "425px", margin: "0 auto" }}>
         <CardHeader
           title={titleState}
           subheader={dateState && dateState.format("MMMM Do YYYY")}
@@ -228,7 +248,7 @@ export default function FormShow({
         <CardMedia
           component="img"
           height="194"
-          image="https://assets.pokemon.com/assets/cms2/img/pokedex/full/143.png"
+          image={imageState}
         />
         <CardContent>
           <Typography variant="body2" color="text.secondary">
@@ -242,7 +262,7 @@ export default function FormShow({
           <TableContainer component={Paper}>
             <Table size="small" aria-label="a dense table">
               <TableBody>
-                {exercises.map(e => (
+                {exercisesState.map(e => (
                   <TableRow
                     key={e.id}
                     sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
