@@ -15,7 +15,6 @@ import History from './components/History';
 import Form from './components/Form';
 import FormShow from './components/FormShow';
 import FormTest from './components/FormTest';
-import HomeTest from './components/HomeTest';
 import useApplicationData from './hooks/useApplicationData';
 
 function NavBar() {
@@ -38,7 +37,6 @@ function App() {
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/" element={<Home workouts={state.workouts} />} />
           <Route path="/history" element={<History exerciseDetails={state.historyDetails} exerciseHistory={state.history} />} />
           <Route path="/calendar" element={<Calendar dailyWorkouts={state.workouts} />} />
           <Route path="/log/new" element={<Form />} />
@@ -53,8 +51,9 @@ function App() {
               deleteSet={deleteSet}
             />}
           />
-          <Route path="log/test" element={<FormTest addWorkout={addWorkout} addSet={addSet} />} />
           <Route path="/test" element={<HomeTest user={state.user} dailyWorkouts={state.workouts} />} />
+          <Route path="/" element={<Home user={state.user} workouts={state.workouts}/>} />
+          <Route path="/log/test" element={<FormTest exercises={state.exercises} addWorkout={addWorkout} addSet={addSet}/>} />
         </Routes>
       </Router>
     </div>
