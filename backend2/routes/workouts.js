@@ -4,7 +4,7 @@ const {
   getAllWorkoutsForUser,
   addWorkoutForUser,
   updateWorkout,
-  removeWorkout
+  removeWorkout,
 } = require('../db/queries/workouts');
 
 // GET
@@ -30,8 +30,8 @@ router.post('/', (req, res) => {
     description,
     title
   ).then((data) => {
+    console.log('WORKOUTS POST: ', data);
     return res.send('Added workout successfully');
-
   });
 });
 
