@@ -13,7 +13,6 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import Button from '@mui/material/Button';
 import DropdownMenu from './DropDownMenu';
 import Autocomplete from '@mui/material/Autocomplete';
-import { addWorkoutForUser } from '../../../backend2/db/queries/workouts';
 
 
 
@@ -47,9 +46,12 @@ export default function FormTest(props) {
       workout, exerciseSets
     });
   };
-
+    
     // user_id, day_id, picture_url, description, title
-    addWorkout();
+    props.addWorkout()
+
+    //workout_id, weight,reps, quantity, exercise
+    props.addSet()
 
   // const onClickHandler = ((event) => {
   //   setExercises(event.target.innerText)

@@ -110,6 +110,47 @@ export default function useApplicationData() {
     // });
   }, []);
 
+  // ADD 
+  function addSet(workout_id, weight, reps, quantity, exercise) {
+    return axios.post('http://localhost:8080/api/sets', {
+      workout_id,
+      weight,
+      reps,
+      quantity,
+      exercise
+    })
+    .then((data) => {
+      return data;
+    });
+  }
+
+  // UPDATE
+  function updateSet(set_id, weight, reps, quantity, exercise) {
+    return axios
+    .post('http://localhost:8080/api/sets/edit', {
+      set_id,
+      weight,
+      reps,
+      quantity,
+      exercise
+    })
+    .then((data) => {
+      return data;
+    });
+  }
+
+  // DELETE
+  function deleteSet(set_id) {
+    return axios
+    .post('http://localhost:8080/api/sets/edit', {
+      set_id
+    })
+    .then((data) => {
+      return data;
+    });
+  }
+
+  // ADD
   function addWorkout(user_id, day_id, picture_url, description, title) {
     return axios
       .post('http://localhost:8080/api/workouts', {
@@ -124,5 +165,5 @@ export default function useApplicationData() {
       });
   }
 
-  return { state, addWorkout };
+  return { state, addWorkout, addSet, updateSet, deleteSet };
 }

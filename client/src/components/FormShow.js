@@ -32,6 +32,10 @@ export default function FormShow(props) {
   // Note from Dina - this is an array of objects, don't forget to loop over them and set id to key. 
   console.log('sets ', props.sets)
 
+  // functions for post requests
+  props.updateSet();
+  props.deleteSet();
+
   return (
     <>
       <Card sx={{ paddingBottom: "1em", maxWidth: "425px", margin: "0 auto" }}>
