@@ -34,7 +34,7 @@ app.use(cookieSession({
 // Separated Routes for each Resource
 const userRoutes = require('./routes/users');
 const workoutRoutes = require('./routes/workouts');
-const exerciseRoutes = require('./routes/exercises'); // THIS IS NOT NEEDED
+const exerciseRoutes = require('./routes/exercises');
 const setRoutes = require('./routes/sets');
 const loginRoutes = require('./routes/login');
 const registerRoutes = require('./routes/register');
@@ -44,7 +44,7 @@ const historyRoutes = require('./routes/history')
 app.use('/api/users', userRoutes);
 app.use('/api/workouts', workoutRoutes);
 app.use('/api/sets', setRoutes);
-app.use('/api/exercises', exerciseRoutes); // THIS IS NOT NEEDED
+app.use('/api/exercises', exerciseRoutes);
 app.use('/api/login', loginRoutes);
 app.use('/api/register', registerRoutes);
 app.use('/api/history', historyRoutes);
