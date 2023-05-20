@@ -49,6 +49,25 @@ export default function FormTest() {
       workout, exerciseSets
     });
   };
+    
+    // user_id, day_id, picture_url, description, title
+    props.addWorkout()
+
+    //workout_id, weight,reps, quantity, exercise
+    props.addSet()
+
+  // const onClickHandler = ((event) => {
+  //   setExercises(event.target.innerText)
+
+  //   const updatedExerciseSets = [...exerciseSets];
+  //   updatedExerciseSets[index] = {
+  //     ...updatedExerciseSets[index],
+  //     exercise: event.target.value
+  //   };
+  //   //need to setExercise
+  //   setExerciseSets(updatedExerciseSets);
+  // })
+
   return (
     <React.Fragment>
       <form onSubmit={onSubmit}>

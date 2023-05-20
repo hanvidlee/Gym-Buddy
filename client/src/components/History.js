@@ -24,7 +24,16 @@ const exercises = [
   { id: 10, exercise: 'Cable Flys', weight: 10, quantity: 6, reps: 12 }
 ];
 
-export default function History() {
+export default function History(props) {
+
+  // Note from Dina - props are both arrays of objects. Don't forget to loop around them and pass down the ids as keys! 
+  // If there are no ids, then use the index if anything, not sure if that's a thing though. 
+
+  const exerciseDetails = props.exerciseDetails;      // use for option 2
+  console.log('exerciseDetails', exerciseDetails);
+
+  const exerciseHistory = props.exerciseHistory;
+  console.log('exerciseHistory ', exerciseHistory);    // use for the drop down portion
 
   return (
     <Card sx={{ paddingBottom: "1em", maxWidth: "425px", margin: "0 auto" }}>
@@ -53,7 +62,7 @@ export default function History() {
           </Table>
         </TableContainer>
       </CardContent>
-      <Link to="/log/view">
+      <Link to="/log/show">
         <Button variant="contained">View Details</Button>
       </Link>
     </Card>

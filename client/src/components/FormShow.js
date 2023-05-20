@@ -6,14 +6,13 @@ import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import { IconButton } from '@mui/material';
-import { Link } from 'react-router-dom';
-import AlarmIcon from '@mui/icons-material/Alarm';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 const exercises = [
   { id: 1, exercise: 'Push Ups', weight: 0, quantity: 2, reps: 10 },
@@ -28,7 +27,16 @@ const exercises = [
   { id: 10, exercise: 'Cable Flys', weight: 10, quantity: 6, reps: 12 }
 ];
 
-export default function FormShow() {
+export default function FormShow(props) {
+
+  // Note from Dina - this is an array of objects, don't forget to loop over them and set id to key. 
+  console.log('sets ', props.sets)
+
+  // functions for post requests
+  props.updateSet();
+  props.deleteSet();
+  props.updateWorkout();
+  props.deleteWorkout();
 
   return (
     <>
@@ -63,10 +71,10 @@ export default function FormShow() {
                       {e.exercise}
                     </TableCell>
                     <TableCell align="right">{e.weight}lbs</TableCell>
-                    <TableCell align="right">{e.quantity} x</TableCell>
-                    <TableCell align="right">{e.reps} reps</TableCell>
-                    <IconButton color="secondary" aria-label="add an alarm">
-                      <AlarmIcon />
+                    <TableCell align="right">{e.quantity}x</TableCell>
+                    <TableCell align="right">{e.reps}reps</TableCell>
+                    <IconButton aria-label="delete">
+                      <DeleteIcon />
                     </IconButton>
                   </TableRow>
                 ))}
@@ -74,9 +82,9 @@ export default function FormShow() {
             </Table>
           </TableContainer>
         </CardContent>
-        <Link to="/log/new">
-          <Button variant="contained">Edit</Button>
-        </Link>
+        <>
+          <Button variant="contained">SAVE Edit CANCEL</Button>
+        </>
       </Card>
     </>
   );
