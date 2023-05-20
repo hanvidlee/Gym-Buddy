@@ -8,6 +8,7 @@ export default function useApplicationData() {
     sets: {},
     user: [], // there's nothing in here
     historyDetails: {},
+    exercises: []
   });
 
   useEffect(() => {
@@ -18,6 +19,7 @@ export default function useApplicationData() {
       axios.get('http://localhost:8080/api/sets'),
       axios.get('http://localhost:8080/api/users'),
       axios.get('http://localhost:8080/api/history/details'),
+      axios.get('http://localhost:8080/api/exercises')
     ])
       .then((all) => {
         console.log('THIS IS ALL', all);
@@ -28,6 +30,7 @@ export default function useApplicationData() {
           sets: all[2].data,
           user: all[3].data,
           historyDetails: all[4].data,
+          exercises: all[5].data
         }));
       })
       .catch((error) => {
@@ -154,14 +157,14 @@ export default function useApplicationData() {
   ///// WORKOUTS
   // ADD
   function addWorkout(user_id, day_id, picture_url, description, title) {
+    const options = {
+      url: 'http://localhost:8080/api/workouts',
+      method: "POST",
+      data : {user_id, day_id, picture_url, description, title},
+      headers: { 'content-type': 'application/x-www-form-urlencoded' },
+    }
     return axios
-      .post('http://localhost:8080/api/workouts', {
-        user_id,
-        day_id,
-        picture_url,
-        description,
-        title,
-      })
+      (options)
       .then((data) => {
         return data;
       });
