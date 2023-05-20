@@ -30,7 +30,7 @@ function NavBar() {
 
 function App() {
   const { state } = useApplicationData();
-  
+  console.log('history details ', state.historyDetails)
   return (
     <div className="App">
       <Router>
@@ -39,10 +39,10 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/" element={<Home />} />
-          <Route path="/history" element={<History exerciseHistory={state.history}/>} />
+          <Route path="/history" element={<History exerciseDetails={state.historyDetails} exerciseHistory={state.history}/>} />
           <Route path="/calendar" element={<Calendar />} />
           <Route path="/log/new" element={<Form />} />
-          <Route path="/log/show" element={<FormShow />} />
+          <Route path="/log/show" element={<FormShow sets={state.sets}/>} />
           <Route path="log/test" element={<FormTest />} />
           <Route path="/test" element={<HomeTest user={state.users} dailyWorkouts={state.workouts}/>} />
         </Routes>
