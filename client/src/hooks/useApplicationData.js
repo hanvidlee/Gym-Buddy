@@ -110,6 +110,7 @@ export default function useApplicationData() {
     // });
   }, []);
 
+  ///// SETS
   // ADD 
   function addSet(workout_id, weight, reps, quantity, exercise) {
     return axios.post('http://localhost:8080/api/sets', {
@@ -142,7 +143,7 @@ export default function useApplicationData() {
   // DELETE
   function deleteSet(set_id) {
     return axios
-    .post('http://localhost:8080/api/sets/edit', {
+    .post('http://localhost:8080/api/sets/remove', {
       set_id
     })
     .then((data) => {
@@ -150,6 +151,7 @@ export default function useApplicationData() {
     });
   }
 
+  ///// WORKOUTS
   // ADD
   function addWorkout(user_id, day_id, picture_url, description, title) {
     return axios
@@ -165,5 +167,30 @@ export default function useApplicationData() {
       });
   }
 
-  return { state, addWorkout, addSet, updateSet, deleteSet };
+   // UPDATE
+   function updateWorkout(set_id, weight, reps, quantity, exercise) {
+    return axios
+    .post('http://localhost:8080/api/workouts/edit', {
+      workout_id,
+      picture_url,
+      description,
+      title
+    })
+    .then((data) => {
+      return data;
+    });
+  }
+
+  // DELETE
+  function deleteWorkout(set_id) {
+    return axios
+    .post('http://localhost:8080/api/workouts/remove', {
+      workout_id
+    })
+    .then((data) => {
+      return data;
+    });
+  }
+
+  return { state, addWorkout, updateWorkout, deleteWorkout, addSet, updateSet, deleteSet };
 }
