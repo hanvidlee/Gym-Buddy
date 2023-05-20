@@ -4,8 +4,7 @@ import axios from 'axios';
 export default function useApplicationData() {
   const [state, setState] = useState({
     workouts: {},
-    history: {}, 
-    exercises: {}, // there's nothing in here
+    history: {},
     sets: {},
     users: [], // there's nothing in here
     historyDetails: {}
@@ -16,7 +15,6 @@ export default function useApplicationData() {
     Promise.all([
       axios.get('http://localhost:8080/api/workouts'),
       axios.get('http://localhost:8080/api/history'),
-      axios.get('http://localhost:8080/api/exercises'),
       axios.get('http://localhost:8080/api/sets'),
       axios.get('http://localhost:8080/api/users'),
       axios.get('http://localhost:8080/api/history/details')
@@ -26,10 +24,9 @@ export default function useApplicationData() {
         ...prev,
         workouts: all[0].data,
         history: all[1].data,
-        exercises: all[2].data,
-        sets: all[3].data,
-        users: all[4].data,
-        historyDetails: all[5].data
+        sets: all[2].data,
+        users: all[3].data,
+        historyDetails: all[4].data
       }));
     }).catch((error) => {
       console.log("This is the error from connection: ", error)

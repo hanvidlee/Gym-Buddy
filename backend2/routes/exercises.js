@@ -1,3 +1,5 @@
+// THIS IS NOT NEEDED
+
 const express = require('express');
 const router = express.Router();
 const { getAllDetailsPerExercise } = require('../db/queries/exercises');
