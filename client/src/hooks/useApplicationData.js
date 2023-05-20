@@ -36,81 +36,6 @@ export default function useApplicationData() {
       .catch((error) => {
         console.log('This is the error from connection: ', error);
       });
-
-      // ADD
-    // axios.post('http://localhost:8080/api/sets', {
-    //   workout_id: ,// how to update correctly
-    //   weight: ,
-    //   reps: ,
-    //   quantity: ,
-    //   exercise:
-    // }).then((response) => {
-    //   console.log('Sets added successfully');
-    //   // setState()
-    // }).catch((error) => {
-    //   console.log('There is an error adding sets: ', error);
-    // })
-
-    // UPDAET
-    // axios.post('http://localhost:8080/api/sets/edit', {
-    //   set_id: ,// how to update correctly
-    //   weight: ,
-    //   reps: ,
-    //   quantity: ,
-    //   exercise:
-    // }).then((response) => {
-    //   console.log('Sets updated successfully');
-    //   // setState()
-    // }).catch((error) => {
-    //   console.log('There is an error updating sets: ', error);
-    // })
-
-    // DELETE
-    // axios.post('http://localhost:8080/api/sets/remove', {
-    //   set_id:
-    // }).then((response) => {
-    //   console.log('Set removed successfully');
-    //   // setState()
-    // }).catch((error) => {
-    //   console.log('There is an error removing set ', error);
-    // });
-
-    // ADD
-    // axios.post('http://localhost:8080/api/workouts', {
-    //   user_id: ,// how to update correctly
-    //   day_id: ,
-    //   picture_url: ,
-    //   description: ,
-    //   title:
-    // }).then((response) => {
-    //   console.log('Workouts added successfully');
-    //   // setState()
-    // }).catch((error) => {
-    //   console.log('There is an error adding workouts: ', error);
-    // })
-
-    // UPDATE
-    // axios.post('http://localhost:8080/api/workouts/edit', {
-    //   workout_id: ,// how to update correctly
-    //   picture_url: ,
-    //   description: ,
-    //   title:
-    // }).then((response) => {
-    //   console.log('Workouts updated successfully');
-    //   // setState()
-    // }).catch((error) => {
-    //   console.log('There is an error updating workouts: ', error);
-    // })
-
-    // DELETE
-    // axios.post('http://localhost:8080/api/wokrouts/remove', {
-    //   workout_id:
-    // }).then((response) => {
-    //   console.log('Workout removed successfully');
-    //   // setState()
-    // }).catch((error) => {
-    //   console.log('There is an removing workout ', error);
-    // });
   }, []);
 
   ///// SETS
@@ -157,14 +82,15 @@ export default function useApplicationData() {
   ///// WORKOUTS
   // ADD
   function addWorkout(user_id, day_id, picture_url, description, title) {
+    const options = {
+      url: 'http://localhost:8080/api/workouts',
+      method: "POST",
+      data : { user_id, day_id, picture_url, description, title },
+      headers: { 'content-type': 'application/x-www-form-urlencoded' },
+    }
+    console.log("options: ", options);
     return axios
-      .post('http://localhost:8080/api/workouts', {
-        user_id,
-        day_id,
-        picture_url,
-        description,
-        title,
-      })
+      (options)
       .then((data) => {
         return data;
       });
@@ -172,16 +98,18 @@ export default function useApplicationData() {
 
    // UPDATE
    function updateWorkout(workout_id, picture_url, description, title) {
+    const options = {
+      url: 'http://localhost:8080/api/workouts/edit',
+      method: "POST",
+      data : { workout_id, picture_url, description, title },
+      headers: { 'content-type': 'application/x-www-form-urlencoded' },
+    }
+    console.log("options: ", options);
     return axios
-    .post('http://localhost:8080/api/workouts/edit', {
-      workout_id,
-      picture_url,
-      description,
-      title
-    })
-    .then((data) => {
-      return data;
-    });
+      (options)
+      .then((data) => {
+        return data;
+      });
   }
 
   // DELETE
@@ -193,6 +121,21 @@ export default function useApplicationData() {
     .then((data) => {
       return data;
     });
+  }
+
+  function deleteWorkout(workout_id) {
+    const options = {
+      url: 'http://localhost:8080/api/workouts/remove',
+      method: "POST",
+      data : { workout_id },
+      headers: { 'content-type': 'application/x-www-form-urlencoded' },
+    }
+    console.log("options: ", options);
+    return axios
+      (options)
+      .then((data) => {
+        return data;
+      });
   }
 
   return { state, addWorkout, updateWorkout, deleteWorkout, addSet, updateSet, deleteSet };

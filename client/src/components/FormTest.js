@@ -22,6 +22,7 @@ export default function FormTest(props) {
     //workout_id, weight,reps, quantity, exercise
     props.addSet()
 
+export default function FormTest(props) {
     const exerciseList = props.exercises;
     console.log('exercise list!!: ', exerciseList);
 
