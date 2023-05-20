@@ -40,7 +40,7 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/" element={<Home />} />
           <Route path="/history" element={<History exerciseDetails={state.historyDetails} exerciseHistory={state.history}/>} />
-          <Route path="/calendar" element={<Calendar />} />
+          <Route path="/calendar" element={<Calendar dailyWorkouts={state.workouts}/>} />
           <Route path="/log/new" element={<Form />} />
           <Route path="/log/show" element={<FormShow sets={state.sets}/>} />
           <Route path="log/test" element={<FormTest />} />
