@@ -8,7 +8,7 @@ export default function useApplicationData() {
     exercises: {}, // there's nothing in here
     sets: {},
     users: [], // there's nothing in here
-    historyDetails : {}
+    historyDetails: {}
   })
 
   useEffect(() => {

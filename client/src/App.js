@@ -31,7 +31,7 @@ function NavBar() {
 function App() {
   const { state } = useApplicationData();
 
-  const dailyWorkouts = state.workouts
+  console.log('THIS IS FOR DAILY EXERCISES: ', state.history)
 
   return (
     <div className="App">
@@ -41,12 +41,12 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/" element={<Home />} />
-          <Route path="/history" element={<History />} />
+          <Route path="/history" element={<History dailyExercises={state.history}/>} />
           <Route path="/calendar" element={<Calendar />} />
           <Route path="/log/new" element={<Form />} />
           <Route path="/log/show" element={<FormShow />} />
           <Route path="log/test" element={<FormTest />} />
-          <Route path="/test" element={<HomeTest workouts={dailyWorkouts}/>} />
+          <Route path="/test" element={<HomeTest dailyWorkouts={state.workouts}/>} />
         </Routes>
       </Router>
     </div>
