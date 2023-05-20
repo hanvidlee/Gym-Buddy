@@ -35,6 +35,8 @@ export default function FormShow(props) {
   // functions for post requests
   props.updateSet();
   props.deleteSet();
+  props.updateWorkout();
+  props.deleteWorkout();
 
   return (
     <>

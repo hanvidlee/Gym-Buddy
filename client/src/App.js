@@ -29,7 +29,7 @@ function NavBar() {
 }
 
 function App() {
-  const { state, addWorkout, addSet, updateSet, deleteSet } = useApplicationData();
+  const { state, addWorkout, updateWorkout, deleteWorkout, addSet, updateSet, deleteSet } = useApplicationData();
   
   return (
     <div className="App">
@@ -42,7 +42,7 @@ function App() {
           <Route path="/history" element={<History exerciseDetails={state.historyDetails} exerciseHistory={state.history}/>} />
           <Route path="/calendar" element={<Calendar dailyWorkouts={state.workouts}/>} />
           <Route path="/log/new" element={<Form />} />
-          <Route path="/log/show" element={<FormShow sets={state.sets} updateSet={updateSet} deleteSet={deleteSet}/>} />
+          <Route path="/log/show" element={<FormShow updateWorkout={updateWorkout} deleteWorkout={deleteWorkout} sets={state.sets} updateSet={updateSet} deleteSet={deleteSet}/>} />
           <Route path="log/test" element={<FormTest addWorkout={addWorkout} addSet={addSet}/>} />
           <Route path="/test" element={<HomeTest user={state.user} dailyWorkouts={state.workouts}/>} />
         </Routes>
