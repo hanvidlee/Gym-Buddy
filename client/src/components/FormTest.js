@@ -17,7 +17,7 @@ import "./Form.scss";
 
 
 
-export default function FormTest() {
+export default function FormTest(props) {
 
   const [selectedImage, setSelectedImage] = useState(null);
 
@@ -50,11 +50,11 @@ export default function FormTest() {
     });
   };
     
-    // user_id, day_id, picture_url, description, title
-    props.addWorkout()
+    // // user_id, day_id, picture_url, description, title
+    // props.addWorkout()
 
-    //workout_id, weight,reps, quantity, exercise
-    props.addSet()
+    // //workout_id, weight,reps, quantity, exercise
+    // props.addSet()
 
   // const onClickHandler = ((event) => {
   //   setExercises(event.target.innerText)
