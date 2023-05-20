@@ -13,18 +13,18 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import Button from '@mui/material/Button';
 import DropdownMenu from './DropDownMenu';
 import Autocomplete from '@mui/material/Autocomplete';
+import { addWorkoutForUser } from '../../../backend2/db/queries/workouts';
 
 
 
-export default function FormTest() {
+export default function FormTest(props) {
+
   const [workout, setWorkout] = useState({
     title: "",
     picture: "",
     description: ""
   });
 
- 
-  
   const [exercises, setExercises] = useState([
     "squat", "push ups", "sit ups"
   ]);
@@ -47,6 +47,9 @@ export default function FormTest() {
       workout, exerciseSets
     });
   };
+
+    // user_id, day_id, picture_url, description, title
+    addWorkout();
 
   // const onClickHandler = ((event) => {
   //   setExercises(event.target.innerText)

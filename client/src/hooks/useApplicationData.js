@@ -34,6 +34,7 @@ export default function useApplicationData() {
         console.log('This is the error from connection: ', error);
       });
 
+      // ADD
     // axios.post('http://localhost:8080/api/sets', {
     //   workout_id: ,// how to update correctly
     //   weight: ,
@@ -47,6 +48,7 @@ export default function useApplicationData() {
     //   console.log('There is an error adding sets: ', error);
     // })
 
+    // UPDAET
     // axios.post('http://localhost:8080/api/sets/edit', {
     //   set_id: ,// how to update correctly
     //   weight: ,
@@ -60,6 +62,7 @@ export default function useApplicationData() {
     //   console.log('There is an error updating sets: ', error);
     // })
 
+    // DELETE
     // axios.post('http://localhost:8080/api/sets/remove', {
     //   set_id:
     // }).then((response) => {
@@ -69,6 +72,7 @@ export default function useApplicationData() {
     //   console.log('There is an error removing set ', error);
     // });
 
+    // ADD
     // axios.post('http://localhost:8080/api/workouts', {
     //   user_id: ,// how to update correctly
     //   day_id: ,
@@ -82,6 +86,7 @@ export default function useApplicationData() {
     //   console.log('There is an error adding workouts: ', error);
     // })
 
+    // UPDATE
     // axios.post('http://localhost:8080/api/workouts/edit', {
     //   workout_id: ,// how to update correctly
     //   picture_url: ,
@@ -94,6 +99,7 @@ export default function useApplicationData() {
     //   console.log('There is an error updating workouts: ', error);
     // })
 
+    // DELETE
     // axios.post('http://localhost:8080/api/wokrouts/remove', {
     //   workout_id:
     // }).then((response) => {
@@ -104,7 +110,7 @@ export default function useApplicationData() {
     // });
   }, []);
 
-  function updateWorkout(user_id, day_id, picture_url, description, title) {
+  function addWorkout(user_id, day_id, picture_url, description, title) {
     return axios
       .post('http://localhost:8080/api/workouts', {
         user_id,
@@ -118,5 +124,5 @@ export default function useApplicationData() {
       });
   }
 
-  return { state, updateWorkout };
+  return { state, addWorkout };
 }
