@@ -1,26 +1,15 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';
+import {CgMenuHotdog} from 'react-icons/cg';
+import homeImg from '../Img/home.png'
+import historyImg from '../Img/history.png'
+import calendarImg from '../Img/calendar.png'
+import logoutImg from '../Img/logout.png'
 
 const DropdownMenu = () => {
-  const [exercises, setExercises] = useState([]);
-  const [records, setRecords] = useState([]);
-
   // hook for opening the menu
   const [open, setOpen] = useState(false);
   const menuRef = useRef();
-
-  // hook for setting value to the menu-trigger
-  const [selectedValue, setSelectedValue] = useState('');
-
-  // fetch exercise api from backend
-  useEffect(() => {
-    fetch('/api/exercises')
-      .then((response) => response.json())
-      .then((data) => {
-        setExercises(data);
-        setRecords(data);
-      })
-      .catch((error) => console.log(error));
-  }, []);
 
   useEffect(() => {
     const handler = (event) => {
@@ -28,6 +17,7 @@ const DropdownMenu = () => {
         setOpen(false);
       }
     };
+
     document.addEventListener('mousedown', handler);
 
     return () => {
@@ -35,18 +25,8 @@ const DropdownMenu = () => {
     };
   }, []);
 
-  const itemClickHandler = (event) => {
-    setSelectedValue(event.target.innerText);
+  const itemClickHandler = () => {
     setOpen(false);
-  };
-
-  const filter = (event) => {
-    const searchItemText = event.target.value.toLowerCase();
-    setRecords(exercises.filter((f) => {
-        return f.name.toLowerCase().includes(searchItemText);
-      })
-    );
-    console.log(event.target.value);
   };
 
   return (
@@ -57,19 +37,20 @@ const DropdownMenu = () => {
           setOpen(!open);
         }}
       >
-        <p>{selectedValue ? selectedValue : 'Select Exercise'}</p>
+        <CgMenuHotdog className="menu-icon" size={50}/>
       </div>
 
       <div className={`dropdown-menu ${open ? 'active' : 'inactive'}`}>
-        <input type="text" className="form-control" placeholder='Search' onChange={filter} />
+        <h3>
+          hanvid_lee
+          <br />
+          <span>Lonely gym boy</span>
+        </h3>
         <ul>
-          {records.map((exercise) => (
-            <DropdownItem
-              key={exercise.id}
-              text={exercise.name}
-              handleClick={itemClickHandler}
-            />
-          ))}
+          <Link to={'/'}><DropdownItem text={'Home'} img={homeImg} handleClick={itemClickHandler}/> </Link>
+          <Link to={'/calendar'}><DropdownItem text={'Calendar'} img={calendarImg} handleClick={itemClickHandler}/> </Link>
+          <Link to={'/history'}><DropdownItem text={'History'} img={historyImg} handleClick={itemClickHandler}/> </Link>
+          <Link to={'/logout'}><DropdownItem text={'Logout'} img={logoutImg} handleClick={itemClickHandler}/> </Link>
         </ul>
       </div>
     </div>
@@ -77,9 +58,15 @@ const DropdownMenu = () => {
 };
 
 function DropdownItem(props) {
+
+  const handleItemClick = () => {
+    props.handleClick();
+  }
+
   return (
-    <li className="dropdownItem">
-      <p onClick={props.handleClick}>{props.text}</p>
+    <li className="dropdownItem" onClick={handleItemClick}>
+      <img src={props.img}></img>
+      <a> {props.text} </a>
     </li>
   );
 }

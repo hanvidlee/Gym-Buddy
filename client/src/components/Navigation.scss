@@ -2,6 +2,7 @@
   background-color: black;
   color: white;
   padding: 10px;
+  height: 200px
 }
 
 .container {
@@ -23,6 +24,11 @@
 
 .navbar-welcome {
   margin-right: 10px;
+}
+
+.navbar-logo {
+  max-width: 100px; /* Adjust the width as needed */
+  height: auto;
 }
 
 .navbar-left {
