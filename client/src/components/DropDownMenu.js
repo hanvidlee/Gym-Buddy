@@ -1,7 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import {CgMenuHotdog} from 'react-icons/cg';
-// import logout from '../Img/logout'
+import homeImg from '../Img/home.png'
+import historyImg from '../Img/history.png'
+import calendarImg from '../Img/calendar.png'
+import logoutImg from '../Img/logout.png'
 
 const DropdownMenu = () => {
   // hook for opening the menu
@@ -44,10 +47,10 @@ const DropdownMenu = () => {
           <span>Lonely gym boy</span>
         </h3>
         <ul>
-          <Link to={'/'}><DropdownItem text={'Home'} handleClick={itemClickHandler}/> </Link>
-          <Link to={'/calendar'}><DropdownItem text={'Calendar'} handleClick={itemClickHandler}/> </Link>
-          <Link to={'/history'}><DropdownItem text={'History'} handleClick={itemClickHandler}/> </Link>
-          <Link to={'/logout'}><DropdownItem text={'Logout'} handleClick={itemClickHandler}/> </Link>
+          <Link to={'/'}><DropdownItem text={'Home'} img={homeImg} handleClick={itemClickHandler}/> </Link>
+          <Link to={'/calendar'}><DropdownItem text={'Calendar'} img={calendarImg} handleClick={itemClickHandler}/> </Link>
+          <Link to={'/history'}><DropdownItem text={'History'} img={historyImg} handleClick={itemClickHandler}/> </Link>
+          <Link to={'/logout'}><DropdownItem text={'Logout'} img={logoutImg} handleClick={itemClickHandler}/> </Link>
         </ul>
       </div>
     </div>
@@ -62,7 +65,7 @@ function DropdownItem(props) {
 
   return (
     <li className="dropdownItem" onClick={handleItemClick}>
-      {/* <img src={props.img}></img> */}
+      <img src={props.img}></img>
       <a> {props.text} </a>
     </li>
   );
