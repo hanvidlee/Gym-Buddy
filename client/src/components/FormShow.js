@@ -21,19 +21,6 @@ import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
 import { MobileDatePicker } from '@mui/x-date-pickers/MobileDatePicker';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 
-const testExercises = [
-  { id: 1, exercise: 'Push Ups', weight: 0, quantity: 2, reps: 10 },
-  { id: 2, exercise: 'Push Ups', weight: 0, quantity: 3, reps: 20 },
-  { id: 3, exercise: 'Bench Press', weight: 200, quantity: 5, reps: 5 },
-  { id: 4, exercise: 'Bentover Rows', weight: 250, quantity: 3, reps: 5 },
-  { id: 5, exercise: 'Bentover Rows', weight: 200, quantity: 2, reps: 8 },
-  { id: 6, exercise: 'Sit Ups', weight: 0, quantity: 5, reps: 30 },
-  { id: 7, exercise: 'Shoulder Press', weight: 100, quantity: 5, reps: 8 },
-  { id: 8, exercise: 'Deadlifts', weight: 285, quantity: 3, reps: 5 },
-  { id: 9, exercise: 'Hip Thrusts', weight: 1000, quantity: 2, reps: 15 },
-  { id: 10, exercise: 'Cable Flys', weight: 10, quantity: 6, reps: 12 }
-];
-
 export default function FormShow({
   sets,
   workouts,
@@ -49,7 +36,7 @@ export default function FormShow({
   console.log("setsPerWorkout", setsPerWorkout);
   const [titleState, setTitleState] = useState(workout?.title);
   const [descriptionState, setDescriptionState] = useState(workout?.description);
-  const [dateState, setDateState] = useState(moment(workout?.workout_date)); // initialize
+  const [dateState, setDateState] = useState(moment(workout?.workout_date));
   const [exercisesState, setExercisesState] = useState(setsPerWorkout);
   const [imageState, setImageState] = useState(workout?.picture_url);
   const [isEditMode, setIsEditMode] = useState(false);

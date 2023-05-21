@@ -93,3 +93,14 @@ export function getAllWorkoutsPerUserAndDates(state, userId) {
 
 // getDaysPerExercise - to be used in history
 // geteExerciseSetsPerWorkout - to be used in log/show
+
+
+
+export function dinaIs (dailyWorkouts, selectedDate) {
+  console.log(dailyWorkouts)
+  if(dailyWorkouts.workout_date === selectedDate) {
+    return true
+  }
+  return false
+}
+
