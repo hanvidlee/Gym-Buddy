@@ -34,7 +34,7 @@ const DropdownMenu = () => {
           setOpen(!open);
         }}
       >
-        <p>Menu</p>
+        <CgMenuHotdog className="menu-icon" size={50}/>
       </div>
 
       <div className={`dropdown-menu ${open ? 'active' : 'inactive'}`}>

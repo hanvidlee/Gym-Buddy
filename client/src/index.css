@@ -35,17 +35,17 @@ a {
   color: black
 }
 
-.menu-trigger p{
+.menu-trigger {
   position: absolute;
   top: 20px;
   left: 20px;
-  height: 30px;
+  height: 40px;
   width: 60px;
-  border-radius: 5%;
+  /* border-radius: 100%; */
   overflow: hidden;
   cursor: pointer;
-  background-color: #fff;
-  color: #242526;
+  /* background-color: #fff;
+  color: #242526; */
 }
 
 .dropdown-menu{
