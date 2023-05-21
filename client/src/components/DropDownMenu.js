@@ -22,7 +22,7 @@ const DropdownMenu = () => {
     };
   }, []);
 
-  const itemClickHandler = (event) => {
+  const itemClickHandler = () => {
     setOpen(false);
   };
 
@@ -55,8 +55,13 @@ const DropdownMenu = () => {
 };
 
 function DropdownItem(props) {
+
+  const handleItemClick = () => {
+    props.handleClick();
+  }
+
   return (
-    <li className="dropdownItem">
+    <li className="dropdownItem" onClick={handleItemClick}>
       {/* <img src={props.img}></img> */}
       <a> {props.text} </a>
     </li>
