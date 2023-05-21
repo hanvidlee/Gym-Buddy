@@ -51,7 +51,7 @@ function App() {
               updateSet={updateSet}
               deleteSet={deleteSet}
             />}
-          />          
+          />
           <Route path="/log/test" element={<FormTest exercises={state.exercises} addWorkout={addWorkout} addSet={addSet}/>} />
         </Routes>
       </Router>
