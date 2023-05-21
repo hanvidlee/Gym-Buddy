@@ -31,7 +31,9 @@ export default function FormShow({
 }) {
   const { id } = useParams();
   const workout = workouts.find((w) => Number(w.id) === Number(id));
-  const setsPerWorkout = sets.filter(s => Number(s.workout_id) === Number(id))
+  console.log("workout", workout);
+  const setsPerWorkout = sets.filter(s => Number(s.workout_id) === Number(id));
+  console.log("setsPerWorkout", setsPerWorkout);
   const [titleState, setTitleState] = useState(workout?.title);
   const [descriptionState, setDescriptionState] = useState(workout?.description);
   const [dateState, setDateState] = useState(moment(workout?.workout_date));
@@ -74,12 +76,12 @@ export default function FormShow({
 
   return (
     isEditMode ?
-      <Card key={`workout-info-${id}`} sx={{ marginBottom: "1em", maxWidth: "425px", margin: "0 auto" }}>
-        <CardContent>
+      <Card key={`workout-info-${id}`} elevation={6} sx={{ paddingBottom: "1em", maxWidth: "425px", margin: "0 auto" }}>
+        <CardContent sx={{ paddingBottom: "0px" }}>
           <TextField
             name="workout-title"
             required
-            label="title"
+            label="Title"
             value={titleState}
             onChange={(e) => setTitleState(e.target.value)}
             InputProps={{
@@ -113,28 +115,38 @@ export default function FormShow({
             }}
           />
         </CardContent>
-        <CardContent>
+        <CardContent sx={{ paddingTop: "0px" }}>
           <LocalizationProvider dateAdapter={AdapterMoment}>
             <MobileDatePicker
-              label="Date mobile"
+              label="Date"
               inputFormat="MM/DD/YYYY"
               value={dateState}
               onChange={onDateChange}
-              renderInput={(params) => <TextField {...params} />}
+              renderInput={(params) => <TextField {...params}
+              />}
+              sx={{
+                '& .MuiInputBase-input': {
+                  fontSize: '13px',
+                  padding: '4px 3px',
+                },
+              }}
             />
           </LocalizationProvider>
         </CardContent>
-        <CardContent>
+        <CardContent sx={{ padding: "0px" }}>
           <TextField
+            id="outlined-multiline-static"
             name="workout-description"
             required
-            label="description"
+            multiline
+            label="Description"
             value={descriptionState}
             onChange={(e) => setDescriptionState(e.target.value)}
             InputProps={{
               endAdornment: <InputAdornment position="start"></InputAdornment>
             }}
             sx={{
+              width: "390px",
               '& .MuiInputBase-input': {
                 fontSize: '13px',
                 padding: '4px 3px',
@@ -221,19 +233,19 @@ export default function FormShow({
             </form>
           </TableContainer>
         </CardContent>
-        <Button type="submit" variant="contained" sx={{ backgroundColor: 'green' }} onClick={onSave}>SAVE</Button>
-        <Button type="submit" variant="contained" sx={{ backgroundColor: 'red' }}>DELETE</Button>
+        <Button type="submit" variant="contained" sx={{ backgroundColor: "green", "&:hover": { backgroundColor: "green" } }} onClick={onSave}>SAVE</Button>
+        <Button type="submit" variant="contained" sx={{ backgroundColor: "red", "&:hover": { backgroundColor: "red" }, marginLeft: "1em", marginRight: "1em" }}>DELETE</Button>
         <Button variant="contained" onClick={onCancel} >CANCEL</Button>
       </Card> :
-      <Card key={`workout-info-${id}`} sx={{ marginBottom: "1em", maxWidth: "425px", margin: "0 auto" }}>
+      <Card key={`workout-info-${id}`} elevation={6} sx={{ paddingBottom: "1em", maxWidth: "425px", margin: "0 auto" }}>
         <CardHeader
           title={titleState}
           subheader={dateState && dateState.format("MMMM Do YYYY")}
         />
         <CardMedia
           component="img"
-          height="194"
           image={imageState}
+          sx={{ margin: "auto", width: "252px", height: "252px" }}
         />
         <CardContent>
           <Typography variant="body2" color="text.secondary">
@@ -242,6 +254,7 @@ export default function FormShow({
         </CardContent>
         <CardHeader
           title="Workout"
+          sx={{ padding: "0" }}
         />
         <CardContent>
           <TableContainer component={Paper}>

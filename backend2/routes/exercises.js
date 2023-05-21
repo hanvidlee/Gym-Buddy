@@ -21,7 +21,6 @@ router.get('/', async (req, res) => {
         'X-RapidAPI-Host': 'exercisedb.p.rapidapi.com'
       }
     });
-
     res.json(response.data);
   } catch (error) {
     console.error(error);
