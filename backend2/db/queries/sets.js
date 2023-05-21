@@ -2,18 +2,18 @@ const db = require('../connection');
 
 // log/show 
 // all sets per user's workout for the day
-const getAllSetsPerUser = function (userId, workoutId) {
+const getAllSetsPerUser = function (userId) {
   return db
     .query(
       `
-  SELECT exercise, weight, reps, quantity
+  SELECT sets.*
   FROM sets
   JOIN workouts ON workouts.id = sets.workout_id
   JOIN users ON users.id = workouts.user_id
-  WHERE users.id = $1 AND workouts.id = $2
+  WHERE users.id = $1
   ORDER BY workouts.workout_date
   `,
-      [userId, workoutId]
+      [userId]
     )
     .then((result) => {
       return result.rows;
