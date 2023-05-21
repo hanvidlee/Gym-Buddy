@@ -11,7 +11,7 @@ const { getAllDetailsPerExercise } = require('../db/queries/exercises');
 //   //   return res.send(data);
 //   // });
 // });
-const apiKey = "786ef654bemsh89a3687e7153b6fp13579ejsn98b50a66d1f2";
+const apiKey = "2d5c230b21msh1f072e9d23498fbp1da888jsn0f007052bbdc";
 
 router.get('/', async (req, res) => {
   try {
@@ -21,7 +21,6 @@ router.get('/', async (req, res) => {
         'X-RapidAPI-Host': 'exercisedb.p.rapidapi.com'
       }
     });
-
     res.json(response.data);
   } catch (error) {
     console.error(error);
