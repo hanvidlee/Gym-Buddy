@@ -5,9 +5,13 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DateCalendar } from '@mui/x-date-pickers/DateCalendar';
 
-export default function DateCalendarValue() {
-  const [value, setValue] = React.useState(dayjs('2022-04-17'));
+export default function Calendar(props) {
 
+  const dailyWorkouts = props.dailyWorkouts;
+  console.log(dailyWorkouts);
+
+  const [value, setValue] = React.useState(dayjs('2022-04-17'));
+  console.log("DateCalendar", value)
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <DemoContainer components={['DateCalendar', 'DateCalendar']}>
