@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './Navigation.scss';
+import DropdownMenu from './DropDownMenu';
 
 export default function Navigation(props) {
   return (
@@ -21,6 +22,7 @@ export default function Navigation(props) {
           <Link to={'/login'} className="btn btn-outline-light">Logout</Link>
         </div>
       </div>
+      <DropdownMenu />
     </nav>
   );
 }
