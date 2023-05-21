@@ -3,24 +3,26 @@ import InputAdornment from '@mui/material/InputAdornment';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Autocomplete from '@mui/material/Autocomplete';
-import "./Form.scss";
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import Typography from '@mui/material/Typography';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
 
 export default function FormTest(props) {
-    //workout_id, weight,reps, quantity, exercise
-    props.addSet()
-    
-  const {addWorkout, addSet} = props 
-  //workout_id, weight,reps, quantity, exercise
-  // props.addSet(workout_id, weight, reps, quantity, exercise);
 
   const exerciseList = props.exercises;
   console.log('exercise list!!: ', exerciseList);
 
   const [selectedImage, setSelectedImage] = useState(null);
 
-  const [title, setTitle] = useState('')
+  const [title, setTitle] = useState('');
 
-  const [description, setDescription] = useState("")
+  const [description, setDescription] = useState("");
 
   const [workout, setWorkout] = useState({
     title: "",
@@ -35,50 +37,40 @@ export default function FormTest(props) {
   const [exerciseSets, setExerciseSets] = useState([
     {
       exercise: "",
-      reps: 10,
-      quantity: 4,
-      weight: 100
+      reps: 0,
+      quantity: 0,
+      weight: 0
     }
   ]);
-
-   const [weight, setWeight] = useState(0)
-
-   const [reps, setReps] = useState(0)
-
-   const [quantity, setQuantity] = useState(0)
-
-   const [exercise, setExercise] = useState("")
-
-
 
   const [value, setValue] = useState("");
   const [inputValue, setInputValue] = useState('');
 
   const onSubmit = (e) => {
     e.preventDefault();
-    props.addWorkout(1, '2023-05-20', selectedImage, description, title)
-    props.addSet(weight, reps, quantity, exercise)
+    props.addWorkout(1, '2023-05-20', selectedImage, description, title);
+    exerciseSets.forEach((set) => {
+      const { weight, reps, quantity, exercise } = set;
+      props.addSet(1, weight, reps, quantity, exercise);
+    });
   };
 
   return (
-    <React.Fragment>
-      <form onSubmit={onSubmit}>
-        <h2>Workout Form</h2>
+    <Card elevation={6} sx={{ marginBottom: "1em", maxWidth: "425px", margin: "0 auto" }}>
+      <CardContent>    <form onSubmit={onSubmit}>
+        <Typography variant="h6">Workout Form</Typography>
         {selectedImage && (
           <div>
             <img
               alt="not found"
               width={"250px"}
               src={URL.createObjectURL(selectedImage)}
-              value={workout.picture}
+              value={selectedImage}
             />
             <br />
             <Button onClick={() => setSelectedImage(null)}>Remove</Button>
           </div>
         )}
-
-        <br />
-        <br />
 
         <input
           type="file"
@@ -98,93 +90,149 @@ export default function FormTest(props) {
         />
         <TextField
           label="Picture"
-          value={workout.picture}
+          value={selectedImage}
           onChange={(event) => setWorkout({ ...workout, picture: event.target.value })}
         />
         <TextField
           label="Description"
           value={description}
-          onChange={(event) => setDescription({...description, description: event.target.value})}
+          onChange={(event) => setDescription({ ...description, description: event.target.value })}
         />
-        <div>
-          {exerciseSets.map((es, index) => {
-            return (
-              <React.Fragment>
-                <Autocomplete
-                  key={`combo-box-demo-${index}`}
-                  className="form-dropdown"
-                  disablePortal
-                  id="combo-box-demo"
-                  options={exercises}
-                  sx={{ width: 300 }}
-                  onChange={(event, newValue) => {
-                    setValue(newValue);
-
-                    const updatedExerciseSets = [...exerciseSets];
-                    updatedExerciseSets[index] = {
-                      ...updatedExerciseSets[index],
-                      exercise: newValue
-                    };
-                    setExerciseSets(updatedExerciseSets);
-                  }}
-                  value={es.exercise || ""}
-                  inputValue={es.exercise}
-                  onInputChange={(event, newInputValue) => {
-                    setInputValue(newInputValue);
-                  }}
-                  renderInput={(params) => <TextField {...params}
-                    required
-                    label="Exercises"
-                  />}
-                />
-                <TextField
-                  required
-                  label="Weight"
-                  InputProps={{
-                    endAdornment: <InputAdornment position="start">lbs</InputAdornment>
-                  }}
-                  value={weight}
-                  onChange={(event) => {
-                    setWeight(event.target.value)
-                  }}
-                />
-                <TextField
-                  required
-                  label="Reps"
-                  value={reps}
-                  onChange={(event) => {
-                    setReps(event.target.value)
-                  }}
-                />
-                <TextField
-                  required
-                  label="Sets"
-                  value={quantity}
-                  onChange={(event) => {
-                    setQuantity(event.target.value)
-                  }}
-                />
-              </React.Fragment>
-            );
-          })
-          }
-        </div>
-        <Button type="submit">Submit</Button>
-        <Button type="button" onClick={() => {
-          exerciseSets.push({
-            exercise: "",
-            reps: 0,
-            quantity: 0,
-            weight: 0
-          });
-
-          setExerciseSets([...exerciseSets]);
-        }}>Add row</Button>
-        <Button type="button" onClick={() => {
-          exerciseSets.pop();
-          setExerciseSets([...exerciseSets]);
-        }}> Delete row </Button>
+        <TableContainer component={Paper}>
+          <Table size="small" aria-label="a dense table">
+            <TableBody>
+              {exerciseSets.map((es, index) => {
+                return (
+                  <TableRow >
+                    <TableCell>
+                      <Autocomplete
+                        key={`combo-box-demo-${index}`}
+                        className="form-dropdown"
+                        disablePortal
+                        id="combo-box-demo"
+                        options={exercises}
+                        align="right"
+                        sx={{
+                          '& .MuiInputBase-input': {
+                            fontSize: '13px',
+                            padding: '4px 3px',
+                          },
+                        }}
+                        onChange={(event, newValue) => {
+                          setValue(newValue);
+                          const updatedExerciseSets = [...exerciseSets];
+                          updatedExerciseSets[index] = {
+                            ...updatedExerciseSets[index],
+                            exercise: newValue
+                          };
+                          setExerciseSets(updatedExerciseSets);
+                        }}
+                        value={es.exercise || ""}
+                        inputValue={es.exercise}
+                        onInputChange={(event, newInputValue) => {
+                          setInputValue(newInputValue);
+                        }}
+                        renderInput={(params) => (
+                          <TextField
+                            {...params}
+                            required
+                            label="Exercises"
+                          />
+                        )}
+                      />
+                    </TableCell>
+                    <TableCell align="right" sx={{ maxWidth: '55px', padding: '4px 2px' }}>
+                      <TextField
+                        required
+                        label="lbs"
+                        InputProps={{
+                          endAdornment: <InputAdornment position="start"></InputAdornment>
+                        }}
+                        value={es.weight}
+                        sx={{
+                          '& .MuiInputBase-input': {
+                            fontSize: '13px',
+                            padding: '4px 3px',
+                          },
+                        }}
+                        onChange={(event) => {
+                          const updatedExerciseSets = [...exerciseSets];
+                          updatedExerciseSets[index] = {
+                            ...updatedExerciseSets[index],
+                            weight: event.target.value
+                          };
+                          setExerciseSets(updatedExerciseSets);
+                        }}
+                      />
+                    </TableCell>
+                    <TableCell align="right" sx={{ maxWidth: '55px', padding: '4px 2px' }}>
+                      <TextField
+                        required
+                        label="x"
+                        value={es.quantity}
+                        sx={{
+                          '& .MuiInputBase-input': {
+                            fontSize: '13px',
+                            padding: '4px 3px',
+                          },
+                        }}
+                        onChange={(event) => {
+                          const updatedExerciseSets = [...exerciseSets];
+                          updatedExerciseSets[index] = {
+                            ...updatedExerciseSets[index],
+                            quantity: event.target.value
+                          };
+                          setExerciseSets(updatedExerciseSets);
+                        }}
+                      />
+                    </TableCell>
+                    <TableCell align="right" sx={{ maxWidth: '55px', padding: '4px 2px' }}>
+                      <TextField
+                        required
+                        label="reps"
+                        value={es.reps}
+                        sx={{
+                          '& .MuiInputBase-input': {
+                            fontSize: '13px',
+                            padding: '4px 3px',
+                          },
+                        }}
+                        onChange={(event) => {
+                          const updatedExerciseSets = [...exerciseSets];
+                          updatedExerciseSets[index] = {
+                            ...updatedExerciseSets[index],
+                            reps: event.target.value
+                          };
+                          setExerciseSets(updatedExerciseSets);
+                        }}
+                      />
+                    </TableCell>
+                  </TableRow>
+                );
+              })}
+            </TableBody>
+          </Table>
+        </TableContainer>
       </form>
-    </React.Fragment>
+      </CardContent>
+        <Button type="submit" variant="contained" sx={{ backgroundColor: 'green' }}>Submit</Button>
+        <Button type="button" variant="contained" sx={{ margin: "0 1em" }} onClick={() => {
+          setExerciseSets([
+            ...exerciseSets,
+            {
+              exercise: "",
+              reps: 0,
+              quantity: 0,
+              weight: 0
+            }
+          ]);
+
+        }}>Add row</Button>
+        <Button type="button" variant="contained" sx={{ backgroundColor: 'red' }} onClick={() => {
+          const updatedExerciseSets = [...exerciseSets];
+          updatedExerciseSets.pop();
+          setExerciseSets(updatedExerciseSets);
+        }}> Delete row </Button>
+    </Card>
   );
 }

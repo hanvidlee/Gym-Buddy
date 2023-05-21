@@ -24,14 +24,14 @@ const getAllSetsPerUser = function (userId) {
 };
 
 // log/new
-const addSetsPerWorkout = function(weight, reps, quantity, exercise) {
+const addSetsPerWorkout = function(workout_id, weight, reps, quantity, exercise) {
   const queryString = `
-  INSERT INTO sets (weight, reps, quantity, exercise)
-  VALUES ($1, $2, $3, $4)
+  INSERT INTO sets (workout_id, weight, reps, quantity, exercise)
+  VALUES ($1, $2, $3, $4, $5)
   RETURNING *
   `;
 
-  const values = [workoutId, weight, reps, quantity, exercise];
+  const values = [workout_id, weight, reps, quantity, exercise];
 
   return db.query(queryString, values)
   .then ((result) => {

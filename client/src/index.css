@@ -9,6 +9,7 @@
   --secondary-text-color: #cecece;
   --border-radius: 8px;
   --speed: 500ms;
+  --background-image: url('../public/gymbuddy2.jpg');
 }
 
 body {

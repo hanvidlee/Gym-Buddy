@@ -11,7 +11,7 @@ export default function Home({
   workouts
 }) {
   return (
-    <>
+    <div>
       <h1>Dashboard</h1>
       <p>Date</p>
       <Link to="/calendar"><Button>Add Workout</Button></Link>
@@ -38,6 +38,6 @@ export default function Home({
           </Card>
         );
       })}
-    </>
+    </div>
   );
 }

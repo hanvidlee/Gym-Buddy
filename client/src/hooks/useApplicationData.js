@@ -40,11 +40,11 @@ export default function useApplicationData() {
 
   ///// SETS
   // ADD 
-  function addSet(weight, reps, quantity, exercise) {
+  function addSet(workout_id, weight, reps, quantity, exercise) {
     const options = {
       url: 'http://localhost:8080/api/sets',
       method: "POST",
-      data : {weight, reps, quantity, exercise},
+      data : {workout_id, weight, reps, quantity, exercise},
       headers: { 'content-type': 'application/x-www-form-urlencoded' },
     }
     console.log("options: ", options)
