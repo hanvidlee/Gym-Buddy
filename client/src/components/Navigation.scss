@@ -26,6 +26,11 @@
   margin-right: 10px;
 }
 
+.navbar-logo {
+  max-width: 100px; /* Adjust the width as needed */
+  height: auto;
+}
+
 .navbar-left {
   flex: 1;
   display: flex;
