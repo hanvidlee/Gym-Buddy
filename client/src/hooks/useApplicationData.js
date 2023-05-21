@@ -40,9 +40,8 @@ export default function useApplicationData() {
 
   ///// SETS
   // ADD 
-  function addSet(workout_id, weight, reps, quantity, exercise) {
+  function addSet(weight, reps, quantity, exercise) {
     return axios.post('http://localhost:8080/api/sets', {
-      workout_id,
       weight,
       reps,
       quantity,

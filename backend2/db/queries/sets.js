@@ -24,10 +24,10 @@ const getAllSetsPerUser = function (userId, workoutId) {
 };
 
 // log/new
-const addSetsPerWorkout = function(workoutId, weight, reps, quantity, exercise) {
+const addSetsPerWorkout = function(weight, reps, quantity, exercise) {
   const queryString = `
-  INSERT INTO sets (workout_id, weight, reps, quantity, exercise)
-  VALUES ($1, $2, $3, $4, $5)
+  INSERT INTO sets (weight, reps, quantity, exercise)
+  VALUES ($1, $2, $3, $4)
   RETURNING *
   `;
 

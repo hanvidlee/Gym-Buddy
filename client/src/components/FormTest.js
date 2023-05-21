@@ -28,6 +28,8 @@ export default function FormTest(props) {
 
   const [title, setTitle] = useState('')
 
+  const [description, setDescription] = useState("")
+
   const [workout, setWorkout] = useState({
     title: "",
     picture: "",
@@ -47,12 +49,23 @@ export default function FormTest(props) {
     }
   ]);
 
+   const [weight, setWeight] = useState(0)
+
+   const [reps, setReps] = useState(0)
+
+   const [quantity, setQuantity] = useState(0)
+
+   const [exercise, setExercise] = useState("")
+
+
+
   const [value, setValue] = useState("");
   const [inputValue, setInputValue] = useState('');
 
   const onSubmit = (e) => {
     e.preventDefault();
-    props.addWorkout(1, '2023-05-20', selectedImage, 'description', title)
+    props.addWorkout(1, '2023-05-20', selectedImage, description, title)
+    props.addSet(weight, reps, quantity, exercise)
   };
 
   return (
@@ -81,20 +94,8 @@ export default function FormTest(props) {
           onChange={(event) => {
             console.log(event.target.files[0]);
             setSelectedImage(event.target.files[0]);
-            setWorkout({ ...workout, picture: { setSelectedImage } });
           }}
         />
-        <Button
-          variant="contained"
-          component="label"
-        >
-          Upload File
-          <input
-            type="file"
-            hidden
-          />
-        </Button>
-
         <TextField
           required
           label="Workout Title"
@@ -110,8 +111,8 @@ export default function FormTest(props) {
         />
         <TextField
           label="Description"
-          value={workout.description}
-          onChange={(event) => setWorkout({ ...workout, description: event.target.value })}
+          value={description}
+          onChange={(event) => setDescription({...description, description: event.target.value})}
         />
         <div>
           {exerciseSets.map((es, index) => {
@@ -150,28 +151,25 @@ export default function FormTest(props) {
                   InputProps={{
                     endAdornment: <InputAdornment position="start">lbs</InputAdornment>
                   }}
-                  value={es.weight}
+                  value={weight}
                   onChange={(event) => {
-                    exerciseSets[index] = { ...exerciseSets[index], weight: event.target.value };
-                    setExerciseSets([...exerciseSets]);
+                    setWeight(event.target.value)
                   }}
                 />
                 <TextField
                   required
                   label="Reps"
-                  value={es.reps}
+                  value={reps}
                   onChange={(event) => {
-                    exerciseSets[index] = { ...exerciseSets[index], reps: event.target.value };
-                    setExerciseSets([...exerciseSets]);
+                    setReps(event.target.value)
                   }}
                 />
                 <TextField
                   required
                   label="Sets"
-                  value={es.quantity}
+                  value={quantity}
                   onChange={(event) => {
-                    exerciseSets[index] = { ...exerciseSets[index], quantity: event.target.value };
-                    setExerciseSets([...exerciseSets]);
+                    setQuantity(event.target.value)
                   }}
                 />
               </React.Fragment>

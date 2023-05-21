@@ -21,10 +21,10 @@ router.get('/', (req, res) => {
 // ADD
 router.post('/', (req, res) => {
   const user_id = req.session.userId;
-  const {workout_id, weight, reps, quantity, exercise } = req.body
+  const {weight, reps, quantity, exercise } = req.body
 
   // workoutId, weight, reps, quantity, exercise
-  addSetsPerWorkout(workout_id, weight, reps, quantity, exercise).then((data) => {
+  addSetsPerWorkout(weight, reps, quantity, exercise).then((data) => {
     return res.send('Added sets successfully');
   });
 });
