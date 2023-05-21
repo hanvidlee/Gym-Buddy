@@ -1,32 +1,16 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';
 import {CgMenuHotdog} from 'react-icons/cg';
-import {FaHistory} from 'react-icons/fa';
+// import logout from '../Img/logout'
 
 const DropdownMenu = () => {
-  // const [exercises, setExercises] = useState([]);
-  // const [records, setRecords] = useState([]);
-
   // hook for opening the menu
   const [open, setOpen] = useState(false);
   const menuRef = useRef();
 
-  // hook for setting value to the menu-trigger
-  // const [selectedValue, setSelectedValue] = useState('');
-
-  // // fetch exercise api from backend
-  // useEffect(() => {
-  //   fetch('/api/exercises')
-  //     .then((response) => response.json())
-  //     .then((data) => {
-  //       setExercises(data);
-  //       setRecords(data);
-  //     })
-  //     .catch((error) => console.log(error));
-  // }, []);
-
   useEffect(() => {
     const handler = (event) => {
-      if (!menuRef.current.contains(event.target)) {
+      if (menuRef.current && !menuRef.current.contains(event.target)) {
         setOpen(false);
       }
     };
@@ -38,19 +22,9 @@ const DropdownMenu = () => {
     };
   }, []);
 
-  // const itemClickHandler = (event) => {
-  //   setSelectedValue(event.target.innerText);
-  //   setOpen(false);
-  // };
-
-  // const filter = (event) => {
-  //   const searchItemText = event.target.value.toLowerCase();
-  //   setRecords(exercises.filter((f) => {
-  //       return f.name.toLowerCase().includes(searchItemText);
-  //     })
-  //   );
-  //   console.log(event.target.value);
-  // };
+  const itemClickHandler = (event) => {
+    setOpen(false);
+  };
 
   return (
     <div className="menu-container" ref={menuRef}>
@@ -70,10 +44,10 @@ const DropdownMenu = () => {
           <span>Lonely gym boy</span>
         </h3>
         <ul>
-          <DropdownItem text={'Home'} />
-          <DropdownItem text={'Calendar'} />
-          <DropdownItem text={'History'} />
-          <DropdownItem text={'Logout'} />
+          <Link to={'/'}><DropdownItem text={'Home'} handleClick={itemClickHandler}/> </Link>
+          <Link to={'/calendar'}><DropdownItem text={'Calendar'} handleClick={itemClickHandler}/> </Link>
+          <Link to={'/history'}><DropdownItem text={'History'} handleClick={itemClickHandler}/> </Link>
+          <Link to={'/logout'}><DropdownItem text={'Logout'} handleClick={itemClickHandler}/> </Link>
         </ul>
       </div>
     </div>
