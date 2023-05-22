@@ -51,9 +51,9 @@ router.post('/edit', (req, res) => {
 
 // DELETE
 router.post('/remove', (req, res) => {
-  // const workout_id = req.body.workoutId;
+  const { workout_id } = req.body;
 
-  removeWorkout(1).then((data) => {
+  removeWorkout(workout_id).then((data) => {
     res.status(200).send({ message: 'OK. Delete successful.' });
   });
 });

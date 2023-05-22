@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 import moment from "moment";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
 import CardMedia from '@mui/material/CardMedia';
@@ -25,15 +26,16 @@ export default function FormShow({
   sets,
   workouts,
   updateSet,
+  addSet,
   deleteSet,
   updateWorkout,
   deleteWorkout,
+  getSets,
+  getWorkouts
 }) {
   const { id } = useParams();
   const workout = workouts.find((w) => Number(w.id) === Number(id));
-  console.log("workout", workout);
   const setsPerWorkout = sets.filter(s => Number(s.workout_id) === Number(id));
-  console.log("setsPerWorkout", setsPerWorkout);
   const [titleState, setTitleState] = useState(workout?.title);
   const [descriptionState, setDescriptionState] = useState(workout?.description);
   const [dateState, setDateState] = useState(moment(workout?.workout_date));
@@ -59,18 +61,38 @@ export default function FormShow({
     });
   };
 
-  //needs api functionality
-  const onCancel = () => {
-    setTitleState(workout?.title);
-    setDescriptionState(workout?.description);
-    setDateState(moment(workout?.workout_date));
-    setExercisesState(setsPerWorkout);
-    setImageState(workout?.picture_url);
+  const onCancel = async () => {
+    const setsData = await getSets();
+    const workoutData = await getWorkouts();
+
+    const specificWorkoutData = workoutData.data.find((w) => Number(w.id) === Number(id));
+    const specificSetsPerWorkout = setsData.data.filter(s => Number(s.workout_id) === Number(id));
+
+
+    setTitleState(specificWorkoutData?.title);
+    setDescriptionState(specificWorkoutData?.description);
+    setDateState(moment(specificWorkoutData?.workout_date));
+    setImageState(specificWorkoutData?.picture_url);
+    setExercisesState(specificSetsPerWorkout);
+
     setIsEditMode(false);
   };
-  
 
-  const onSave = () => {
+  const onSave = async () => {
+    await updateWorkout(id, imageState, descriptionState, titleState);
+    for (const exercise of exercisesState) {
+      if (exercise.isShown === false) {
+        await deleteSet(exercise.id);
+        continue;
+      }
+
+      if (exercise.id) {
+        await updateSet(exercise.id, exercise.weight, exercise.reps, exercise.quantity, exercise.exercise);
+      } else {
+        await addSet(id, exercise.weight, exercise.reps, exercise.quantity, exercise.exercise);
+      }
+    }
+
     setIsEditMode(false);
   };
 
@@ -88,10 +110,25 @@ export default function FormShow({
 
   const onDeleteIcon = (index) => {
     setExercisesState(prev => {
-      prev.splice(index, 1);
-      return [...prev];
+      const newPrev = [...prev];
+      newPrev[index] = { ...newPrev[index], isShown: false };
+      return [...newPrev];
     });
   };
+
+  const onDelete = async () => {
+    await deleteWorkout(id)
+  }
+
+  // const linkTarget = {
+  //   pathname: "/",
+  //   key: uuidv4(), // we could use Math.random, but that's not guaranteed unique.
+  //   state: {
+  //     applied: true
+  //   }
+  // };
+
+  // console.log("linkTarget", linkTarget)
 
   return (
     isEditMode ?
@@ -162,7 +199,7 @@ export default function FormShow({
             required
             multiline
             label="Description"
-            value={descriptionState} 
+            value={descriptionState}
             onChange={(e) => setDescriptionState(e.target.value)}
             InputProps={{
               endAdornment: <InputAdornment position="start"></InputAdornment>
@@ -187,84 +224,87 @@ export default function FormShow({
             <form onSubmit={onEditSubmit}>
               <Table size="small" aria-label="a dense table">
                 <TableBody>
-                  {exercisesState.map((e, index) => (
-                    <TableRow
-                      key={e.id}
-                      sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                    >
-                      <TableCell component="th" scope="row">
-                        {e.exercise}
-                      </TableCell>
-                      <TableCell align="right" sx={{ maxWidth: '55px', padding: '4px 2px' }}>
-                        <TextField
-                          name={`weight-${index}`}
-                          required
-                          label="lbs"
-                          value={e.weight}
-                          onChange={(e) => onHandleChange({ weight: e.target.value }, index)}
-                          InputProps={{
-                            endAdornment: <InputAdornment position="start"></InputAdornment>
-                          }}
-                          InputLabelProps={{
-                            shrink: true
-                          }}
-                          sx={{
-                            '& .MuiInputBase-input': {
-                              fontSize: '13px',
-                              padding: '4px 3px',
-                            },
-                          }}
-                        />
-                      </TableCell>
-                      <TableCell align="right" sx={{ maxWidth: '55px', padding: '4px 2px' }}>
-                        <TextField
-                          name={`quantity-${index}`}
-                          required
-                          label="x"
-                          value={e.quantity}
-                          onChange={(e) => onHandleChange({ quantity: e.target.value }, index)}
-                          InputProps={{
-                            endAdornment: <InputAdornment position="start"></InputAdornment>
-                          }}
-                          InputLabelProps={{
-                            shrink: true
-                          }}
-                          sx={{
-                            '& .MuiInputBase-input': {
-                              fontSize: '13px',
-                              padding: '4px 3px',
-                            },
-                          }}
-                        />
-                      </TableCell>
-                      <TableCell align="right" sx={{ maxWidth: '55px', padding: '4px 2px' }}>
-                        <TextField
-                          name={`reps-${index}`}
-                          required
-                          label="reps"
-                          value={e.reps}
-                          onChange={(e) => onHandleChange({ reps: e.target.value }, index)}
-                          InputProps={{
-                            endAdornment: <InputAdornment position="start"></InputAdornment>
-                          }}
+                  {exercisesState.map((e, index) => {
+                    if (e.isShown === false) return null;
+                    return (
+                      <TableRow
+                        key={e.id}
+                        sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                      >
+                        <TableCell component="th" scope="row">
+                          {e.exercise}
+                        </TableCell>
+                        <TableCell align="right" sx={{ maxWidth: '55px', padding: '4px 2px' }}>
+                          <TextField
+                            name={`weight-${index}`}
+                            required
+                            label="lbs"
+                            value={e.weight}
+                            onChange={(e) => onHandleChange({ weight: e.target.value }, index)}
+                            InputProps={{
+                              endAdornment: <InputAdornment position="start"></InputAdornment>
+                            }}
                             InputLabelProps={{
-              shrink: true
-            }}
-                          sx={{
-                            '& .MuiInputBase-input': {
-                              fontSize: '13px',
-                              padding: '4px 3px',
-                            },
-                          }}
-                        />
-                      </TableCell>
-                      <TableCell>
-                        <IconButton aria-label="delete" onClick={() => onDeleteIcon(index)}>
-                          <DeleteIcon />
-                        </IconButton>
-                      </TableCell>
-                    </TableRow>
-                  ))}
+                              shrink: true
+                            }}
+                            sx={{
+                              '& .MuiInputBase-input': {
+                                fontSize: '13px',
+                                padding: '4px 3px',
+                              },
+                            }}
+                          />
+                        </TableCell>
+                        <TableCell align="right" sx={{ maxWidth: '55px', padding: '4px 2px' }}>
+                          <TextField
+                            name={`quantity-${index}`}
+                            required
+                            label="x"
+                            value={e.quantity}
+                            onChange={(e) => onHandleChange({ quantity: e.target.value }, index)}
+                            InputProps={{
+                              endAdornment: <InputAdornment position="start"></InputAdornment>
+                            }}
+                            InputLabelProps={{
+                              shrink: true
+                            }}
+                            sx={{
+                              '& .MuiInputBase-input': {
+                                fontSize: '13px',
+                                padding: '4px 3px',
+                              },
+                            }}
+                          />
+                        </TableCell>
+                        <TableCell align="right" sx={{ maxWidth: '55px', padding: '4px 2px' }}>
+                          <TextField
+                            name={`reps-${index}`}
+                            required
+                            label="reps"
+                            value={e.reps}
+                            onChange={(e) => onHandleChange({ reps: e.target.value }, index)}
+                            InputProps={{
+                              endAdornment: <InputAdornment position="start"></InputAdornment>
+                            }}
+                            InputLabelProps={{
+                              shrink: true
+                            }}
+                            sx={{
+                              '& .MuiInputBase-input': {
+                                fontSize: '13px',
+                                padding: '4px 3px',
+                              },
+                            }}
+                          />
+                        </TableCell>
+                        <TableCell>
+                          <IconButton aria-label="delete" onClick={() => onDeleteIcon(index)}>
+                            <DeleteIcon />
+                          </IconButton>
+                        </TableCell>
+                      </TableRow>
+                    );
+                  })}
                 </TableBody>
               </Table>
             </form>
@@ -272,7 +312,7 @@ export default function FormShow({
         </CardContent>
         <Button type="submit" variant="contained" sx={{ backgroundColor: "green", "&:hover": { backgroundColor: "green" } }} onClick={onSave}>SAVE</Button>
         <Button type="submit" variant="contained" sx={{ marginLeft: "1em" }} onClick={onAdd}>Add Row</Button>
-        <Button type="submit" variant="contained" sx={{ backgroundColor: "red", "&:hover": { backgroundColor: "red" }, marginLeft: "1em", marginRight: "1em" }}>DELETE</Button>
+        <Link reloadDocument to="/"><Button type="submit" variant="contained" sx={{ backgroundColor: "red", "&:hover": { backgroundColor: "red" }, marginLeft: "1em", marginRight: "1em" }} onClick={onDelete}>DELETE</Button></Link>
         <Button variant="contained" onClick={onCancel} >CANCEL</Button>
       </Card> :
       <Card key={`workout-info-${id}`} elevation={6} sx={{ paddingBottom: "1em", maxWidth: "425px", margin: "0 auto" }}>
@@ -298,19 +338,22 @@ export default function FormShow({
           <TableContainer component={Paper}>
             <Table size="small" aria-label="a dense table">
               <TableBody>
-                {exercisesState.map(e => (
-                  <TableRow
-                    key={e.id}
-                    sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                  >
-                    <TableCell component="th" scope="row">
-                      {e.exercise}
-                    </TableCell>
-                    <TableCell align="right">{e.weight}lbs</TableCell>
-                    <TableCell align="right">{e.quantity}x</TableCell>
-                    <TableCell align="right">{e.reps}reps</TableCell>
-                  </TableRow>
-                ))}
+                {exercisesState.map(e => {
+                  if (e.isShown === false) return null;
+                  return (
+                    <TableRow
+                      key={e.id}
+                      sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                    >
+                      <TableCell component="th" scope="row">
+                        {e.exercise}
+                      </TableCell>
+                      <TableCell align="right">{e.weight}lbs</TableCell>
+                      <TableCell align="right">{e.quantity}x</TableCell>
+                      <TableCell align="right">{e.reps}reps</TableCell>
+                    </TableRow>
+                  );
+                })}
               </TableBody>
             </Table>
           </TableContainer>

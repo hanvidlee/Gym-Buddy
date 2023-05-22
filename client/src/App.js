@@ -28,7 +28,17 @@ function NavBar() {
 }
 
 function App() {
-  const { state, addWorkout, updateWorkout, deleteWorkout, addSet, updateSet, deleteSet } = useApplicationData();
+  const {
+    state,
+    addWorkout,
+    updateWorkout,
+    deleteWorkout,
+    addSet,
+    updateSet,
+    deleteSet,
+    getSets,
+    getWorkouts
+  } = useApplicationData();
 
   return (
     <div className="App">
@@ -53,10 +63,13 @@ function App() {
               key={`workout-info-${JSON.stringify(state)}`}
               workouts={state.workouts}
               updateWorkout={updateWorkout}
+              addSet={addSet}
               deleteWorkout={deleteWorkout}
               sets={state.sets}
               updateSet={updateSet}
               deleteSet={deleteSet}
+              getSets={getSets}
+              getWorkouts={getWorkouts}
             />}
           />
           <Route path="/log/test" element={<FormTest exercises={state.exercises} addWorkout={addWorkout} addSet={addSet} />} />
