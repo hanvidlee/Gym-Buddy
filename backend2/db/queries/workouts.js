@@ -74,4 +74,14 @@ const removeWorkout = function (workoutId) {
   })
 }
 
-module.exports = { getAllWorkoutsForUser, addWorkoutForUser, updateWorkout, removeWorkout };
+const getNumberOfWorkouts = function() {
+  return db.query(`
+  SELECT COUNT(*)
+  FROM workouts
+  `)
+  .then((result) => {
+    console.log('QUERY NUM WORKOUTS: ', result.rows)
+  })
+}
+
+module.exports = { getAllWorkoutsForUser, addWorkoutForUser, updateWorkout, removeWorkout, getNumberOfWorkouts };

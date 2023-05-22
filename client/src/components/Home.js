@@ -25,6 +25,8 @@ export default function Home({ workouts }) {
             Add Workout
           </Button>
         </Link>
+
+        <div className='css-15a4v3o-MuiPaper-root-MuiCard-root'>
         {workouts.map((workout) => {
           return (
             <Card
@@ -70,6 +72,7 @@ export default function Home({ workouts }) {
             </Card>
           );
         })}
+        </div>
       </>
     </div>
   );
