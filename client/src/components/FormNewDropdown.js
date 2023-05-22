@@ -30,6 +30,7 @@ const FormNewDropdown = ({index, exerciseList, exerciseSets, setExerciseSets}) =
       }}
       renderInput={(params) => (
         <TextField
+          required
           {...params}
 
           label="Exercises"

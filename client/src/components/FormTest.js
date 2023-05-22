@@ -127,7 +127,7 @@ export default function FormTest(props) {
                       <TableCell>
                         <FormNewDropdown
                           index={index}
-                          exerciseList={[{label: 'test', id: 1}]}
+                          exerciseList={exerciseList}
                           exerciseSets={exerciseSets}
                           setExerciseSets={setExerciseSets}
                         />
