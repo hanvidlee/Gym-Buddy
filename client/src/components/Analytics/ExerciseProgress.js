@@ -1,5 +1,5 @@
 import React from 'react';
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Label } from 'recharts';
 
 const data = [
   {
@@ -30,8 +30,25 @@ const data = [
 ];
 
 export default function ExerciseProgress() {
-  
+
+  const formatAxis = (tickItem) => {
+    const date = new Date(tickItem);
+    return date.toLocaleString('default', { month: 'short', day: 'numeric' });
+  };
+
+  const chartYear = new Date(data[0].date).getFullYear();
+
   return (
-    <p>Hi from Exercise Progress</p>
+    <div>
+      <LineChart width={500} height={300} data={data} margin={{top: 5, right: 30, left: 20, bottom: 5, }} >
+        <Line type='montone' dataKey='weight' stroke='red' activeDot={{ r: 12 }}/>
+        <CartesianGrid strokeDasharray="3 3"/>
+        <XAxis dataKey='date' tickFormatter={formatAxis}/>
+        <YAxis />
+        <Tooltip />
+        <Legend />
+        <Label value={chartYear} position='top' />
+      </LineChart>
+    </div>
   )
 }
