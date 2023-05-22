@@ -61,7 +61,13 @@ function App() {
             />}
           />
           <Route path="/log/test" element={<FormTest exercises={state.exercises} addWorkout={addWorkout} addSet={addSet} />} />
-          <Route path="/analytics" element={<Analytics numWorkouts={state.analytics} topFiveExercises={state.topFiveExercises} exerciseProgress={state.exerciseProgress} />} />
+          <Route path="/analytics" element={
+            <Analytics 
+              numWorkouts={state.analytics} 
+              topFiveExercises={state.topFiveExercises} 
+              exerciseProgress={state.exerciseProgress} 
+              workoutsByMonth={state.workoutsByMonth} />} 
+            />
         </Routes>
       </Router>
     </div>

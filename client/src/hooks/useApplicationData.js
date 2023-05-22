@@ -11,7 +11,8 @@ export default function useApplicationData() {
     exercises: [],
     analytics: {},
     topFiveExercises: {},
-    exerciseProgress: {}
+    exerciseProgress: {},
+    workoutsByMonth: {}
   });
 
   useEffect(() => {
@@ -25,7 +26,8 @@ export default function useApplicationData() {
       axios.get('http://localhost:8080/api/exercises'),
       axios.get('http://localhost:8080/api/analytics'),
       axios.get('http://localhost:8080/api/topFiveExercises'),
-      axios.get('http://localhost:8080/api/exerciseProgress')
+      axios.get('http://localhost:8080/api/exerciseProgress'),
+      axios.get('http://localhost:8080/api/workoutsPerMonth')
     ])
       .then((all) => {
         console.log('THIS IS ALL', all);
@@ -39,7 +41,8 @@ export default function useApplicationData() {
           exercises: all[5].data,
           analytics: all[6].data,
           topFiveExercises: all[7].data,
-          exerciseProgress: all[8].data
+          exerciseProgress: all[8].data,
+          workoutsByMonth: all[9].data
         }));
       })
       .catch((error) => {
