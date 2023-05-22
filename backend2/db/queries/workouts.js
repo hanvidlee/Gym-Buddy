@@ -103,12 +103,11 @@ const getNumberOfWorkouts = function () {
 // THIS ONE DOESN'T WORK
 const getNumberOfWorkoutsPerMonth = function () {
   return db.query(`
-  SELECT
-  DATE_FORMAT(workout_date, '%Y-%m') AS workout_month,
-  COUNT(*) AS workout_count
+  SELECT EXTRACT('MONTH' FROM workout_date) AS workout_month,
+  COUNT(id) AS workout_count
   FROM workouts
-  GROUP BY DATE_FORMAT(workout_date, '%Y-%m')
-  ORDER BY workout_month
+  GROUP BY EXTRACT('MONTH' FROM workout_date)
+  ORDER BY workout_month ASC
   `)
   .then((result) => {
     console.log('QUERY NUM WORKOUTS PER MONTH: ', result.rows);
