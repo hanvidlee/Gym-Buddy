@@ -44,6 +44,7 @@ const addSetsPerWorkout = function(workout_id, weight, reps, quantity, exercise)
 }
 
 const updateSetInWorkout = function(setId, weight, reps, quantity, exercise) {
+  console.log("setId", setId)
   const queryString = `
   UPDATE sets
   SET weight = $2,
