@@ -7,7 +7,11 @@ import {
   CartesianGrid,
   Tooltip,
   Legend,
-  Label
+  Label,
+  BarChart,
+  Bar,
+  Cell,
+  ResponsiveContainer,
 } from 'recharts';
 
 const data = [
@@ -50,7 +54,7 @@ export default function ExerciseProgress() {
 
   return (
     <>
-      <div style={{ backgroundColor: 'white', padding: '20 px' }}>
+      {/* <div style={{ backgroundColor: 'white', padding: '20 px' }}>
         <div>
           <h1>Exercise Title</h1>
         </div>
@@ -73,11 +77,35 @@ export default function ExerciseProgress() {
             <YAxis />
             <Tooltip />
             <Legend />
-            <Label
-            value={chartYear}
-            position="top"
-            />
+            <Label value={chartYear} position="insideBottom" style={{ fill: '#666', fontSize: '14px' }}/>
           </LineChart>
+        </div>
+      </div> */}
+
+      <div style={{ backgroundColor: 'rgb: 0, 0, 0, 0.9', padding: '20 px' }}>
+        <div>
+          <h1>Exercise Title</h1>
+        </div>
+
+        <div>
+            <BarChart
+              width={500}
+              height={300}
+              data={data}
+              margin={{
+                top: 5,
+                right: 30,
+                left: 20,
+                bottom: 5,
+              }}
+            >
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis dataKey="date" tickFormatter={formatAxis} />
+              <YAxis />
+              <Tooltip />
+              <Legend />
+              <Bar dataKey="weight" fill="#F44236" barSize={20}/>
+            </BarChart>
         </div>
       </div>
     </>
