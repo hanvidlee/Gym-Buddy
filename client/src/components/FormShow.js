@@ -45,13 +45,7 @@ export default function FormShow({
     setDateState(newDate);
   };
 
-  const onEditSubmit = (event) => {
-    // for (let i = 0; i < exercises.length; i++) {
-    //   // console.log(event.target[`exercise-${i}`].value)
-    //   console.log(event.target[`weight-${i}`].value);
-    //   console.log(event.target[`quantity-${i}`].value);
-    //   console.log(event.target[`reps-${i}`].value);
-    // }
+  const onEditSubmit = () => {
     setIsEditMode(false);
   };
 
@@ -67,11 +61,36 @@ export default function FormShow({
 
   //needs api functionality
   const onCancel = () => {
+    setTitleState(workout?.title);
+    setDescriptionState(workout?.description);
+    setDateState(moment(workout?.workout_date));
+    setExercisesState(setsPerWorkout);
+    setImageState(workout?.picture_url);
     setIsEditMode(false);
   };
+  
 
   const onSave = () => {
     setIsEditMode(false);
+  };
+
+  const onAdd = () => {
+    setExercisesState(prev => {
+      prev.push({
+        exercise: "",
+        reps: 0,
+        quantity: 0,
+        weight: 0
+      });
+      return [...prev];
+    });
+  };
+
+  const onDeleteIcon = (index) => {
+    setExercisesState(prev => {
+      prev.splice(index, 1);
+      return [...prev];
+    });
   };
 
   return (
@@ -222,7 +241,7 @@ export default function FormShow({
                         />
                       </TableCell>
                       <TableCell>
-                        <IconButton aria-label="delete">
+                        <IconButton aria-label="delete" onClick={() => onDeleteIcon(index)}>
                           <DeleteIcon />
                         </IconButton>
                       </TableCell>
@@ -234,6 +253,7 @@ export default function FormShow({
           </TableContainer>
         </CardContent>
         <Button type="submit" variant="contained" sx={{ backgroundColor: "green", "&:hover": { backgroundColor: "green" } }} onClick={onSave}>SAVE</Button>
+        <Button type="submit" variant="contained" sx={{ marginLeft: "1em" }} onClick={onAdd}>Add Row</Button>
         <Button type="submit" variant="contained" sx={{ backgroundColor: "red", "&:hover": { backgroundColor: "red" }, marginLeft: "1em", marginRight: "1em" }}>DELETE</Button>
         <Button variant="contained" onClick={onCancel} >CANCEL</Button>
       </Card> :
