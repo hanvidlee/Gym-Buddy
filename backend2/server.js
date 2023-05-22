@@ -41,6 +41,7 @@ const loginRoutes = require('./routes/login');
 const registerRoutes = require('./routes/register');
 const historyRoutes = require('./routes/history');
 const analyticRoutes = require('./routes/analytics');
+const topFiveRoutes = require('./routes/topFiveExercises');
 
 // Mount all resource routes
 app.use('/api/users', userRoutes);
@@ -51,6 +52,7 @@ app.use('/api/login', loginRoutes);
 app.use('/api/register', registerRoutes);
 app.use('/api/history', historyRoutes);
 app.use('/api/analytics', analyticRoutes);
+app.use('/api/topFiveExercises', topFiveRoutes);
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);

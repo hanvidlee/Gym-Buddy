@@ -76,7 +76,7 @@ const removeWorkout = function (workoutId) {
 
 const getNumberOfWorkouts = function() {
   return db.query(`
-  SELECT COUNT(*)
+  SELECT COUNT(*) AS total_workouts
   FROM workouts
   `)
   .then((result) => {
