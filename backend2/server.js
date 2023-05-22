@@ -43,6 +43,7 @@ const historyRoutes = require('./routes/history');
 const analyticRoutes = require('./routes/analytics');
 const topFiveRoutes = require('./routes/topFiveExercises');
 const workoutsPerMonth = require('./routes/workoutsPerMonth');
+const exerciseProgress = require('./routes/exerciseProgress');
 
 // Mount all resource routes
 app.use('/api/users', userRoutes);
@@ -55,6 +56,7 @@ app.use('/api/history', historyRoutes);
 app.use('/api/analytics', analyticRoutes);
 app.use('/api/topFiveExercises', topFiveRoutes);
 app.use('/api/workoutsPerMonth', workoutsPerMonth);
+app.use('/api/exerciseProgress', exerciseProgress);
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);

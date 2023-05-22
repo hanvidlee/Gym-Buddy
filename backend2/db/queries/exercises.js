@@ -61,4 +61,21 @@ const getTopFiveExercises = function () {
   })
 };
 
-module.exports = { getAllDetailsPerExercise, getAllExercisesPerDay, getTopFiveExercises };
+const getExerciseProgress = function() {
+  return db.query(`
+  SELECT sets.exercise, MAX(sets.weight) AS weight, workout_date AS date
+  FROM workouts
+  JOIN sets ON sets.workout_id = workouts.id
+  GROUP BY workouts.workout_date, sets.exercise
+  ORDER BY workouts.workout_date
+  `)
+  .then((result) => {
+    console.log('EXERCISE PROGRESS: ', result)
+    return result.rows
+  })
+  .catch((error) => {
+    console.error(error.message);
+  })
+}
+
+module.exports = { getAllDetailsPerExercise, getAllExercisesPerDay, getTopFiveExercises, getExerciseProgress };
