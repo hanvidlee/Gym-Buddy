@@ -81,6 +81,7 @@ const getNumberOfWorkouts = function() {
   `)
   .then((result) => {
     console.log('QUERY NUM WORKOUTS: ', result.rows)
+    return result.rows;
   })
 }
 
