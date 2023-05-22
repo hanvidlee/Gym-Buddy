@@ -9,7 +9,8 @@ export default function useApplicationData() {
     user: [], // there's nothing in here
     historyDetails: {},
     exercises: [],
-    analytics: {}
+    analytics: {},
+    topFiveExercises: {}
   });
 
   useEffect(() => {
@@ -21,7 +22,8 @@ export default function useApplicationData() {
       axios.get('http://localhost:8080/api/users'),
       axios.get('http://localhost:8080/api/history/details'),
       axios.get('http://localhost:8080/api/exercises'),
-      axios.get('http://localhost:8080/api/analytics')
+      axios.get('http://localhost:8080/api/analytics'),
+      axios.get('http://localhost:8080/api/topFiveExercises')
     ])
       .then((all) => {
         console.log('THIS IS ALL', all);
@@ -33,7 +35,8 @@ export default function useApplicationData() {
           user: all[3].data,
           historyDetails: all[4].data,
           exercises: all[5].data,
-          analytics: all[6].data
+          analytics: all[6].data,
+          topFiveExercises: all[7].data
         }));
       })
       .catch((error) => {
