@@ -21,6 +21,8 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
 import { MobileDatePicker } from '@mui/x-date-pickers/MobileDatePicker';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import FormShowDropdown from './FormShowDropdown';
+
 
 export default function FormShow({
   sets,
@@ -31,7 +33,8 @@ export default function FormShow({
   updateWorkout,
   deleteWorkout,
   getSets,
-  getWorkouts
+  getWorkouts,
+  exercises,
 }) {
   const { id } = useParams();
   const workout = workouts.find((w) => Number(w.id) === Number(id));
@@ -40,6 +43,7 @@ export default function FormShow({
   const [descriptionState, setDescriptionState] = useState(workout?.description);
   const [dateState, setDateState] = useState(moment(workout?.workout_date));
   const [exercisesState, setExercisesState] = useState(setsPerWorkout);
+  console.log(exercisesState)
   const [imageState, setImageState] = useState(workout?.picture_url);
   const [isEditMode, setIsEditMode] = useState(false);
 
@@ -118,6 +122,14 @@ export default function FormShow({
 
   const onDelete = async () => {
     await deleteWorkout(id)
+  }
+
+  const handleExercisesChange = (index, newExercise) => {
+    let exercises = [...exercisesState]
+    let exercise = { ...exercises[index] }
+    exercise.exercise = newExercise
+    exercises[index] = exercise
+    setExercisesState(exercises)
   }
 
   // const linkTarget = {
@@ -232,7 +244,12 @@ export default function FormShow({
                         sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                       >
                         <TableCell component="th" scope="row">
-                          {e.exercise}
+                          <FormShowDropdown 
+                            index={index}
+                            exerciseList={exercises.map(e => e.name)}
+                            handleChange={handleExercisesChange}
+                            initialValue={e.exercise}
+                          />
                         </TableCell>
                         <TableCell align="right" sx={{ maxWidth: '55px', padding: '4px 2px' }}>
                           <TextField

@@ -12,6 +12,7 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import FormNewDropdown from './FormNewDropdown';
 
 export default function FormTest(props) {
 
@@ -23,16 +24,6 @@ export default function FormTest(props) {
 
   const [description, setDescription] = useState("");
 
-  const [workout, setWorkout] = useState({
-    title: "",
-    picture: "",
-    description: ""
-  });
-
-  const [exercises, setExercises] = useState([
-    "squat", "push ups", "sit ups"
-  ]);
-
   const [exerciseSets, setExerciseSets] = useState([
     {
       exercise: "",
@@ -41,9 +32,6 @@ export default function FormTest(props) {
       weight: 0
     }
   ]);
-
-  const [value, setValue] = useState("");
-  const [inputValue, setInputValue] = useState('');
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -69,7 +57,7 @@ export default function FormTest(props) {
             <Button onClick={() => setSelectedImage(null)}>Remove</Button>
           </div>
         )}
-
+        
         <CardContent sx={{ paddingBottom: "0px" }}>
           <TextField
             label="Title"
@@ -137,44 +125,11 @@ export default function FormTest(props) {
                       sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                     >
                       <TableCell>
-                        <Autocomplete
-                          key={`combo-box-demo-${index}`}
-                          className="form-dropdown"
-                          disablePortal
-                          id="combo-box-demo"
-                          options={exerciseList}
-                          align="right"
-                          onChange={(event, newValue) => {
-                            setValue(newValue);
-                            const updatedExerciseSets = [...exerciseSets];
-                            updatedExerciseSets[index] = {
-                              ...updatedExerciseSets[index],
-                              exercise: newValue
-                            };
-                            setExerciseSets(updatedExerciseSets);
-                          }}
-                          value={es.exercise || ""}
-                          inputValue={es.exercise}
-                          onInputChange={(event, newInputValue) => {
-                            setInputValue(newInputValue);
-                          }}
-                          renderInput={(params) => (
-                            <TextField
-                              {...params}
-                     
-                              label="Exercises"
-                              InputLabelProps={{
-                                shrink: true
-                              }}
-                              sx={{
-                                maxWidth: "auto",
-                                '& .MuiInputBase-input': {
-                                  fontSize: '13px',
-                                  padding: '4px 3px',
-                                },
-                              }}
-                            />
-                          )}
+                        <FormNewDropdown
+                          index={index}
+                          exerciseList={[{label: 'test', id: 1}]}
+                          exerciseSets={exerciseSets}
+                          setExerciseSets={setExerciseSets}
                         />
                       </TableCell>
                       <TableCell align="right" sx={{ maxWidth: '55px', padding: '4px 2px' }}>
