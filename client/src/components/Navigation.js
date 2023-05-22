@@ -15,7 +15,7 @@ export default function Navigation(props) {
           </Link>
         </div>
         <div className="navbar-right">
-          <span>Welcome!</span>
+          <span>Welcome Hanvid!</span>
           {/* <Link to={'/login'} className="btn btn-outline-light">Logout</Link> */}
         </div>
       </div>

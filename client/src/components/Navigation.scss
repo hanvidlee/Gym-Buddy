@@ -1,8 +1,8 @@
 .navbar {
   background-color: black;
   color: white;
-  padding: 10px;
-  height: 200px
+  height: 50px;
+  width: 425px
 }
 
 .container {
@@ -13,7 +13,8 @@
 
 .navbar-brand {
   font-weight: bold;
-  margin-right: 20px; /* Adjust the margin as needed */
+  // margin-right: 20px;
+  /* Adjust the margin as needed */
 }
 
 .navbar-link {
@@ -27,8 +28,10 @@
 }
 
 .navbar-logo {
-  max-width: 100px; /* Adjust the width as needed */
+  max-width: 40px;
+  /* Adjust the width as needed */
   height: auto;
+  padding-top: 3px;
 }
 
 .navbar-left {

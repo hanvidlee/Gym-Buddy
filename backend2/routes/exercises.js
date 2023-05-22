@@ -11,7 +11,7 @@ const { getAllDetailsPerExercise } = require('../db/queries/exercises');
 //   //   return res.send(data);
 //   // });
 // });
-const apiKey = "2d5c230b21msh1f072e9d23498fbp1da888jsn0f007052bbdc";
+const apiKey = "b71c7d395amsh814d5a563bd86a2p1bcd44jsn901b00d7d721";
 
 router.get('/', async (req, res) => {
   try {

@@ -30,7 +30,7 @@ export default function Home({ workouts }) {
             elevation={6}
             sx={{
               paddingBottom: '1em',
-              maxWidth: '425px',
+              maxWidth: '405px',
               margin: '0 auto',
               marginBottom: '1em',
               backgroundColor: "rgba(0, 0, 0, 0.9)",
