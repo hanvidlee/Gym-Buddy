@@ -62,9 +62,9 @@ import { TextField } from '@mui/material';
 // export default Calendar;
 
 // option 2
-export default function Calendar({ workouts }) {
+export default function Calendar({ dailyWorkouts }) {
 
-  const workoutDates = workouts.map((workout) => {
+  const workoutDates = dailyWorkouts.map((workout) => {
     return dayjs(workout.workout_date).toDate().toDateString(); // returns an array of parsed dates from database
   });
 
@@ -100,21 +100,21 @@ export default function Calendar({ workouts }) {
         onChange={onDateChange}
         renderInput={(params) => (<TextField {...params} />
         )}
-        renderDay={(day, _value, DayComponentProps) => {
-          const isSelected =
-            !DayComponentProps.outsideCurrentMonth &&
-            highlightedDays.includes(dayjs(day).date());
+        // renderDay={(day, _value, DayComponentProps) => {
+        //   const isSelected =
+        //     !DayComponentProps.outsideCurrentMonth &&
+        //     highlightedDays.includes(dayjs(day).date());
 
-          return (
-            <Badge
-              key={day.toString()}
-              overlap='circular'
-              badgeContent={isSelected ? <FitnessCenterIcon color='red' /> : undefined}
-            >
-              <PickersDay {...DayComponentProps} />
-            </Badge>
-          );
-        }}
+        //   return (
+        //     <Badge
+        //       key={day.toString()}
+        //       overlap='circular'
+        //       badgeContent={isSelected ? <FitnessCenterIcon color='red' /> : undefined}
+        //     >
+        //       <PickersDay {...DayComponentProps} />
+        //     </Badge>
+        //   );
+        // }}
       />
       <Badge badgeContent={hasSameDate ? <FitnessCenterIcon /> : undefined}/>
     </LocalizationProvider>

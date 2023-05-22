@@ -16,6 +16,7 @@ import Form from './components/Form';
 import FormShow from './components/FormShow';
 import FormTest from './components/FormTest';
 import useApplicationData from './hooks/useApplicationData';
+import Analytics from './components/Analytics/Analytics';
 
 function NavBar() {
   const location = useLocation();
@@ -74,6 +75,13 @@ function App() {
             />}
           />
           <Route path="/log/test" element={<FormTest exercises={state.exercises} addWorkout={addWorkout} addSet={addSet} />} />
+          <Route path="/analytics" element={
+            <Analytics 
+              numWorkouts={state.analytics} 
+              topFiveExercises={state.topFiveExercises} 
+              exerciseProgress={state.exerciseProgress} 
+              workoutsByMonth={state.workoutsByMonth} />} 
+            />
         </Routes>
       </Router>
     </div>
