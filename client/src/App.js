@@ -70,6 +70,7 @@ function App() {
               deleteSet={deleteSet}
               getSets={getSets}
               getWorkouts={getWorkouts}
+              exercises={state.exercises}
             />}
           />
           <Route path="/log/test" element={<FormTest exercises={state.exercises} addWorkout={addWorkout} addSet={addSet} />} />
