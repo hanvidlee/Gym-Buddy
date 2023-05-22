@@ -30,8 +30,7 @@ router.post('/', (req, res) => {
     description,
     title
   ).then((data) => {
-    return res.send('Added workout successfully');
-
+    return res.send(data);
   });
 });
 

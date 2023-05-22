@@ -15,8 +15,7 @@ import Paper from '@mui/material/Paper';
 
 export default function FormTest(props) {
 
-  const exerciseList = props.exercises;
-  console.log('exercise list!!: ', exerciseList);
+  const exerciseList = props.exercises.map(e => e.name);
 
   const [selectedImage, setSelectedImage] = useState(null);
 
@@ -46,12 +45,12 @@ export default function FormTest(props) {
   const [value, setValue] = useState("");
   const [inputValue, setInputValue] = useState('');
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
-    props.addWorkout(1, '2023-05-20', selectedImage, description, title);
+    const addedworkout = await props.addWorkout(1, '2023-05-20', selectedImage, description, title);
     exerciseSets.forEach((set) => {
       const { weight, reps, quantity, exercise } = set;
-      props.addSet(1, weight, reps, quantity, exercise);
+      props.addSet(addedworkout.data[0].id, weight, reps, quantity, exercise);
     });
   };
 
@@ -143,7 +142,7 @@ export default function FormTest(props) {
                           className="form-dropdown"
                           disablePortal
                           id="combo-box-demo"
-                          options={exercises}
+                          options={exerciseList}
                           align="right"
                           onChange={(event, newValue) => {
                             setValue(newValue);
@@ -162,7 +161,7 @@ export default function FormTest(props) {
                           renderInput={(params) => (
                             <TextField
                               {...params}
-                              required
+                     
                               label="Exercises"
                               InputLabelProps={{
                                 shrink: true
