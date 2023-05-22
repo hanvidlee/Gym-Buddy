@@ -54,34 +54,6 @@ export default function ExerciseProgress() {
 
   return (
     <>
-      {/* <div style={{ backgroundColor: 'white', padding: '20 px' }}>
-        <div>
-          <h1>Exercise Title</h1>
-        </div>
-
-        <div>
-          <LineChart
-            width={500}
-            height={300}
-            data={data}
-            margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
-          >
-            <Line
-              type="montone"
-              dataKey="weight"
-              stroke="red"
-              activeDot={{ r: 12 }}
-            />
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="date" tickFormatter={formatAxis} />
-            <YAxis />
-            <Tooltip />
-            <Legend />
-            <Label value={chartYear} position="insideBottom" style={{ fill: '#666', fontSize: '14px' }}/>
-          </LineChart>
-        </div>
-      </div> */}
-
       <div style={{ backgroundColor: 'rgb: 0, 0, 0, 0.9', padding: '20 px' }}>
         <div>
           <h1>Exercise Title</h1>
@@ -111,3 +83,32 @@ export default function ExerciseProgress() {
     </>
   );
 }
+
+
+      {/* <div style={{ backgroundColor: 'white', padding: '20 px' }}>
+        <div>
+          <h1>Exercise Title</h1>
+        </div>
+
+        <div>
+          <LineChart
+            width={500}
+            height={300}
+            data={data}
+            margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
+          >
+            <Line
+              type="montone"
+              dataKey="weight"
+              stroke="red"
+              activeDot={{ r: 12 }}
+            />
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis dataKey="date" tickFormatter={formatAxis} />
+            <YAxis />
+            <Tooltip />
+            <Legend />
+            <Label value={chartYear} position="insideBottom" style={{ fill: '#666', fontSize: '14px' }}/>
+          </LineChart>
+        </div>
+      </div> */}
