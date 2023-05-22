@@ -106,6 +106,9 @@ export default function FormShow({
             InputProps={{
               endAdornment: <InputAdornment position="start"></InputAdornment>
             }}
+            InputLabelProps={{
+              shrink: true
+            }}
             sx={{
               '& .MuiInputBase-input': {
                 fontSize: '13px',
@@ -159,16 +162,22 @@ export default function FormShow({
             required
             multiline
             label="Description"
-            value={descriptionState}
+            value={descriptionState} 
             onChange={(e) => setDescriptionState(e.target.value)}
             InputProps={{
               endAdornment: <InputAdornment position="start"></InputAdornment>
+            }}
+            InputLabelProps={{
+              shrink: true
             }}
             sx={{
               width: "390px",
               '& .MuiInputBase-input': {
                 fontSize: '13px',
                 padding: '4px 3px',
+              },
+              '& .MuiOutlinedInput-root': {
+                padding: '4px 10px'
               },
             }}
           />
@@ -196,6 +205,9 @@ export default function FormShow({
                           InputProps={{
                             endAdornment: <InputAdornment position="start"></InputAdornment>
                           }}
+                          InputLabelProps={{
+                            shrink: true
+                          }}
                           sx={{
                             '& .MuiInputBase-input': {
                               fontSize: '13px',
@@ -213,6 +225,9 @@ export default function FormShow({
                           onChange={(e) => onHandleChange({ quantity: e.target.value }, index)}
                           InputProps={{
                             endAdornment: <InputAdornment position="start"></InputAdornment>
+                          }}
+                          InputLabelProps={{
+                            shrink: true
                           }}
                           sx={{
                             '& .MuiInputBase-input': {
@@ -232,6 +247,9 @@ export default function FormShow({
                           InputProps={{
                             endAdornment: <InputAdornment position="start"></InputAdornment>
                           }}
+                            InputLabelProps={{
+              shrink: true
+            }}
                           sx={{
                             '& .MuiInputBase-input': {
                               fontSize: '13px',

@@ -41,13 +41,15 @@ export default function useApplicationData() {
   ///// SETS
   // ADD 
   function addSet(workout_id, weight, reps, quantity, exercise) {
-    return axios.post('http://localhost:8080/api/sets', {
-      workout_id,
-      weight,
-      reps,
-      quantity,
-      exercise
-    })
+    const options = {
+      url: 'http://localhost:8080/api/sets',
+      method: "POST",
+      data : {workout_id, weight, reps, quantity, exercise},
+      headers: { 'content-type': 'application/x-www-form-urlencoded' },
+    }
+    console.log("options: ", options)
+    return axios 
+    (options)
     .then((data) => {
       return data;
     });
