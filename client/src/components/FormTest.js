@@ -14,7 +14,11 @@ import Paper from '@mui/material/Paper';
 import FormNewDropdown from './FormNewDropdown';
 import { IconButton } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom';
+import { MobileDatePicker } from '@mui/x-date-pickers/MobileDatePicker';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
+import moment from 'moment';
 import './Home.scss';
 
 export default function FormTest(props) {
@@ -39,16 +43,25 @@ export default function FormTest(props) {
 
   const [sets, setSets] = useState([]);
 
+  const [dateState, setDateState] = useState('');
+
+  const onDateChange = (newDate) => {
+    setDateState(newDate);
+  };
 
   function refreshPage() {
     window.location.reload(false);
   }
 
+  const formattedDate = moment(dateState).format('YYYY-MM-DD');
+  console.log('formatted date: ', formattedDate)
+
   const onSubmit = async (e) => {
     e.preventDefault();
+
     const addedworkout = await props.addWorkout(
       1,
-      '2023-05-20',
+      formattedDate,
       selectedImage,
       description,
       title
@@ -63,18 +76,15 @@ export default function FormTest(props) {
   };
 
   const removeRow = (index) => {
-    setExerciseSets(prev => {
+    setExerciseSets((prev) => {
       const newPrev = [...prev];
-      newPrev[index] = {...newPrev[index], isRemoved: true};
-      console.log(newPrev)
+      newPrev[index] = { ...newPrev[index], isRemoved: true };
+      console.log(newPrev);
       return [...newPrev];
-    })
-    // const newExerciseSets = [...exerciseSets];
-    // newExerciseSets.splice(index, 1);
-    // setExerciseSets(newExerciseSets);
+    });
   };
 
-  const refresh = () => window.location.reload(true)
+  const refresh = () => window.location.reload(true);
 
   return (
     <CardContent class="home-wrapper">
@@ -103,6 +113,30 @@ export default function FormTest(props) {
               <Button onClick={() => setSelectedImage(null)}>Remove</Button>
             </div>
           )}
+          <LocalizationProvider dateAdapter={AdapterMoment}>
+            <MobileDatePicker
+              label="Date"
+              inputFormat="MM/DD/YYYY"
+              value={dateState}
+              onChange={onDateChange}
+              renderInput={(params) => <TextField {...params} />}
+              sx={{
+                '& .MuiFormLabel-root': {
+                  color: 'white',
+                },
+                '& .MuiInputBase-input': {
+                  fontSize: '13px',
+                  padding: '4px 3px',
+                },
+                '& .MuiOutlinedInput-root': {
+                  color: 'white',
+                  '& fieldset': {
+                    borderColor: 'white',
+                  },
+                },
+              }}
+            />
+          </LocalizationProvider>
 
           <CardContent sx={{ paddingBottom: '0px' }}>
             <TextField
@@ -188,10 +222,8 @@ export default function FormTest(props) {
               <Table size="small" aria-label="a dense table">
                 <TableBody>
                   {exerciseSets.map((es, index) => {
-                    console.log('ES: ', es);
-                    console.log('INDEX: ', index);
                     if (es.isRemoved === true) return null;
-                    
+
                     return (
                       <TableRow
                         key={es.id}
@@ -360,22 +392,6 @@ export default function FormTest(props) {
             }}
           >
             Add row
-          </Button>
-          <Button
-            type="button"
-            variant="contained"
-            sx={{
-              backgroundColor: 'red',
-              '&:hover': { backgroundColor: 'red' },
-            }}
-            onClick={() => {
-              const updatedExerciseSets = [...exerciseSets];
-              updatedExerciseSets.pop();
-              setExerciseSets(updatedExerciseSets);
-            }}
-          >
-            {' '}
-            Delete row{' '}
           </Button>
         </form>
       </Card>
