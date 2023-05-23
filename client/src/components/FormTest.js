@@ -14,6 +14,7 @@ import Paper from '@mui/material/Paper';
 import FormNewDropdown from './FormNewDropdown';
 import { IconButton } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
+import { Link } from 'react-router-dom'
 import './Home.scss';
 
 export default function FormTest(props) {
@@ -36,6 +37,10 @@ export default function FormTest(props) {
 
   const [sets, setSets] = useState([]);
 
+  function refreshPage() {
+    window.location.reload(false);
+  }
+
   const onSubmit = async (e) => {
     e.preventDefault();
     const addedworkout = await props.addWorkout(
@@ -46,8 +51,10 @@ export default function FormTest(props) {
       title
     );
     exerciseSets.forEach((set) => {
-      const { weight, reps, quantity, exercise } = set;
-      props.addSet(addedworkout.data[0].id, weight, reps, quantity, exercise);
+      if (!set.isRemoved) {
+        const { weight, reps, quantity, exercise } = set;
+        props.addSet(addedworkout.data[0].id, weight, reps, quantity, exercise);
+      }
     });
   };
 
@@ -62,6 +69,8 @@ export default function FormTest(props) {
     // newExerciseSets.splice(index, 1);
     // setExerciseSets(newExerciseSets);
   };
+
+  const refresh = () => window.location.reload(true)
 
   return (
     <CardContent class="home-wrapper">
@@ -320,16 +329,18 @@ export default function FormTest(props) {
               </Table>
             </TableContainer>
           </CardContent>
-          <Button
+          <Link to="/"> <Button
             type="submit"
             variant="contained"
             sx={{
               backgroundColor: 'green',
               '&:hover': { backgroundColor: 'green' },
             }}
+            
           >
             Submit
           </Button>
+          </Link>
           <Button
             type="button"
             variant="contained"

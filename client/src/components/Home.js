@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Card from '@mui/material/Card';
 import CardMedia from '@mui/material/CardMedia';
 import CardContent from '@mui/material/CardContent';
@@ -9,6 +9,8 @@ import { Link } from 'react-router-dom';
 import './Home.scss';
 
 export default function Home({ workouts }) {
+  
+
   return (
     <CardContent class="home-wrapper">
         {workouts.map((workout) => {
