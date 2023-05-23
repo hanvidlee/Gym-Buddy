@@ -65,9 +65,6 @@ export default function FormTest(props) {
       console.log(newPrev)
       return [...newPrev];
     })
-    // const newExerciseSets = [...exerciseSets];
-    // newExerciseSets.splice(index, 1);
-    // setExerciseSets(newExerciseSets);
   };
 
   const refresh = () => window.location.reload(true)
@@ -329,7 +326,7 @@ export default function FormTest(props) {
               </Table>
             </TableContainer>
           </CardContent>
-          <Link to="/"> <Button
+          <Link to="/"><Button
             type="submit"
             variant="contained"
             sx={{
@@ -358,22 +355,6 @@ export default function FormTest(props) {
             }}
           >
             Add row
-          </Button>
-          <Button
-            type="button"
-            variant="contained"
-            sx={{
-              backgroundColor: 'red',
-              '&:hover': { backgroundColor: 'red' },
-            }}
-            onClick={() => {
-              const updatedExerciseSets = [...exerciseSets];
-              updatedExerciseSets.pop();
-              setExerciseSets(updatedExerciseSets);
-            }}
-          >
-            {' '}
-            Delete row{' '}
           </Button>
         </form>
       </Card>
