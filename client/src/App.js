@@ -58,7 +58,7 @@ function App() {
               exerciseHistory={state.history} />}
           />
           <Route path="/calendar" element={<Calendar dailyWorkouts={state.workouts} />} />
-          <Route path="/log/new" element={<Form />} />
+          <Route path="/log/new" element={<FormTest exercises={state.exercises} addWorkout={addWorkout} addSet={addSet} />} />
           <Route path="/log/show/:id" element={
             <FormShow
               key={`workout-info-${JSON.stringify(state)}`}
@@ -74,7 +74,7 @@ function App() {
               exercises={state.exercises}
             />}
           />
-          <Route path="/log/test" element={<FormTest exercises={state.exercises} addWorkout={addWorkout} addSet={addSet} />} />
+          {/* <Route path="/log/test" element={<FormTest exercises={state.exercises} addWorkout={addWorkout} addSet={addSet} />} /> */}
           <Route path="/analytics" element={
             <Analytics 
               numWorkouts={state.analytics} 
