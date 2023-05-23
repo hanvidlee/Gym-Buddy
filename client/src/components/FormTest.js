@@ -35,6 +35,9 @@ export default function FormTest(props) {
     }
   ]);
 
+  const [sets, setSets] = useState([])
+
+
   const onSubmit = async (e) => {
     e.preventDefault();
     const addedworkout = await props.addWorkout(1, '2023-05-20', selectedImage, description, title);
@@ -43,6 +46,12 @@ export default function FormTest(props) {
       props.addSet(addedworkout.data[0].id, weight, reps, quantity, exercise);
     });
   };
+
+  const removeRow = (index) => {
+    const newExerciseSets = [...exerciseSets];
+    newExerciseSets.splice(index, 1);
+    setExerciseSets(newExerciseSets);
+  }
 
   return (
     <CardContent class="home-wrapper">
@@ -141,6 +150,8 @@ export default function FormTest(props) {
               <Table size="small" aria-label="a dense table">
                 <TableBody>
                   {exerciseSets.map((es, index) => {
+                    console.log('ES: ', es)
+                    console.log('INDEX: ', index)
                     return (
                       <TableRow
                         key={es.id}
@@ -251,7 +262,7 @@ export default function FormTest(props) {
                           />
                         </TableCell>
                         <TableCell sx={{ padding: "0px 1px" }}>
-                          <IconButton sx={{ padding: "0px", color: "white" }} aria-label="delete">
+                          <IconButton sx={{ padding: "0px", color: "white" }} aria-label="delete" onClick={() => {removeRow(index)}}>
                             <DeleteIcon />
                           </IconButton>
                         </TableCell>
