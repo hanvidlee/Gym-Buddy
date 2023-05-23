@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
 import {
-  LineChart,
-  Line,
   XAxis,
   YAxis,
   CartesianGrid,
@@ -9,9 +7,7 @@ import {
   Legend,
   Label,
   BarChart,
-  Bar,
-  Cell,
-  ResponsiveContainer,
+  Bar
 } from 'recharts';
 import AnalyticsDropdown from "./AnalyticsDropDown";
 
