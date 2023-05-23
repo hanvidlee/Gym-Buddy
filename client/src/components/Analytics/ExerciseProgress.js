@@ -40,7 +40,7 @@ export default function ExerciseProgress({exercises}) {
 
   return (
     <>
-      <div style={{ backgroundColor: 'white', padding: '20 px' }}>
+      <div style={{ backgroundColor: 'white', padding: '20 px', boxShadow: '0px 13px 20px 0px #80808029 '}} >
         <div>
           <h3>Weight Progress</h3>
         </div>

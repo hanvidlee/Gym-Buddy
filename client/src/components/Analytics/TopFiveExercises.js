@@ -11,13 +11,12 @@ import './TopFiveExercises.scss';
 export default function TopFiveExercises({ exercises }) {
   console.log('TOP FIVE EXERCISES: ', exercises);
 
-  // style={{ backgroundColor: 'white', padding: '20 px' }}
   return (
     <div className="Table">
         <h3>Top 5 Exercises</h3>
 
       <TableContainer component={Paper} style={{ boxShadow: '0px 13px 20px 0px #80808029 ' }}>
-        <Table sx={{ maxWidth: 350 }} aria-label="simple table">
+        <Table sx={{ maxWidth: 325 }} aria-label="simple table">
           <TableHead>
             <TableRow>
               <TableCell>Exercise</TableCell>

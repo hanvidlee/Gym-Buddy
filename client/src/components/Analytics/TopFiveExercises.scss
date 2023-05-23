@@ -4,12 +4,11 @@
 
 .MuiTableRow-root.MuiTableRow-head>*{
   font-weight: bold !important;
+  font-size: 16px !important;
 }
 
 .Table td, th {
   border: none!important;
-}
-
-.Table:first-child {
-  border-radius: 0.7rem !important;
+  padding-top: 5px !important;
+  font-size: 14px !important;
 }
