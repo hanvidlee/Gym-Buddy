@@ -42,7 +42,7 @@ export default function ExerciseProgress({exercises}) {
     <>
       <div style={{ backgroundColor: 'white', padding: '20 px' }}>
         <div>
-          <h1>Progress</h1>
+          <h1>Exercise Analytics</h1>
         </div>
 
         <div>
