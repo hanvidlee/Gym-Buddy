@@ -68,7 +68,7 @@ export default function FormShow({
     setImageState(workout?.picture_url);
     setIsEditMode(false);
   };
-  
+
 
   const onSave = () => {
     setIsEditMode(false);
@@ -95,7 +95,7 @@ export default function FormShow({
 
   return (
     isEditMode ?
-      <Card key={`workout-info-${id}`} elevation={6} sx={{ paddingBottom: "1em", maxWidth: "425px", margin: "0 auto" }}>
+      <Card key={`workout-info-${id}`} elevation={6} sx={{ paddingBottom: "1em", maxWidth: "425px", margin: "0 auto", marginTop: "50px" }}>
         <CardContent sx={{ paddingBottom: "0px" }}>
           <TextField
             name="workout-title"
@@ -162,7 +162,7 @@ export default function FormShow({
             required
             multiline
             label="Description"
-            value={descriptionState} 
+            value={descriptionState}
             onChange={(e) => setDescriptionState(e.target.value)}
             InputProps={{
               endAdornment: <InputAdornment position="start"></InputAdornment>
@@ -247,9 +247,9 @@ export default function FormShow({
                           InputProps={{
                             endAdornment: <InputAdornment position="start"></InputAdornment>
                           }}
-                            InputLabelProps={{
-              shrink: true
-            }}
+                          InputLabelProps={{
+                            shrink: true
+                          }}
                           sx={{
                             '& .MuiInputBase-input': {
                               fontSize: '13px',
@@ -275,7 +275,7 @@ export default function FormShow({
         <Button type="submit" variant="contained" sx={{ backgroundColor: "red", "&:hover": { backgroundColor: "red" }, marginLeft: "1em", marginRight: "1em" }}>DELETE</Button>
         <Button variant="contained" onClick={onCancel} >CANCEL</Button>
       </Card> :
-      <Card key={`workout-info-${id}`} elevation={6} sx={{ paddingBottom: "1em", maxWidth: "425px", margin: "0 auto" }}>
+      <Card key={`workout-info-${id}`} elevation={6} sx={{ paddingBottom: "1em", maxWidth: "425px", margin: "0 auto", marginTop: "50px" }}>
         <CardHeader
           title={titleState}
           subheader={dateState && dateState.format("MMMM Do YYYY")}

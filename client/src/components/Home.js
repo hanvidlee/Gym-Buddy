@@ -18,6 +18,8 @@ export default function Home({ workouts }) {
             backgroundColor: 'green',
             '&:hover': { backgroundColor: 'green' },
             margin: '1em',
+            marginLeft: '50px',
+            position: 'fixed'
           }}
         >
           Add Workout
