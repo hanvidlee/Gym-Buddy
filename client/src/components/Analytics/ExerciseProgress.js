@@ -71,32 +71,3 @@ export default function ExerciseProgress({exercises}) {
     </>
   );
 }
-
-
-      {/* <div style={{ backgroundColor: 'white', padding: '20 px' }}>
-        <div>
-          <h1>Exercise Title</h1>
-        </div>
-
-        <div>
-          <LineChart
-            width={500}
-            height={300}
-            data={data}
-            margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
-          >
-            <Line
-              type="montone"
-              dataKey="weight"
-              stroke="red"
-              activeDot={{ r: 12 }}
-            />
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="date" tickFormatter={formatAxis} />
-            <YAxis />
-            <Tooltip />
-            <Legend />
-            <Label value={chartYear} position="insideBottom" style={{ fill: '#666', fontSize: '14px' }}/>
-          </LineChart>
-        </div>
-      </div> */}

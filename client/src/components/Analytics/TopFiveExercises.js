@@ -9,7 +9,6 @@ import Paper from '@mui/material/Paper';
 import './TopFiveExercises.scss';
 
 export default function TopFiveExercises({ exercises }) {
-  console.log('TOP FIVE EXERCISES: ', exercises);
 
   return (
     <div className="Table">
