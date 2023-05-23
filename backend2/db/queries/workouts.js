@@ -100,13 +100,12 @@ const getNumberOfWorkouts = function () {
     });
 };
 
-// THIS ONE DOESN'T WORK
 const getNumberOfWorkoutsPerMonth = function () {
   return db.query(`
-  SELECT EXTRACT('MONTH' FROM workout_date) AS workout_month,
+  SELECT TO_CHAR(workout_date, 'Month') AS workout_month,
   COUNT(id) AS workout_count
   FROM workouts
-  GROUP BY EXTRACT('MONTH' FROM workout_date)
+  GROUP BY TO_CHAR(workout_date, 'Month')
   ORDER BY workout_month ASC
   `)
   .then((result) => {

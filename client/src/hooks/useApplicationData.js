@@ -9,8 +9,8 @@ export default function useApplicationData() {
     user: [], // there's nothing in here
     historyDetails: {},
     exercises: [],
-    analytics: {},
-    topFiveExercises: {},
+    analytics: [],
+    topFiveExercises: [],
     exerciseProgress: [],
     workoutsByMonth: {}
   });
