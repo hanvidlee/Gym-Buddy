@@ -9,7 +9,7 @@ export default function useApplicationData() {
     user: [], // there's nothing in here
     historyDetails: {},
     exercises: [],
-    analytics: {},
+    analytics: [],
     topFiveExercises: [],
     exerciseProgress: [],
     workoutsByMonth: {}
