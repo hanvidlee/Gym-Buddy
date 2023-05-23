@@ -48,7 +48,7 @@ function App() {
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/" element={<Home user={state.user} workouts={state.workouts} />} />
+          <Route reloadDocument path="/" element={<Home user={state.user} workouts={state.workouts} />} />
           <Route path="/history" element={
             <History
               key={`workout-info-${JSON.stringify(state)}`}

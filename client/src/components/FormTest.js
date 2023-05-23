@@ -14,7 +14,7 @@ import Paper from '@mui/material/Paper';
 import FormNewDropdown from './FormNewDropdown';
 import { IconButton } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import './Home.scss';
 
 export default function FormTest(props) {
@@ -35,7 +35,10 @@ export default function FormTest(props) {
     },
   ]);
 
+  const navigate = useNavigate();
+
   const [sets, setSets] = useState([]);
+
 
   function refreshPage() {
     window.location.reload(false);
@@ -55,6 +58,7 @@ export default function FormTest(props) {
         const { weight, reps, quantity, exercise } = set;
         props.addSet(addedworkout.data[0].id, weight, reps, quantity, exercise);
       }
+      navigate('/')
     });
   };
 
@@ -329,18 +333,16 @@ export default function FormTest(props) {
               </Table>
             </TableContainer>
           </CardContent>
-          <Link to="/"> <Button
+         <Button
             type="submit"
             variant="contained"
             sx={{
               backgroundColor: 'green',
               '&:hover': { backgroundColor: 'green' },
             }}
-            
           >
             Submit
           </Button>
-          </Link>
           <Button
             type="button"
             variant="contained"
