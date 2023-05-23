@@ -5,16 +5,11 @@ import {
   CartesianGrid,
   Tooltip,
   Legend,
-  Label,
   BarChart,
   Bar
 } from 'recharts';
 
 export default function WorkoutsByMonth({workouts}) {
-
-  console.log('WORKOUTS BY MONTH', workouts)
-  // chartYear is not working
-  // const chartYear = workouts.length > 0 ? new Date(workouts[0].date).getFullYear() : null;
 
   return (
     <>
@@ -41,7 +36,6 @@ export default function WorkoutsByMonth({workouts}) {
               <YAxis />
               <Tooltip />
               <Legend />
-              {/* <Label value={chartYear} position="insideBottom" style={{ fill: '#666', fontSize: '14px' }}/> */}
               <Bar dataKey="workout_count" name="Count" fill="#F44236" barSize={20}/>
             </BarChart>
         </div>
