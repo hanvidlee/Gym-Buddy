@@ -15,35 +15,6 @@ import {
 } from 'recharts';
 import AnalyticsDropdown from "./AnalyticsDropDown";
 
-
-// const data = [
-//   {
-//     date: '2023-05-02T04:00:00.000Z',
-//     exercise: 'Bentover Rows',
-//     weight: 250,
-//   },
-//   {
-//     date: '2023-05-02T04:00:00.000Z',
-//     exercise: 'Bench Press',
-//     weight: 200,
-//   },
-//   {
-//     date: '2023-05-03T04:00:00.000Z',
-//     exercise: 'Bentover Rows',
-//     weight: 200,
-//   },
-//   {
-//     date: '2023-05-04T04:00:00.000Z',
-//     exercise: 'Bentover Rows',
-//     weight: 250,
-//   },
-//   {
-//     date: '2023-05-05T04:00:00.000Z',
-//     exercise: 'Bentover Rows',
-//     weight: 300,
-//   },
-// ];
-
 export default function ExerciseProgress({exercises}) {
   // format date to show month and day
   const formatAxis = (tickItem) => {
@@ -51,20 +22,21 @@ export default function ExerciseProgress({exercises}) {
     return date.toLocaleString('default', { month: 'short', day: 'numeric' });
   };
 
+  // chartYear is not working
+  const chartYear = exercises.length > 0 ? new Date(exercises[0].date).getFullYear() : null;
+
+  // this is for the user selected value from drop down
   const [selectedValue, setSelectedValue] = useState('');
 
+  // pass this to the dropdownmenu so that the change in value is being extracted and passed back to this parent component
   const handleSelectedChange = (value) => {
     setSelectedValue(value);
   }
 
-  console.log('SELECTED VALUE FROM PARENT: ', selectedValue);
-
-  console.log('WHAT ARE EXERCISES: ', exercises)
+  // filter the exercises to the selectedValue and pass this list to the bar graph
   const filteredExercises = exercises.filter((exercise) => {
     return exercise.exercise === selectedValue
   })
-
-  console.log('filteredExercises: ', filteredExercises)
 
   return (
     <>
@@ -91,6 +63,7 @@ export default function ExerciseProgress({exercises}) {
               <YAxis />
               <Tooltip />
               <Legend />
+              <Label value={chartYear} position="insideBottom" style={{ fill: '#666', fontSize: '14px' }}/>
               <Bar dataKey="weight" fill="#F44236" barSize={20}/>
             </BarChart>
         </div>
