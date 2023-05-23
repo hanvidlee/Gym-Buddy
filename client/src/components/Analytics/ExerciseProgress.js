@@ -53,12 +53,6 @@ export default function ExerciseProgress({exercises}) {
 
   console.log('EXERCISE PROGRESS: ', exercises)
 
-  // const exerciseNames = exercises.map((exercise) => {
-  //   return exercise.exercise
-  // });
-
-  // console.log('EXERCISE NAMES: ', exerciseNames)
-
   // show year on the label
   // const chartYear = new Date(exercises[0].date).getFullYear();
 
