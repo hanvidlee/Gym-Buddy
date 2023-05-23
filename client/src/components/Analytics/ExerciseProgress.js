@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   LineChart,
   Line,
@@ -51,24 +51,34 @@ export default function ExerciseProgress({exercises}) {
     return date.toLocaleString('default', { month: 'short', day: 'numeric' });
   };
 
-  console.log('EXERCISE PROGRESS: ', exercises)
+  const [selectedValue, setSelectedValue] = useState('');
 
-  // show year on the label
-  // const chartYear = new Date(exercises[0].date).getFullYear();
+  const handleSelectedChange = (value) => {
+    setSelectedValue(value);
+  }
+
+  console.log('SELECTED VALUE FROM PARENT: ', selectedValue);
+
+  console.log('WHAT ARE EXERCISES: ', exercises)
+  const filteredExercises = exercises.filter((exercise) => {
+    return exercise.exercise === selectedValue
+  })
+
+  console.log('filteredExercises: ', filteredExercises)
 
   return (
     <>
       <div style={{ backgroundColor: 'white', padding: '20 px' }}>
         <div>
-          <h1>Exercise Title</h1>
+          <h1>Progress</h1>
         </div>
 
         <div>
-            <AnalyticsDropdown exercises={exercises} />
+            <AnalyticsDropdown exercises={exercises} onExerciseChange={handleSelectedChange} />
             <BarChart
               width={500}
               height={300}
-              data={exercises}
+              data={filteredExercises}
               margin={{
                 top: 5,
                 right: 30,
