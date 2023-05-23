@@ -10,7 +10,7 @@ export default function useApplicationData() {
     historyDetails: {},
     exercises: [],
     analytics: {},
-    topFiveExercises: {},
+    topFiveExercises: [],
     exerciseProgress: [],
     workoutsByMonth: {}
   });
