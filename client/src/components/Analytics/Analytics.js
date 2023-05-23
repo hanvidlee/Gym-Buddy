@@ -1,6 +1,7 @@
 import React from "react";
 import ExerciseProgress from "./ExerciseProgress";
 import TopFiveExercises from "./TopFiveExercises";
+import WorkoutsByMonth from "./WorkoutsByMonth";
 
 export default function Analytics({numWorkouts, topFiveExercises, exerciseProgress, workoutsByMonth}) {
   // console.log('COUNT: ', numWorkouts);
@@ -13,6 +14,7 @@ export default function Analytics({numWorkouts, topFiveExercises, exerciseProgre
       <h1>Exercise Analytics</h1>
       <TopFiveExercises exercises={topFiveExercises} />
       <ExerciseProgress exercises={exerciseProgress} />
+      <WorkoutsByMonth workouts={workoutsByMonth} />
     </>
   )
 }
