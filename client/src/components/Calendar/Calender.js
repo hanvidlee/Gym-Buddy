@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import dayjs from 'dayjs';
 import { DemoContainer, DemoItem } from '@mui/x-date-pickers/internals/demo';
 // import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
@@ -13,6 +13,73 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { StaticDatePicker } from '@mui/x-date-pickers/StaticDatePicker';
 import { TextField } from '@mui/material';
+import { DayCalendarSkeleton } from '@mui/x-date-pickers/DayCalendarSkeleton';
+
+const initialValue = dayjs()
+const months = [ "January", "February", "March", "April", "May", "June", 
+"July", "August", "September", "October", "November", "December" ];
+
+const Day = (props) => {
+  const { highlightedDays = [], day, outsideCurrentMonth, currentMonth, ...other } = props;
+  const workoutDaysWithMonth = []
+  const workoutDays = []
+
+  highlightedDays.map(day => {
+    const splitDay = day.split(' ')
+    workoutDaysWithMonth.push({[splitDay[1]]: parseInt(splitDay[2], 10)})
+    workoutDays.push(parseInt(splitDay[2], 10))
+  })
+
+  const isSelected =
+    !props.outsideCurrentMonth && workoutDaysWithMonth.map(el => el[months[currentMonth]]).indexOf(day.date()) > 0
+
+  return (
+    <Badge
+      key={props.day.toString()}
+      overlap="circular"
+      badgeContent={isSelected ? <FitnessCenterIcon color='red' /> : undefined}
+    >
+      <PickersDay {...other} outsideCurrentMonth={outsideCurrentMonth} day={day} />
+    </Badge>
+  );
+}
+
+export default function Calendar({dailyWorkouts}) {
+  const [isLoading, setIsLoading] = useState(false);
+  const [currentMonth, setCurrentMonth] = useState()
+
+  const workoutDates = dailyWorkouts.map((workout) => {
+    return dayjs(workout.workout_date).toDate().toDateString(); // returns an array of parsed dates from database
+  });
+
+  const handleMonthChange = (date) => {
+    setCurrentMonth(date.$M)
+  }
+
+  useEffect(() => {
+    handleMonthChange(dayjs(new Date()))
+  }, [])
+
+  return (
+    <LocalizationProvider dateAdapter={AdapterDayjs}>
+      <DateCalendar
+        defaultValue={initialValue}
+        loading={isLoading}
+        renderLoading={() => <DayCalendarSkeleton />}
+        onMonthChange={handleMonthChange}
+        slots={{
+          day: Day
+        }}
+        slotProps={{
+          day: {
+            highlightedDays: workoutDates,
+            currentMonth: currentMonth,
+          },
+        }}
+      />
+    </LocalizationProvider>
+  );
+}
 
 // OPTION 3
 // import React, { useState } from 'react';
@@ -62,24 +129,25 @@ import { TextField } from '@mui/material';
 // export default Calendar;
 
 // option 2
-export default function Calendar({ dailyWorkouts }) {
+// export default function Calendar({ dailyWorkouts }) {
 
-  const workoutDates = dailyWorkouts.map((workout) => {
-    return dayjs(workout.workout_date).toDate().toDateString(); // returns an array of parsed dates from database
-  });
+//   const workoutDates = dailyWorkouts.map((workout) => {
+//     return dayjs(workout.workout_date).toDate().toDateString(); // returns an array of parsed dates from database
+//   });
+
 
   // const [value, setValue] = React.useState(new Date());
   // const [dateState, setDateState] = useState(dayjs(workout?.workout_date));
-  const [dateState, setDateState] = useState(dayjs());
-  const [highlightedDays, setHighlightedDays] = useState(workoutDates);
+  // const [dateState, setDateState] = useState(dayjs());
+  // const [highlightedDays, setHighlightedDays] = useState(workoutDates);
 
-  const parsedValue = dateState.toDate().toDateString(); // parsed value from calendar date
+  // const parsedValue = dateState.toDate().toDateString(); // parsed value from calendar date
 
-  const hasSameDate = workoutDates.some((parsedWorkout) => {
-    return dayjs(parsedValue).isSame(parsedWorkout);
-  });
+  // const hasSameDate = workoutDates.some((parsedWorkout) => {
+  //   return dayjs(parsedValue).isSame(parsedWorkout);
+  // });
 
-  console.log(hasSameDate);
+  // console.log(hasSameDate);
 
   // useEffect(() => {
   //   const filteredDays = workoutDates.filter((parsedWorkout) => {
@@ -88,38 +156,38 @@ export default function Calendar({ dailyWorkouts }) {
   //   setHighlightedDays(filteredDays.map((day) => dayjs(day).date()));
   // }, [dateState, workoutDates]);
 
-  const onDateChange = (newDate) => {
-    setDateState(newDate);
-  };
+//   const onDateChange = (newDate) => {
+//     setDateState(newDate);
+//   };
 
-  return (
-    <LocalizationProvider dateAdapter={AdapterDayjs}>
-      <StaticDatePicker
-        orientation="portrait"
-        value={dateState}
-        onChange={onDateChange}
-        renderInput={(params) => (<TextField {...params} />
-        )}
-        // renderDay={(day, _value, DayComponentProps) => {
-        //   const isSelected =
-        //     !DayComponentProps.outsideCurrentMonth &&
-        //     highlightedDays.includes(dayjs(day).date());
+//   return (
+//     <LocalizationProvider dateAdapter={AdapterDayjs}>
+//       <StaticDatePicker
+//         orientation="portrait"
+//         value={dateState}
+//         onChange={onDateChange}
+//         renderInput={(params) => (<TextField {...params} />
+//         )}
+//         renderDay={(day, _value, DayComponentProps) => {
+//           const isSelected =
+//             !DayComponentProps.outsideCurrentMonth &&
+//             highlightedDays.includes(dayjs(day).date());
 
-        //   return (
-        //     <Badge
-        //       key={day.toString()}
-        //       overlap='circular'
-        //       badgeContent={isSelected ? <FitnessCenterIcon color='red' /> : undefined}
-        //     >
-        //       <PickersDay {...DayComponentProps} />
-        //     </Badge>
-        //   );
-        // }}
-      />
-      <Badge badgeContent={hasSameDate ? <FitnessCenterIcon /> : undefined}/>
-    </LocalizationProvider>
-  );
-}
+//           return (
+//             <Badge
+//               key={day.toString()}
+//               overlap='circular'
+//               badgeContent={isSelected ? <FitnessCenterIcon color='red' /> : undefined}
+//             >
+//               <PickersDay {...DayComponentProps} />
+//             </Badge>
+//           );
+//         }}
+//       />
+//       <Badge badgeContent={hasSameDate ? <FitnessCenterIcon /> : undefined}/>
+//     </LocalizationProvider>
+//   );
+// }
 
 // renderDay={(day, _value, DayComponentProps) => {
 //   const isSelected =
