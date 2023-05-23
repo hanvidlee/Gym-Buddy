@@ -31,7 +31,7 @@ const DropdownMenu = () => {
   };
 
   return (
-    <div className="menu-container" ref={menuRef}>
+    <div className="menu-container" ref={menuRef} style={{ zIndex: 999 }}>
       <div
         className="menu-trigger"
         onClick={() => {
@@ -45,7 +45,7 @@ const DropdownMenu = () => {
         <h3>
           hanvid_lee
           <br />
-          <span>Lonely gym boy</span>
+          <span>Lonely gym boi</span>
         </h3>
         <ul>
           <Link to={'/'}><DropdownItem text={'Home'} img={homeImg} handleClick={itemClickHandler}/> </Link>

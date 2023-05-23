@@ -1,50 +1,25 @@
 .navbar {
+  display: flex;
+  margin: auto;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
   background-color: black;
   color: white;
-  padding: 10px;
-  height: 200px
-}
-
-.container {
-  display: flex;
+  height: 50px;
+  width: 425px;
+  z-index: 999;
   justify-content: space-between;
-  align-items: center;
-}
-
-.navbar-brand {
-  font-weight: bold;
-  margin-right: 20px; /* Adjust the margin as needed */
-}
-
-.navbar-link {
-  margin-right: 10px;
-  color: white;
-  text-decoration: none;
-}
-
-.navbar-welcome {
-  margin-right: 10px;
 }
 
 .navbar-logo {
-  max-width: 100px; /* Adjust the width as needed */
+  max-width: 40px;
   height: auto;
-}
-
-.navbar-left {
-  flex: 1;
-  display: flex;
-  align-items: center;
-}
-
-.navbar-center {
-  flex: 2;
-  display: flex;
-  justify-content: center;
+  padding-top: 3px;
 }
 
 .navbar-right {
-  flex: 1;
-  display: flex;
-  justify-content: flex-end;
+  padding-top: 12px;
+  padding-right: 10px;
 }

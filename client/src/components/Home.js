@@ -1,6 +1,5 @@
 import React from 'react';
 import Card from '@mui/material/Card';
-import CardHeader from '@mui/material/CardHeader';
 import CardMedia from '@mui/material/CardMedia';
 import CardContent from '@mui/material/CardContent';
 import moment from 'moment';
@@ -11,22 +10,7 @@ import './Home.scss';
 
 export default function Home({ workouts }) {
   return (
-    <div className="home-wrapper">
-      <>
-        <Link to="/calendar">
-          <Button
-            variant="contained"
-            sx={{
-              backgroundColor: 'green',
-              '&:hover': { backgroundColor: 'green' },
-              margin: '1em',
-            }}
-          >
-            Add Workout
-          </Button>
-        </Link>
-
-        <div className='css-15a4v3o-MuiPaper-root-MuiCard-root'>
+    <CardContent class="home-wrapper">
         {workouts.map((workout) => {
           return (
             <Card
@@ -34,9 +18,11 @@ export default function Home({ workouts }) {
               elevation={6}
               sx={{
                 paddingBottom: '1em',
-                maxWidth: '425px',
+                maxWidth: '405px',
                 margin: '0 auto',
                 marginBottom: '1em',
+                backgroundColor: "rgba(0, 0, 0, 0.8)",
+                color: "white"
               }}
             >
               <CardContent>
@@ -47,21 +33,21 @@ export default function Home({ workouts }) {
                 >
                   {moment(workout.workout_date).format('MMMM Do YYYY')}
                 </Typography>
-                <CardHeader
-                  subheader={workout.title}
-                  sx={{
-                    padding: '0',
-                    textAlign: 'left',
-                    paddingBottom: '0.2em',
-                  }}
-                />
+                <Typography sx={{
+                  padding: '0',
+                  textAlign: 'left',
+                  paddingBottom: '0.2em',
+                  color: "white"
+                }}>
+                  {workout.title}
+                </Typography>
                 <div style={{ display: 'flex', alignItems: 'center' }}>
                   <CardMedia
                     component="img"
                     sx={{ width: 126, height: 126, marginRight: '1em' }}
                     image={workout.picture_url}
                   />
-                  <Typography variant="body2" color="text.secondary">
+                  <Typography variant="body2" color="white">
                     {workout.description}
                   </Typography>
                 </div>
@@ -72,8 +58,6 @@ export default function Home({ workouts }) {
             </Card>
           );
         })}
-        </div>
-      </>
-    </div>
+    </CardContent>
   );
 }

@@ -7,7 +7,6 @@ import logoPng from '../Img/logo.png'
 export default function Navigation(props) {
   return (
     <nav className="navbar">
-      <div className="container">
         <DropdownMenu className="navbar-left"/>
         <div className="navbar-center">
           <Link to={'/'}>
@@ -15,10 +14,8 @@ export default function Navigation(props) {
           </Link>
         </div>
         <div className="navbar-right">
-          <span>Welcome!</span>
-          {/* <Link to={'/login'} className="btn btn-outline-light">Logout</Link> */}
+          <span>Welcome Hanvid!</span>
         </div>
-      </div>
     </nav>
   );
 }

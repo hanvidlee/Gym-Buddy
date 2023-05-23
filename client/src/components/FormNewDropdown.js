@@ -35,14 +35,26 @@ const FormNewDropdown = ({index, exerciseList, exerciseSets, setExerciseSets}) =
 
           label="Exercises"
           InputLabelProps={{
+            sx: { color: 'white' },
             shrink: true
           }}
           sx={{
-            maxWidth: "auto",
-            '& .MuiInputBase-input': {
+            padding: '0px',
+            minWidth: "180px",
+            '& .MuiInputBase-root': {
+              height: '27px',
               fontSize: '13px',
-              padding: '4px 3px',
+              paddingTop: '0px',
             },
+            '& .MuiOutlinedInput-root': {
+              color: 'white',
+              '& fieldset': {
+                borderColor: 'white',
+              },
+            },
+            '& .MuiSvgIcon-root': {
+              color: 'white',
+            }
           }}
         />
       )}

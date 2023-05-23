@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 
-const FormShowDropdown = ({index, exerciseList, handleChange, initialValue}) => {
+const FormShowDropdown = ({ index, exerciseList, handleChange, initialValue }) => {
   const [value, setValue] = useState(initialValue);
   const [inputValue, setInputValue] = useState('');
-  
+
   return (
     <Autocomplete
       key={`combo-box-demo-${index}`}
@@ -16,7 +16,7 @@ const FormShowDropdown = ({index, exerciseList, handleChange, initialValue}) => 
       align="right"
       onChange={(event, newValue) => {
         setValue(newValue);
-        handleChange(index, newValue)
+        handleChange(index, newValue);
       }}
       value={value}
       inputValue={inputValue}
@@ -26,22 +26,34 @@ const FormShowDropdown = ({index, exerciseList, handleChange, initialValue}) => 
       renderInput={(params) => (
         <TextField
           {...params}
-          label="Exercises"
+          label="Exercise"
           InputLabelProps={{
+            sx: { color: 'white' },
             shrink: true
           }}
           sx={{
-            maxWidth: "auto",
-            '& .MuiInputBase-input': {
+            padding: '0px',
+            minWidth: "180px",
+            '& .MuiInputBase-root': {
+              height: '27px',
               fontSize: '13px',
-              padding: '4px 3px',
+              paddingTop: '0px',
             },
+            '& .MuiOutlinedInput-root': {
+              color: 'white',
+              '& fieldset': {
+                borderColor: 'white',
+              },
+            },
+            '& .MuiSvgIcon-root': {
+              color: 'white',
+            }
           }}
         />
       )}
     />
   );
-}
+};
 
 export default FormShowDropdown
 
