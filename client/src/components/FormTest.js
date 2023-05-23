@@ -14,7 +14,7 @@ import Paper from '@mui/material/Paper';
 import FormNewDropdown from './FormNewDropdown';
 import { IconButton } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { MobileDatePicker } from '@mui/x-date-pickers/MobileDatePicker';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
@@ -38,6 +38,8 @@ export default function FormTest(props) {
       weight: 0,
     },
   ]);
+
+  const navigate = useNavigate();
 
   const [sets, setSets] = useState([]);
 
@@ -69,6 +71,7 @@ export default function FormTest(props) {
         const { weight, reps, quantity, exercise } = set;
         props.addSet(addedworkout.data[0].id, weight, reps, quantity, exercise);
       }
+      navigate('/')
     });
   };
 
@@ -362,18 +365,16 @@ export default function FormTest(props) {
               </Table>
             </TableContainer>
           </CardContent>
-          <Link to="/">
-            <Button
-              type="submit"
-              variant="contained"
-              sx={{
-                backgroundColor: 'green',
-                '&:hover': { backgroundColor: 'green' },
-              }}
-            >
-              Submit
-            </Button>
-          </Link>
+         <Button
+            type="submit"
+            variant="contained"
+            sx={{
+              backgroundColor: 'green',
+              '&:hover': { backgroundColor: 'green' },
+            }}
+          >
+            Submit
+          </Button>
           <Button
             type="button"
             variant="contained"
