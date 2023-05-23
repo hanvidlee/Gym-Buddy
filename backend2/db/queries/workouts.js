@@ -14,7 +14,7 @@ const getAllWorkoutsForUser = function (userId) {
       [userId]
     )
     .then((result) => {
-      console.log('GET ALL WORKOUTS: ',result.rows)
+      console.log('GET ALL WORKOUTS: ', result.rows);
       return result.rows;
     })
     .catch((error) => {
@@ -23,7 +23,13 @@ const getAllWorkoutsForUser = function (userId) {
 };
 
 // picture_url, description, title, sets ==> reps, quantity, weight, exercise
-const addWorkoutForUser = function (userId, workout_date, picture_url, description, title) {
+const addWorkoutForUser = function (
+  userId,
+  workout_date,
+  picture_url,
+  description,
+  title
+) {
   const queryString = `
       INSERT INTO workouts (user_id, workout_date, picture_url, description, title)
       VALUES ($1, $2, $3, $4, $5)
@@ -32,14 +38,15 @@ const addWorkoutForUser = function (userId, workout_date, picture_url, descripti
 
   const values = [userId, workout_date, picture_url, description, title];
 
-  return db.query(queryString, values)
-  .then((result) => {
-    console.log('ADDING WORKOUTS ', result.rows)
-    return result.rows;
-  })
-  .catch((error) => {
-    console.error(error.message);
-  })
+  return db
+    .query(queryString, values)
+    .then((result) => {
+      console.log('ADDING WORKOUTS ', result.rows);
+      return result.rows;
+    })
+    .catch((error) => {
+      console.error(error.message);
+    });
 };
 
 const updateWorkout = function (workoutId, picture_url, description, title) {
@@ -51,27 +58,68 @@ const updateWorkout = function (workoutId, picture_url, description, title) {
   WHERE id = $1
   `;
 
-  const values = [workoutId, picture_url, description, title]
+  const values = [workoutId, picture_url, description, title];
 
-  return db.query(queryString, values)
-  .then((result) => {
-    console.log('QUERY UPDATE: ', result.rows)
-    return result.rows;
-  })
-  .catch((error) => {
-    console.error(error.message)
-  })
-}
+  return db
+    .query(queryString, values)
+    .then((result) => {
+      console.log('QUERY UPDATE: ', result.rows);
+      return result.rows;
+    })
+    .catch((error) => {
+      console.error(error.message);
+    });
+};
 
 const removeWorkout = function (workoutId) {
-  return db.query(`
+  return db
+    .query(
+      `
   DELETE FROM workouts
   WHERE id = $1
   RETURNING *
-  `, [workoutId])
-  .then((result) => {
-    console.log('QUERY DELETE: ', result.rows)
-  })
-}
+  `,
+      [workoutId]
+    )
+    .then((result) => {
+      console.log('QUERY DELETE: ', result.rows);
+    });
+};
 
-module.exports = { getAllWorkoutsForUser, addWorkoutForUser, updateWorkout, removeWorkout };
+const getNumberOfWorkouts = function () {
+  return db
+    .query(
+      `
+  SELECT COUNT(*) AS total_workouts
+  FROM workouts
+  `
+    )
+    .then((result) => {
+      console.log('QUERY NUM WORKOUTS: ', result.rows);
+      return result.rows;
+    });
+};
+
+// THIS ONE DOESN'T WORK
+const getNumberOfWorkoutsPerMonth = function () {
+  return db.query(`
+  SELECT EXTRACT('MONTH' FROM workout_date) AS workout_month,
+  COUNT(id) AS workout_count
+  FROM workouts
+  GROUP BY EXTRACT('MONTH' FROM workout_date)
+  ORDER BY workout_month ASC
+  `)
+  .then((result) => {
+    console.log('QUERY NUM WORKOUTS PER MONTH: ', result.rows);
+    return result.rows
+  })
+};
+
+module.exports = {
+  getAllWorkoutsForUser,
+  addWorkoutForUser,
+  updateWorkout,
+  removeWorkout,
+  getNumberOfWorkouts,
+  getNumberOfWorkoutsPerMonth
+};

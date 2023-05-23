@@ -1,6 +1,7 @@
 const express = require('express');
 const axios = require('axios');
 const router = express.Router();
+const { list } = require('./mockExercisesList')
 // const request = require('request');
 const { getAllDetailsPerExercise } = require('../db/queries/exercises');
 
@@ -15,13 +16,13 @@ const apiKey = "b71c7d395amsh814d5a563bd86a2p1bcd44jsn901b00d7d721";
 
 router.get('/', async (req, res) => {
   try {
-    const response = await axios.get('https://exercisedb.p.rapidapi.com/exercises', {
-      headers: {
-        'X-RapidAPI-Key': apiKey,
-        'X-RapidAPI-Host': 'exercisedb.p.rapidapi.com'
-      }
-    });
-    res.json(response.data);
+    // const response = await axios.get('https://exercisedb.p.rapidapi.com/exercises', {
+    //   headers: {
+    //     'X-RapidAPI-Key': apiKey,
+    //     'X-RapidAPI-Host': 'exercisedb.p.rapidapi.com'
+    //   }
+    // });
+    res.json(list);
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'An error occurred' });

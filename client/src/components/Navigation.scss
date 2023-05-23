@@ -10,51 +10,16 @@
   height: 50px;
   width: 425px;
   z-index: 999;
-}
-
-.container {
-  display: flex;
   justify-content: space-between;
-  align-items: center;
-}
-
-.navbar-brand {
-  font-weight: bold;
-  // margin-right: 20px;
-  /* Adjust the margin as needed */
-}
-
-.navbar-link {
-  margin-right: 10px;
-  color: white;
-  text-decoration: none;
-}
-
-.navbar-welcome {
-  margin-right: 10px;
 }
 
 .navbar-logo {
   max-width: 40px;
-  /* Adjust the width as needed */
   height: auto;
   padding-top: 3px;
 }
 
-.navbar-left {
-  flex: 1;
-  display: flex;
-  align-items: center;
-}
-
-.navbar-center {
-  flex: 2;
-  display: flex;
-  justify-content: center;
-}
-
 .navbar-right {
-  flex: 1;
-  display: flex;
-  justify-content: flex-end;
+  padding-top: 12px;
+  padding-right: 10px;
 }

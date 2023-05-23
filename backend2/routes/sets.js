@@ -32,18 +32,19 @@ router.post('/', (req, res) => {
 // ASK AHANA ABOUT THIS. Can I have this post route to '/' ?? Or do I use PUT here instead.
 // UPDATE
 router.post('/edit', (req, res) => {
-  // const { set_id, weight, reps, quantity, exercise } = req.body
+  const { set_id, weight, reps, quantity, exercise } = req.body
+  console.log("req.body", req.body)
 
-  updateSetInWorkout(1, 0, 20, 3, 'Sit Ups').then((data) => {
-    res.status(200).send({ message: 'OK. Update successful.' });
+  updateSetInWorkout(set_id, weight, reps, quantity, exercise).then((data) => {
+    return res.status(200).send({ message: 'OK. Update successful.' });
   });
 });
 
 // DELETE
 router.post('/remove', (req, res) => {
-  // const set_id = req.body.setId
+  const { set_id } = req.body
 
-  removeSetFromWorkout(10).then((data) => {
+  removeSetFromWorkout(set_id).then((data) => {
     res.status(200).send({ message: 'OK. Delete successful.' });
   });
 });

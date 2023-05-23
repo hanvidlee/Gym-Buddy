@@ -21,7 +21,7 @@ export default function Home({ workouts }) {
                 maxWidth: '405px',
                 margin: '0 auto',
                 marginBottom: '1em',
-                backgroundColor: "rgba(0, 0, 0, 0.9)",
+                backgroundColor: "rgba(0, 0, 0, 0.8)",
                 color: "white"
               }}
             >

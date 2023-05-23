@@ -16,6 +16,7 @@ import Form from './components/Form';
 import FormShow from './components/FormShow';
 import FormTest from './components/FormTest';
 import useApplicationData from './hooks/useApplicationData';
+import Analytics from './components/Analytics/Analytics';
 
 function NavBar() {
   const location = useLocation();
@@ -28,7 +29,17 @@ function NavBar() {
 }
 
 function App() {
-  const { state, addWorkout, updateWorkout, deleteWorkout, addSet, updateSet, deleteSet } = useApplicationData();
+  const {
+    state,
+    addWorkout,
+    updateWorkout,
+    deleteWorkout,
+    addSet,
+    updateSet,
+    deleteSet,
+    getSets,
+    getWorkouts
+  } = useApplicationData();
 
   return (
     <div className="App">
@@ -53,13 +64,24 @@ function App() {
               key={`workout-info-${JSON.stringify(state)}`}
               workouts={state.workouts}
               updateWorkout={updateWorkout}
+              addSet={addSet}
               deleteWorkout={deleteWorkout}
               sets={state.sets}
               updateSet={updateSet}
               deleteSet={deleteSet}
+              getSets={getSets}
+              getWorkouts={getWorkouts}
+              exercises={state.exercises}
             />}
           />
           <Route path="/log/test" element={<FormTest exercises={state.exercises} addWorkout={addWorkout} addSet={addSet} />} />
+          <Route path="/analytics" element={
+            <Analytics 
+              numWorkouts={state.analytics} 
+              topFiveExercises={state.topFiveExercises} 
+              exerciseProgress={state.exerciseProgress} 
+              workoutsByMonth={state.workoutsByMonth} />} 
+            />
         </Routes>
       </Router>
     </div>
