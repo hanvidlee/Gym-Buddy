@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   LineChart,
   Line,
@@ -13,57 +13,44 @@ import {
   Cell,
   ResponsiveContainer,
 } from 'recharts';
+import AnalyticsDropdown from "./AnalyticsDropDown";
 
-const data = [
-  {
-    date: '2023-05-02T04:00:00.000Z',
-    exercise: 'Bentover Rows',
-    weight: 250,
-  },
-  {
-    date: '2023-05-02T04:00:00.000Z',
-    exercise: 'Bench Press',
-    weight: 200,
-  },
-  {
-    date: '2023-05-03T04:00:00.000Z',
-    exercise: 'Bentover Rows',
-    weight: 200,
-  },
-  {
-    date: '2023-05-04T04:00:00.000Z',
-    exercise: 'Bentover Rows',
-    weight: 250,
-  },
-  {
-    date: '2023-05-05T04:00:00.000Z',
-    exercise: 'Bentover Rows',
-    weight: 300,
-  },
-];
-
-export default function ExerciseProgress() {
+export default function ExerciseProgress({exercises}) {
   // format date to show month and day
   const formatAxis = (tickItem) => {
     const date = new Date(tickItem);
     return date.toLocaleString('default', { month: 'short', day: 'numeric' });
   };
 
-  // show year on the label
-  const chartYear = new Date(data[0].date).getFullYear();
+  // chartYear is not working
+  const chartYear = exercises.length > 0 ? new Date(exercises[0].date).getFullYear() : null;
+
+  // this is for the user selected value from drop down
+  const [selectedValue, setSelectedValue] = useState('');
+
+  // pass this to the dropdownmenu so that the change in value is being extracted and passed back to this parent component
+  const handleSelectedChange = (value) => {
+    setSelectedValue(value);
+  }
+
+  // filter the exercises to the selectedValue and pass this list to the bar graph
+  const filteredExercises = exercises.filter((exercise) => {
+    return exercise.exercise === selectedValue
+  })
 
   return (
     <>
-      <div style={{ backgroundColor: 'rgb: 0, 0, 0, 0.9', padding: '20 px' }}>
+      <div style={{ backgroundColor: 'white', padding: '20 px' }}>
         <div>
-          <h1>Exercise Title</h1>
+          <h1>Exercise Analytics</h1>
         </div>
 
         <div>
+            <AnalyticsDropdown exercises={exercises} onExerciseChange={handleSelectedChange} />
             <BarChart
               width={500}
               height={300}
-              data={data}
+              data={filteredExercises}
               margin={{
                 top: 5,
                 right: 30,
@@ -76,6 +63,7 @@ export default function ExerciseProgress() {
               <YAxis />
               <Tooltip />
               <Legend />
+              <Label value={chartYear} position="insideBottom" style={{ fill: '#666', fontSize: '14px' }}/>
               <Bar dataKey="weight" fill="#F44236" barSize={20}/>
             </BarChart>
         </div>

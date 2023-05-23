@@ -10,7 +10,7 @@ export default function Analytics({numWorkouts, topFiveExercises, exerciseProgre
   return(
     <>
       <p>Hi from Analytics</p>
-      <ExerciseProgress />
+      <ExerciseProgress exercises={exerciseProgress} />
     </>
   )
 }
