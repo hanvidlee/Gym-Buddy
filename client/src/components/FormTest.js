@@ -14,55 +14,85 @@ import Paper from '@mui/material/Paper';
 import FormNewDropdown from './FormNewDropdown';
 import { IconButton } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
+import { Link } from 'react-router-dom'
 import './Home.scss';
 
 export default function FormTest(props) {
-
-  const exerciseList = props.exercises.map(e => e.name);
+  const exerciseList = props.exercises.map((e) => e.name);
 
   const [selectedImage, setSelectedImage] = useState(null);
 
   const [title, setTitle] = useState('');
 
-  const [description, setDescription] = useState("");
+  const [description, setDescription] = useState('');
 
   const [exerciseSets, setExerciseSets] = useState([
     {
-      exercise: "",
+      exercise: '',
       reps: 0,
       quantity: 0,
-      weight: 0
-    }
+      weight: 0,
+    },
   ]);
 
-  const [sets, setSets] = useState([])
+  const [sets, setSets] = useState([]);
 
+  function refreshPage() {
+    window.location.reload(false);
+  }
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    const addedworkout = await props.addWorkout(1, '2023-05-20', selectedImage, description, title);
+    const addedworkout = await props.addWorkout(
+      1,
+      '2023-05-20',
+      selectedImage,
+      description,
+      title
+    );
     exerciseSets.forEach((set) => {
-      const { weight, reps, quantity, exercise } = set;
-      props.addSet(addedworkout.data[0].id, weight, reps, quantity, exercise);
+      if (!set.isRemoved) {
+        const { weight, reps, quantity, exercise } = set;
+        props.addSet(addedworkout.data[0].id, weight, reps, quantity, exercise);
+      }
     });
   };
 
   const removeRow = (index) => {
-    const newExerciseSets = [...exerciseSets];
-    newExerciseSets.splice(index, 1);
-    setExerciseSets(newExerciseSets);
-  }
+    setExerciseSets(prev => {
+      const newPrev = [...prev];
+      newPrev[index] = {...newPrev[index], isRemoved: true};
+      console.log(newPrev)
+      return [...newPrev];
+    })
+    // const newExerciseSets = [...exerciseSets];
+    // newExerciseSets.splice(index, 1);
+    // setExerciseSets(newExerciseSets);
+  };
+
+  const refresh = () => window.location.reload(true)
 
   return (
     <CardContent class="home-wrapper">
-      <Card elevation={6} sx={{ paddingBottom: "1em", maxWidth: "425px", margin: "0 auto", marginTop: "50px", backgroundColor: "rgba(0, 0, 0, 0.8)" }}>
+      <Card
+        elevation={6}
+        sx={{
+          paddingBottom: '1em',
+          maxWidth: '425px',
+          margin: '0 auto',
+          marginTop: '50px',
+          backgroundColor: 'rgba(0, 0, 0, 0.8)',
+        }}
+      >
         <form onSubmit={onSubmit}>
-          <Typography variant="h6" sx={{ color: "white" }}>Create a Workout</Typography>
+          <Typography variant="h6" sx={{ color: 'white' }}>
+            Create a Workout
+          </Typography>
           {selectedImage && (
             <div>
               <img
                 alt="not found"
-                width={"250px"}
+                width={'250px'}
                 src={URL.createObjectURL(selectedImage)}
                 value={selectedImage}
               />
@@ -70,7 +100,7 @@ export default function FormTest(props) {
             </div>
           )}
 
-          <CardContent sx={{ paddingBottom: "0px" }}>
+          <CardContent sx={{ paddingBottom: '0px' }}>
             <TextField
               label="Title"
               required
@@ -78,11 +108,13 @@ export default function FormTest(props) {
               onChange={(event) => setTitle(event.target.value)}
               defaultValue="Title"
               InputProps={{
-                endAdornment: <InputAdornment position="start"></InputAdornment>
+                endAdornment: (
+                  <InputAdornment position="start"></InputAdornment>
+                ),
               }}
               InputLabelProps={{
                 sx: { color: 'white' },
-                shrink: true
+                shrink: true,
               }}
               sx={{
                 '& .MuiInputBase-input': {
@@ -95,7 +127,7 @@ export default function FormTest(props) {
                   '& fieldset': {
                     borderColor: 'white',
                   },
-                }
+                },
               }}
             />
           </CardContent>
@@ -115,7 +147,7 @@ export default function FormTest(props) {
               }}
             />
           </CardContent>
-          <CardContent sx={{ padding: "0px" }}>
+          <CardContent sx={{ padding: '0px' }}>
             <TextField
               id="outlined-multiline-static"
               multiline
@@ -123,14 +155,16 @@ export default function FormTest(props) {
               value={description}
               onChange={(event) => setDescription(event.target.value)}
               InputProps={{
-                endAdornment: <InputAdornment position="start"></InputAdornment>
+                endAdornment: (
+                  <InputAdornment position="start"></InputAdornment>
+                ),
               }}
               InputLabelProps={{
                 sx: { color: 'white' },
-                shrink: true
+                shrink: true,
               }}
               sx={{
-                width: "390px",
+                width: '390px',
                 '& .MuiInputBase-input': {
                   fontSize: '13px',
                   padding: '4px 3px',
@@ -146,16 +180,21 @@ export default function FormTest(props) {
             />
           </CardContent>
           <CardContent>
-            <TableContainer component={Paper} sx={{ backgroundColor: "#222" }}>
+            <TableContainer component={Paper} sx={{ backgroundColor: '#222' }}>
               <Table size="small" aria-label="a dense table">
                 <TableBody>
                   {exerciseSets.map((es, index) => {
-                    console.log('ES: ', es)
-                    console.log('INDEX: ', index)
+                    console.log('ES: ', es);
+                    console.log('INDEX: ', index);
+                    if (es.isRemoved === true) return null;
+                    
                     return (
                       <TableRow
                         key={es.id}
-                        sx={{ '&:last-child td, &:last-child th': { border: 0 }, height: "50px" }}
+                        sx={{
+                          '&:last-child td, &:last-child th': { border: 0 },
+                          height: '50px',
+                        }}
                       >
                         <TableCell align="right" sx={{ padding: '4px 2px' }}>
                           <FormNewDropdown
@@ -165,17 +204,22 @@ export default function FormTest(props) {
                             setExerciseSets={setExerciseSets}
                           />
                         </TableCell>
-                        <TableCell align="right" sx={{ maxWidth: '55px', padding: '4px 2px' }}>
+                        <TableCell
+                          align="right"
+                          sx={{ maxWidth: '55px', padding: '4px 2px' }}
+                        >
                           <TextField
                             required
                             label="lbs"
                             value={es.weight}
                             InputProps={{
-                              endAdornment: <InputAdornment position="start"></InputAdornment>
+                              endAdornment: (
+                                <InputAdornment position="start"></InputAdornment>
+                              ),
                             }}
                             InputLabelProps={{
                               sx: { color: 'white' },
-                              shrink: true
+                              shrink: true,
                             }}
                             sx={{
                               '& .MuiInputBase-input': {
@@ -187,26 +231,29 @@ export default function FormTest(props) {
                                 '& fieldset': {
                                   borderColor: 'white',
                                 },
-                              }
+                              },
                             }}
                             onChange={(event) => {
                               const updatedExerciseSets = [...exerciseSets];
                               updatedExerciseSets[index] = {
                                 ...updatedExerciseSets[index],
-                                weight: event.target.value
+                                weight: event.target.value,
                               };
                               setExerciseSets(updatedExerciseSets);
                             }}
                           />
                         </TableCell>
-                        <TableCell align="right" sx={{ maxWidth: '55px', padding: '4px 2px' }}>
+                        <TableCell
+                          align="right"
+                          sx={{ maxWidth: '55px', padding: '4px 2px' }}
+                        >
                           <TextField
                             required
                             label="x"
                             value={es.quantity}
                             InputLabelProps={{
                               sx: { color: 'white' },
-                              shrink: true
+                              shrink: true,
                             }}
                             sx={{
                               '& .MuiInputBase-input': {
@@ -218,26 +265,29 @@ export default function FormTest(props) {
                                 '& fieldset': {
                                   borderColor: 'white',
                                 },
-                              }
+                              },
                             }}
                             onChange={(event) => {
                               const updatedExerciseSets = [...exerciseSets];
                               updatedExerciseSets[index] = {
                                 ...updatedExerciseSets[index],
-                                quantity: event.target.value
+                                quantity: event.target.value,
                               };
                               setExerciseSets(updatedExerciseSets);
                             }}
                           />
                         </TableCell>
-                        <TableCell align="right" sx={{ maxWidth: '55px', padding: '4px 2px' }}>
+                        <TableCell
+                          align="right"
+                          sx={{ maxWidth: '55px', padding: '4px 2px' }}
+                        >
                           <TextField
                             required
                             label="reps"
                             value={es.reps}
                             InputLabelProps={{
                               sx: { color: 'white' },
-                              shrink: true
+                              shrink: true,
                             }}
                             sx={{
                               '& .MuiInputBase-input': {
@@ -249,20 +299,26 @@ export default function FormTest(props) {
                                 '& fieldset': {
                                   borderColor: 'white',
                                 },
-                              }
+                              },
                             }}
                             onChange={(event) => {
                               const updatedExerciseSets = [...exerciseSets];
                               updatedExerciseSets[index] = {
                                 ...updatedExerciseSets[index],
-                                reps: event.target.value
+                                reps: event.target.value,
                               };
                               setExerciseSets(updatedExerciseSets);
                             }}
                           />
                         </TableCell>
-                        <TableCell sx={{ padding: "0px 1px" }}>
-                          <IconButton sx={{ padding: "0px", color: "white" }} aria-label="delete" onClick={() => {removeRow(index)}}>
+                        <TableCell sx={{ padding: '0px 1px' }}>
+                          <IconButton
+                            sx={{ padding: '0px', color: 'white' }}
+                            aria-label="delete"
+                            onClick={() => {
+                              removeRow(index);
+                            }}
+                          >
                             <DeleteIcon />
                           </IconButton>
                         </TableCell>
@@ -273,24 +329,52 @@ export default function FormTest(props) {
               </Table>
             </TableContainer>
           </CardContent>
-          <Button type="submit" variant="contained" sx={{ backgroundColor: "green", "&:hover": { backgroundColor: "green" } }}>Submit</Button>
-          <Button type="button" variant="contained" sx={{ margin: "0 1em" }} onClick={() => {
-            setExerciseSets([
-              ...exerciseSets,
-              {
-                exercise: "",
-                reps: 0,
-                quantity: 0,
-                weight: 0
-              }
-            ]);
-
-          }}>Add row</Button>
-          <Button type="button" variant="contained" sx={{ backgroundColor: "red", "&:hover": { backgroundColor: "red" } }} onClick={() => {
-            const updatedExerciseSets = [...exerciseSets];
-            updatedExerciseSets.pop();
-            setExerciseSets(updatedExerciseSets);
-          }}> Delete row </Button>
+          <Link to="/"> <Button
+            type="submit"
+            variant="contained"
+            sx={{
+              backgroundColor: 'green',
+              '&:hover': { backgroundColor: 'green' },
+            }}
+            
+          >
+            Submit
+          </Button>
+          </Link>
+          <Button
+            type="button"
+            variant="contained"
+            sx={{ margin: '0 1em' }}
+            onClick={() => {
+              setExerciseSets([
+                ...exerciseSets,
+                {
+                  exercise: '',
+                  reps: 0,
+                  quantity: 0,
+                  weight: 0,
+                },
+              ]);
+            }}
+          >
+            Add row
+          </Button>
+          <Button
+            type="button"
+            variant="contained"
+            sx={{
+              backgroundColor: 'red',
+              '&:hover': { backgroundColor: 'red' },
+            }}
+            onClick={() => {
+              const updatedExerciseSets = [...exerciseSets];
+              updatedExerciseSets.pop();
+              setExerciseSets(updatedExerciseSets);
+            }}
+          >
+            {' '}
+            Delete row{' '}
+          </Button>
         </form>
       </Card>
     </CardContent>
