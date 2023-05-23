@@ -9,7 +9,7 @@ export default function Analytics({numWorkouts, topFiveExercises, exerciseProgre
 
   return(
     <>
-      <p>Hi from Analytics</p>
+      <h1>Exercise Analytics</h1>
       <ExerciseProgress exercises={exerciseProgress} />
     </>
   )
