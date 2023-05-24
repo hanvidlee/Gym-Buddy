@@ -146,7 +146,7 @@ export default function FormShow({
   return (
     isEditMode ?
       <CardContent class='home-wrapper'>
-        <Card key={`workout-info-${id}`} elevation={6} sx={{ paddingBottom: "1em", maxWidth: "425px", margin: "0 auto", marginTop: "50px", backgroundColor: "rgba(0, 0, 0, 0.8)" }}>
+        <Card key={`workout-info-${id}`} elevation={6} sx={{ paddingBottom: "1em", maxWidth: "425px", margin: "0 auto", paddingTop: "50px", backgroundColor: "rgba(0, 0, 0, 0.8)" }}>
           <CardContent sx={{ paddingBottom: "0px", marginLeft: "1px", display: "flex", justifyContent: "flex-start" }}>
             <TextField
               name="workout-title"
@@ -386,7 +386,7 @@ export default function FormShow({
       </CardContent> :
       <CardContent class='home-wrapper'>
         <Card key={`workout-info-${id}`} elevation={6} sx={{
-          paddingBottom: "1em", maxWidth: "425px", margin: "0 auto", marginTop: "50px", backgroundColor: "rgba(0, 0, 0, 0.8)",
+          paddingBottom: "1em", maxWidth: "425px", margin: "0 auto", paddingTop: "50px", backgroundColor: "rgba(0, 0, 0, 0.8)",
           color: "white"
         }}>
           <Typography>
