@@ -35,7 +35,6 @@ const addSetsPerWorkout = function(workout_id, weight, reps, quantity, exercise)
 
   return db.query(queryString, values)
   .then ((result) => {
-    console.log('QUERY: ', result.rows);
     return result.rows;
   })
   .catch((error) => {
@@ -44,7 +43,6 @@ const addSetsPerWorkout = function(workout_id, weight, reps, quantity, exercise)
 }
 
 const updateSetInWorkout = function(setId, weight, reps, quantity, exercise) {
-  console.log("setId", setId)
   const queryString = `
   UPDATE sets
   SET weight = $2,
@@ -59,7 +57,6 @@ const updateSetInWorkout = function(setId, weight, reps, quantity, exercise) {
 
   return db.query(queryString, values)
   .then((result) => {
-    console.log('QUERY UPDATE: ', result.rows)
     return result.rows;
   })
   .catch((error) => {

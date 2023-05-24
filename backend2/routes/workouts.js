@@ -12,7 +12,9 @@ router.get('/', (req, res) => {
   // const user_id = req.session.userId;
 
   getAllWorkoutsForUser(1).then((data) => {
-    console.log('data', data);
+    // console.log('data', data);
+    //call get route from image upload and replace image names with image urls
+    
     return res.send(data);
   });
 });

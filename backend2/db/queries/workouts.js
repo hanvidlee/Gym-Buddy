@@ -14,7 +14,6 @@ const getAllWorkoutsForUser = function (userId) {
       [userId]
     )
     .then((result) => {
-      console.log('GET ALL WORKOUTS: ', result.rows);
       return result.rows;
     })
     .catch((error) => {
@@ -41,7 +40,6 @@ const addWorkoutForUser = function (
   return db
     .query(queryString, values)
     .then((result) => {
-      console.log('ADDING WORKOUTS ', result.rows);
       return result.rows;
     })
     .catch((error) => {
@@ -63,7 +61,6 @@ const updateWorkout = function (workoutId, picture_url, description, title) {
   return db
     .query(queryString, values)
     .then((result) => {
-      console.log('QUERY UPDATE: ', result.rows);
       return result.rows;
     })
     .catch((error) => {
@@ -82,7 +79,7 @@ const removeWorkout = function (workoutId) {
       [workoutId]
     )
     .then((result) => {
-      console.log('QUERY DELETE: ', result.rows);
+      return result.rows
     });
 };
 
@@ -95,7 +92,6 @@ const getNumberOfWorkouts = function () {
   `
     )
     .then((result) => {
-      console.log('QUERY NUM WORKOUTS: ', result.rows);
       return result.rows;
     });
 };
@@ -109,7 +105,6 @@ const getNumberOfWorkoutsPerMonth = function () {
   ORDER BY workout_month ASC
   `)
   .then((result) => {
-    console.log('QUERY NUM WORKOUTS PER MONTH: ', result.rows);
     return result.rows
   })
 };

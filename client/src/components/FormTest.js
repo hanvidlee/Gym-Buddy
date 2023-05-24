@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 import InputAdornment from '@mui/material/InputAdornment';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
@@ -38,6 +39,7 @@ export default function FormTest(props) {
       weight: 0,
     },
   ]);
+  const [status, setStatus] = useState('')
 
   const navigate = useNavigate();
 
@@ -49,20 +51,26 @@ export default function FormTest(props) {
     setDateState(newDate);
   };
 
-  function refreshPage() {
-    window.location.reload(false);
-  }
 
   const formattedDate = moment(dateState).format('YYYY-MM-DD');
-  console.log('formatted date: ', formattedDate);
 
   const onSubmit = async (e) => {
     e.preventDefault();
+    
+    let formData = new FormData()
+    formData.append('myImage', selectedImage.data)
+    const options = {
+      url: 'http://localhost:8080/api/images',
+      method: "POST",
+      data : formData,
+      headers: { 'content-type': 'multipart/form-data' },
+    }
+    const response = await axios(options)
 
     const addedworkout = await props.addWorkout(
       1,
       formattedDate,
-      selectedImage,
+      response.data,
       description,
       title
     );
@@ -79,12 +87,10 @@ export default function FormTest(props) {
     setExerciseSets((prev) => {
       const newPrev = [...prev];
       newPrev[index] = { ...newPrev[index], isRemoved: true };
-      console.log(newPrev);
       return [...newPrev];
     });
   };
 
-  const refresh = () => window.location.reload(true);
 
   return (
     <CardContent class="home-wrapper">
@@ -98,7 +104,7 @@ export default function FormTest(props) {
           backgroundColor: 'rgba(0, 0, 0, 0.8)',
         }}
       >
-        <form onSubmit={onSubmit}>
+        <form onSubmit={onSubmit} enctype="multipart/form-data">
           <Typography variant="h6" sx={{ color: 'white' }}>
             Create a Workout
           </Typography>
@@ -164,13 +170,14 @@ export default function FormTest(props) {
             {selectedImage && (
               <div>
                 <div style={{ display: "flex", justifyContent: "center" }}>
-                  <img
+                  {/* <img
                     alt="not found"
                     width={'250px'}
                     src={URL.createObjectURL(selectedImage)}
                     value={selectedImage}
                     style={{ paddingTop: "0px" }}
-                  />
+                  /> */}
+                  {/* <input type='file' name='file' onChange={handleFileChange}></input> */}
                 </div>
                 <div style={{ display: "flex", justifyContent: "center", marginTop: "10px" }}>
                   <Button variant="contained" sx={{ backgroundColor: "red", "&:hover": { backgroundColor: "red" } }} onClick={() => setSelectedImage(null)}>Remove</Button>
@@ -181,8 +188,11 @@ export default function FormTest(props) {
               type="file"
               name="myImage"
               onChange={(event) => {
-                console.log(event.target.files[0]);
-                setSelectedImage(event.target.files[0]);
+                const img = {
+                  preview: URL.createObjectURL(event.target.files[0]),
+                  data: event.target.files[0],
+                }
+                setSelectedImage(img)
               }}
               style={{
                 color: 'white',
@@ -400,6 +410,7 @@ export default function FormTest(props) {
           >
             Add row
           </Button>
+          <Link reloadDocument to="/"><Button type="button" variant="contained" sx={{ backgroundColor: "red", "&:hover": { backgroundColor: "red" }, marginLeft: "1em", marginRight: "1em" }}>Cancel</Button></Link>
         </form>
       </Card>
     </CardContent >
