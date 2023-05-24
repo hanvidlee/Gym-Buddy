@@ -20,11 +20,15 @@ export default function NumOfWorkouts({ count }) {
         marginBottom: '1em',
         paddingTop: '10px',
         backgroundColor: "rgba(0, 0, 0, 0.8)",
-        color: "white"
+        color: "white",
+        paddingTop: "1em"
       }}
     >
       <Typography variant="h5" component="div">
-        Total Workouts: {total[0]}
+        Total Workouts:
+      </Typography>
+      <Typography variant="h4" component="div">
+      {total[0]}
       </Typography>
     </Card>
   );

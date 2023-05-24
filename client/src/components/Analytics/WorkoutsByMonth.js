@@ -22,10 +22,11 @@ export default function WorkoutsByMonth({ workouts }) {
         margin: '0 auto',
         marginBottom: '1em',
         backgroundColor: "rgba(0, 0, 0, 0.8)",
-        color: "white"
+        color: "white",
+        paddingTop: "1em"
       }}
     >
-      <Typography>Workouts Per Month in 2023</Typography>
+      <Typography variant="h5" >Workouts Per Month in 2023</Typography>
       <div>
         <BarChart
           width={350}
