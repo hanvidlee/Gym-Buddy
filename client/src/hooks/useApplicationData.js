@@ -38,7 +38,7 @@ export default function useApplicationData() {
           historyDetails: all[4].data,
           exercises: all[5].data,
           analytics: all[6].data,
-          topFiveExercises: all[7].data,
+          topFiveExercisexs: all[7].data,
           exerciseProgress: all[8].data,
           workoutsByMonth: all[9].data
         }));

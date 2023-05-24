@@ -70,7 +70,6 @@ const getExerciseProgress = function() {
   ORDER BY workouts.workout_date
   `)
   .then((result) => {
-    console.log('EXERCISE PROGRESS: ', result)
     return result.rows
   })
   .catch((error) => {

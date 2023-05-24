@@ -7,7 +7,7 @@ export default function NumOfWorkouts({ count }) {
     return item.total_workouts;
   });
 
-  console.log('TOTAL: ', total[0]);
+  // console.log('TOTAL: ', total[0]);
 
   return (
     <Card

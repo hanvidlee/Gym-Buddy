@@ -9,7 +9,6 @@ import { Link } from 'react-router-dom';
 import './Home.scss';
 
 export default function Home({ workouts }) {
-
   return (
     <CardContent class="home-wrapper">
       {workouts.map((workout) => {

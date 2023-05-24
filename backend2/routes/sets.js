@@ -33,7 +33,7 @@ router.post('/', (req, res) => {
 // UPDATE
 router.post('/edit', (req, res) => {
   const { set_id, weight, reps, quantity, exercise } = req.body
-  console.log("req.body", req.body)
+  // console.log("req.body", req.body)
 
   updateSetInWorkout(set_id, weight, reps, quantity, exercise).then((data) => {
     return res.status(200).send({ message: 'OK. Update successful.' });
