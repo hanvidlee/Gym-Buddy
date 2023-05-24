@@ -13,6 +13,8 @@ import {
 
 export default function WorkoutsByMonth({ workouts }) {
 
+  const maxCount = Math.max(...workouts.map((workout) => workout.workout_count));
+
   return (
     <Card
       elevation={6}
@@ -40,6 +42,7 @@ export default function WorkoutsByMonth({ workouts }) {
           <YAxis
             tick={{ fill: 'white' }}
             axisLine={{ stroke: 'white' }}
+            domain={[0, maxCount + 5]} //y-axis range extends beyond the max value by adding buffer of 5 units
           />
           <Tooltip />
           <Legend />

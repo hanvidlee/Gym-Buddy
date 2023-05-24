@@ -12,7 +12,7 @@ export default function useApplicationData() {
     analytics: [],
     topFiveExercises: [],
     exerciseProgress: [],
-    workoutsByMonth: {}
+    workoutsByMonth: []
   });
 
   useEffect(() => {
