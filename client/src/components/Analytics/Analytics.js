@@ -8,7 +8,6 @@ import Box from "@mui/material/Box"
 import '../Home.scss';
 
 export default function Analytics({ numWorkouts, topFiveExercises, exerciseProgress, workoutsByMonth }) {
-
   return (
     <CardContent class="home-wrapper">
       <Box sx={{
