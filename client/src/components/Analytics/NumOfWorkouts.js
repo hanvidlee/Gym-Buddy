@@ -14,7 +14,7 @@ export default function NumOfWorkouts({ count }) {
       elevation={6}
       sx={{
         paddingBottom: '1em',
-        maxWidth: '405px',
+        width: '405px',
         margin: '0 auto',
         marginTop: '50px',
         marginBottom: '1em',

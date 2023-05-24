@@ -94,7 +94,7 @@ export default function FormTest(props) {
           paddingBottom: '1em',
           maxWidth: '425px',
           margin: '0 auto',
-          marginTop: '50px',
+          paddingTop: '50px',
           backgroundColor: 'rgba(0, 0, 0, 0.8)',
         }}
       >
