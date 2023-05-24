@@ -1,7 +1,7 @@
 INSERT INTO workouts (workout_date, picture_url, description, title, user_id)
-VALUES ('2023-04-01', 'localhost:3000/Img/1%20First%20Day.jpg', 'Today is the first day I embark on my gym journey to try to improve my mental, physical, and nutritional health!', 'Day 1', 1),
-       ('2023-04-07', 'https://randomuser.me/api/portraits/men/2.jpg',  'Tried one of the most popular exercises today. Time to make Arnold Proud!', 'Exciting prospects', 1),
-       ('2023-04-12', 'https://randomuser.me/api/portraits/women/3.jpg',  'I do not understand why some people enjoy the cardio business....', 'Cardi No', 1),
+VALUES ('2023-04-01', 'https://randomuser.me/api/portraits/men/4.jpg', 'Today is the first day I embark on my gym journey to try to improve my mental, physical, and nutritional health!', 'Day 1', 1),
+       ('2023-04-07', 'https://randomuser.me/api/portraits/men/4.jpg',  'Tried one of the most popular exercises today. Time to make Arnold Proud!', 'Exciting prospects', 1),
+       ('2023-04-12', 'https://randomuser.me/api/portraits/men/4.jpg',  'I do not understand why some people enjoy the cardio business....', 'Cardi No', 1),
        ('2023-04-15', 'https://randomuser.me/api/portraits/men/4.jpg',  'I watched a video someone lifting 500kg and wanted to see how hard it is myself. Needless to say, I cannot lift 500kg.', 'Lifting Deads', 1),
        ('2023-04-20', 'https://randomuser.me/api/portraits/men/4.jpg', 'Spreading my wings so one day I can fly to the heavens', 'I believe I can fly', 1),
        ('2023-04-25', 'https://randomuser.me/api/portraits/men/4.jpg', 'Learned more about how to target the different fibers in my muscles. Slow and easy wins the race', 'Chest Day Best Day', 1),
