@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
+import { Paper } from '@mui/material';
 
 const FormShowDropdown = ({ index, exerciseList, handleChange, initialValue }) => {
   const [value, setValue] = useState(initialValue);
@@ -14,6 +15,9 @@ const FormShowDropdown = ({ index, exerciseList, handleChange, initialValue }) =
       id="combo-box-demo"
       options={exerciseList}
       align="right"
+      PaperComponent={({ children }) => (
+        <Paper style={{ background: "#222", color: "white" }}>{children}</Paper>
+      )}
       onChange={(event, newValue) => {
         setValue(newValue);
         handleChange(index, newValue);
