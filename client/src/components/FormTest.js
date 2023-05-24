@@ -61,8 +61,8 @@ export default function FormTest(props) {
   const fileOnChange = (event) => {
     console.log(event.target.files[0]);
     setImage(event.target.files[0]);
-    setUploadedImage(URL.createObjectURL(event.target.files[0]))
-}
+    setUploadedImage(URL.createObjectURL(event.target.files[0]));
+  };
 
   const formattedDate = moment(dateState).format('YYYY-MM-DD');
 
@@ -71,13 +71,13 @@ export default function FormTest(props) {
 
     let formData = new FormData();
 
-    formData.append("avatar", image)
+    formData.append("avatar", image);
 
-     const options = {
+    const options = {
       url: 'http://localhost:8080/api/uploadFile',
       method: "POST",
-      data : formData
-    }
+      data: formData
+    };
     const response = await axios(options);
 
     setLoading(true);
@@ -159,8 +159,7 @@ export default function FormTest(props) {
                   },
                 }}
               />
-            </LocalizationProvider>
-          </CardContent>
+            </CardContent>
             <CardContent sx={{ paddingTop: "0px", marginLeft: "1px", display: "flex", justifyContent: "flex-start" }}>
               <LocalizationProvider dateAdapter={AdapterMoment}>
                 <MobileDatePicker
@@ -188,52 +187,52 @@ export default function FormTest(props) {
                 />
               </LocalizationProvider>
             </CardContent>
-          <CardContent sx={{ paddingTop: "0px" }}>
-          {uploadedImage && (
-  <div>
-    <div style={{ display: "flex", justifyContent: "center" }}>
-      <img
-        alt="Uploaded"
-        width={'250px'}
-        src={uploadedImage}
-        style={{ paddingTop: "0px" }}
-      />
-    </div>
-    <div style={{ display: "flex", justifyContent: "center", marginTop: "10px" }}>
-      <Button
-        variant="contained"
-        sx={{ backgroundColor: "red", "&:hover": { backgroundColor: "red" } }}
-        onClick={() => {
-          setSelectedImage(null);
-          setUploadedImage(null); // Reset the uploaded image
-        }}
-      >
-        Remove
-      </Button>
-    </div>
-  </div>
-)}
-         <div className="upload">
-            <input type="file" onChange={fileOnChange}/>
-        </div>
-          </CardContent>
-          <CardContent sx={{ padding: '0px' }}>
-            <TextField
-              id="outlined-multiline-static"
-              multiline
-              label="Description"
-              value={description}
-              onChange={(event) => setDescription(event.target.value)}
-              InputProps={{
-                endAdornment: (
-                  <InputAdornment position="start"></InputAdornment>
-                ),
-              }}
-              InputLabelProps={{
-                sx: { color: 'white' },
-                shrink: true,
-              }}
-     sx={{
+            <CardContent sx={{ paddingTop: "0px" }}>
+              {uploadedImage && (
+                <div>
+                  <div style={{ display: "flex", justifyContent: "center" }}>
+                    <img
+                      alt="Uploaded"
+                      width={'250px'}
+                      src={uploadedImage}
+                      style={{ paddingTop: "0px" }}
+                    />
+                  </div>
+                  <div style={{ display: "flex", justifyContent: "center", marginTop: "10px" }}>
+                    <Button
+                      variant="contained"
+                      sx={{ backgroundColor: "red", "&:hover": { backgroundColor: "red" } }}
+                      onClick={() => {
+                        setSelectedImage(null);
+                        setUploadedImage(null); // Reset the uploaded image
+                      }}
+                    >
+                      Remove
+                    </Button>
+                  </div>
+                </div>
+              )}
+              <div className="upload">
+                <input type="file" onChange={fileOnChange} />
+              </div>
+            </CardContent>
+            <CardContent sx={{ padding: '0px' }}>
+              <TextField
+                id="outlined-multiline-static"
+                multiline
+                label="Description"
+                value={description}
+                onChange={(event) => setDescription(event.target.value)}
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="start"></InputAdornment>
+                  ),
+                }}
+                InputLabelProps={{
+                  sx: { color: 'white' },
+                  shrink: true,
+                }}
+                sx={{
                   width: '390px',
                   '& .MuiInputBase-input': {
                     fontSize: '13px',
@@ -247,6 +246,7 @@ export default function FormTest(props) {
                     },
                   },
                 }}
+                />
             </CardContent>
             <CardContent>
               <TableContainer component={Paper} sx={{ backgroundColor: '#222' }}>
