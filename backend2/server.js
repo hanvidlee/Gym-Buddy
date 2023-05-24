@@ -12,6 +12,21 @@ const bodyParser = require('body-parser')
 const PORT = process.env.PORT || 8080;
 const app = express();
 
+// from upload.js
+const fs = require('fs');
+const router = express.Router();
+const multer = require('multer');
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, './images/');
+    },
+    filename: (req, file, cb) => {
+        cb(null, file.originalname);
+    },
+});
+const upload = multer({ storage: storage });
+
+
 // Load the logger first so all (static) HTTP requests are logged to STDOUT
 // 'dev' = Concise output colored by response status for development use.
 //         The :status token will be colored red for server error codes, yellow for client error codes, cyan for redirection codes, and uncolored for all other codes.
@@ -45,6 +60,22 @@ const topFiveRoutes = require('./routes/topFiveExercises');
 const workoutsPerMonth = require('./routes/workoutsPerMonth');
 const exerciseProgress = require('./routes/exerciseProgress');
 const imageUpload = require('./routes/imageUpload');
+// const upload = require('./routes/upload');
+
+// upload.js 
+app.use(express.static('./images'));
+
+app.post('/api/uploadFile', upload.single('avatar'), (req, res) => {
+  console.log('FILE: ', req.file)
+
+  let fileType = req.file.mimetype.split("/")[1]
+  let newFileName = req.file.filename + "." + fileType
+  console.log("newFileName: ", newFileName)
+
+  fs.rename(`./images/${req.file.filename}`, `./images/${newFileName}`, function() {
+      res.send("200");
+  })
+});
 
 // Mount all resource routes
 app.use('/api/users', userRoutes);
@@ -59,6 +90,7 @@ app.use('/api/topFiveExercises', topFiveRoutes);
 app.use('/api/workoutsPerMonth', workoutsPerMonth);
 app.use('/api/exerciseProgress', exerciseProgress);
 app.use('/api/images', imageUpload);
+// app.use('/api/uploadFile');
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);

@@ -17,6 +17,7 @@ import FormShow from './components/FormShow';
 import FormTest from './components/FormTest';
 import useApplicationData from './hooks/useApplicationData';
 import Analytics from './components/Analytics/Analytics';
+import Upload from './components/Upload';
 
 function NavBar() {
   const location = useLocation();
@@ -44,7 +45,7 @@ function App() {
   return (
     <div className="App">
       <Router>
-        <NavBar />
+        {/* <NavBar /> */}
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
@@ -82,6 +83,7 @@ function App() {
               exerciseProgress={state.exerciseProgress} 
               workoutsByMonth={state.workoutsByMonth} />} 
             />
+          <Route path="/upload" element={<Upload />} />
         </Routes>
       </Router>
     </div>
