@@ -37,14 +37,15 @@ export default function ExerciseProgress({ exercises }) {
       elevation={6}
       sx={{
         paddingBottom: '1em',
-        maxWidth: '405px',
+        width: '405px',
         margin: '0 auto',
         marginBottom: '1em',
         backgroundColor: "rgba(0, 0, 0, 0.8)",
-        color: "white"
+        color: "white",
+        paddingTop: "1em"
       }}
     >
-      <Typography>
+      <Typography variant="h5">
         Weight Progress in 2023
       </Typography>
 

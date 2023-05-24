@@ -12,12 +12,10 @@ import Home from './components/Home';
 import Login from './components/Login';
 import Register from './components/Register';
 import History from './components/History';
-import Form from './components/Form';
 import FormShow from './components/FormShow';
 import FormTest from './components/FormTest';
 import useApplicationData from './hooks/useApplicationData';
 import Analytics from './components/Analytics/Analytics';
-import Upload from './components/Upload';
 
 function NavBar() {
   const location = useLocation();
@@ -83,7 +81,6 @@ function App() {
               exerciseProgress={state.exerciseProgress} 
               workoutsByMonth={state.workoutsByMonth} />} 
             />
-          <Route path="/upload" element={<Upload />} />
         </Routes>
       </Router>
     </div>
