@@ -1,4 +1,6 @@
 import React from 'react';
+import Card from '@mui/material/Card';
+import Typography from '@mui/material/Typography';
 import {
   XAxis,
   YAxis,
@@ -9,37 +11,41 @@ import {
   Bar
 } from 'recharts';
 
-export default function WorkoutsByMonth({workouts}) {
+export default function WorkoutsByMonth({ workouts }) {
 
   return (
-    <>
-      <div style={{ backgroundColor: 'white', padding: '20 px', boxShadow: '0px 13px 20px 0px #80808029 '}} >
-        <div>
-          <h3>Workouts Per Month</h3>
-          <h5>2023</h5>
-        </div>
-
-        <div>
-            <BarChart
-              width={500}
-              height={300}
-              data={workouts}
-              margin={{
-                top: 5,
-                right: 30,
-                left: 20,
-                bottom: 5,
-              }}
-            >
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey={(data) => data.workout_month.toString()} />
-              <YAxis />
-              <Tooltip />
-              <Legend />
-              <Bar dataKey="workout_count" name="Count" fill="#F44236" barSize={20}/>
-            </BarChart>
-        </div>
+    <Card
+      elevation={6}
+      sx={{
+        paddingBottom: '1em',
+        maxWidth: '405px',
+        margin: '0 auto',
+        marginBottom: '1em',
+        backgroundColor: "rgba(0, 0, 0, 0.8)",
+        color: "white"
+      }}
+    >
+      <Typography>Workouts Per Month in 2023</Typography>
+      <div>
+        <BarChart
+          width={350}
+          height={300}
+          data={workouts}
+        >
+          <CartesianGrid strokeDasharray="3 3" />
+          <XAxis
+            tick={{ fill: 'white' }}
+            axisLine={{ stroke: 'white' }}
+            dataKey={(data) => data.workout_month.toString()} />
+          <YAxis
+            tick={{ fill: 'white' }}
+            axisLine={{ stroke: 'white' }}
+          />
+          <Tooltip />
+          <Legend />
+          <Bar dataKey="workout_count" name="Count" fill="#F44236" barSize={20} />
+        </BarChart>
       </div>
-    </>
+    </Card>
   );
 }

@@ -54,7 +54,7 @@ export default function FormTest(props) {
   }
 
   const formattedDate = moment(dateState).format('YYYY-MM-DD');
-  console.log('formatted date: ', formattedDate)
+  console.log('formatted date: ', formattedDate);
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -71,7 +71,7 @@ export default function FormTest(props) {
         const { weight, reps, quantity, exercise } = set;
         props.addSet(addedworkout.data[0].id, weight, reps, quantity, exercise);
       }
-      navigate('/')
+      navigate('/');
     });
   };
 
@@ -102,43 +102,7 @@ export default function FormTest(props) {
           <Typography variant="h6" sx={{ color: 'white' }}>
             Create a Workout
           </Typography>
-          {selectedImage && (
-            <div>
-              <img
-                alt="not found"
-                width={'250px'}
-                src={URL.createObjectURL(selectedImage)}
-                value={selectedImage}
-              />
-              <Button onClick={() => setSelectedImage(null)}>Remove</Button>
-            </div>
-          )}
-          <LocalizationProvider dateAdapter={AdapterMoment}>
-            <MobileDatePicker
-              label="Date"
-              inputFormat="MM/DD/YYYY"
-              value={dateState}
-              onChange={onDateChange}
-              renderInput={(params) => <TextField {...params} />}
-              sx={{
-                '& .MuiFormLabel-root': {
-                  color: 'white',
-                },
-                '& .MuiInputBase-input': {
-                  fontSize: '13px',
-                  padding: '4px 3px',
-                },
-                '& .MuiOutlinedInput-root': {
-                  color: 'white',
-                  '& fieldset': {
-                    borderColor: 'white',
-                  },
-                },
-              }}
-            />
-          </LocalizationProvider>
-
-          <CardContent sx={{ paddingBottom: '0px' }}>
+          <CardContent sx={{ paddingTop: "0px", marginLeft: "1px", display: "flex", justifyContent: "flex-start" }}>
             <TextField
               label="Title"
               required
@@ -169,7 +133,50 @@ export default function FormTest(props) {
               }}
             />
           </CardContent>
-          <CardContent>
+          <CardContent sx={{ paddingTop: "0px", marginLeft: "1px", display: "flex", justifyContent: "flex-start" }}>
+            <LocalizationProvider dateAdapter={AdapterMoment}>
+              <MobileDatePicker
+                label="Date"
+                inputFormat="MM/DD/YYYY"
+                value={dateState}
+                onChange={onDateChange}
+                error={false}
+                renderInput={(params) => <TextField {...params} />}
+                sx={{
+                  '& .MuiFormLabel-root': {
+                    color: 'white',
+                  },
+                  '& .MuiInputBase-input': {
+                    fontSize: '13px',
+                    padding: '4px 3px',
+                  },
+                  '& .MuiOutlinedInput-root': {
+                    color: 'white',
+                    '& fieldset': {
+                      borderColor: 'white',
+                    },
+                  },
+                }}
+              />
+            </LocalizationProvider>
+          </CardContent>
+          <CardContent sx={{ paddingTop: "0px" }}>
+            {selectedImage && (
+              <div>
+                <div style={{ display: "flex", justifyContent: "center" }}>
+                  <img
+                    alt="not found"
+                    width={'250px'}
+                    src={URL.createObjectURL(selectedImage)}
+                    value={selectedImage}
+                    style={{ paddingTop: "0px" }}
+                  />
+                </div>
+                <div style={{ display: "flex", justifyContent: "center", marginTop: "10px" }}>
+                  <Button variant="contained" sx={{ backgroundColor: "red", "&:hover": { backgroundColor: "red" } }} onClick={() => setSelectedImage(null)}>Remove</Button>
+                </div>
+              </div>
+            )}
             <input
               type="file"
               name="myImage"
@@ -365,7 +372,7 @@ export default function FormTest(props) {
               </Table>
             </TableContainer>
           </CardContent>
-         <Button
+          <Button
             type="submit"
             variant="contained"
             sx={{
@@ -378,7 +385,7 @@ export default function FormTest(props) {
           <Button
             type="button"
             variant="contained"
-            sx={{ margin: '0 1em' }}
+            sx={{ marginLeft: "1em" }}
             onClick={() => {
               setExerciseSets([
                 ...exerciseSets,
@@ -395,6 +402,6 @@ export default function FormTest(props) {
           </Button>
         </form>
       </Card>
-    </CardContent>
+    </CardContent >
   );
 }
