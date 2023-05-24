@@ -54,27 +54,38 @@ export default function FormTest(props) {
     setDateState(newDate);
   };
 
+  const [image, setImage] = useState({});
+
+  const [uploadedImage, setUploadedImage] = useState(null);
+
+  const fileOnChange = (event) => {
+    console.log(event.target.files[0]);
+    setImage(event.target.files[0]);
+    setUploadedImage(URL.createObjectURL(event.target.files[0]))
+}
 
   const formattedDate = moment(dateState).format('YYYY-MM-DD');
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true);
 
     let formData = new FormData();
-    formData.append('myImage', selectedImage.data);
-    const options = {
-      url: 'http://localhost:8080/api/images',
-      method: 'POST',
-      data: formData,
-      headers: { 'content-type': 'multipart/form-data' },
-    };
+
+    formData.append("avatar", image)
+
+     const options = {
+      url: 'http://localhost:8080/api/uploadFile',
+      method: "POST",
+      data : formData
+    }
     const response = await axios(options);
+
+    setLoading(true);
 
     const addedworkout = await props.addWorkout(
       1,
       formattedDate,
-      response.data,
+      uploadedImage,
       description,
       title
     );
@@ -91,7 +102,6 @@ export default function FormTest(props) {
     }, 2000);
   };
 
-
   const removeRow = (index) => {
     setExerciseSets((prev) => {
       const newPrev = [...prev];
@@ -99,7 +109,6 @@ export default function FormTest(props) {
       return [...newPrev];
     });
   };
-
 
   return (
     <CardContent class="home-wrapper">
@@ -150,7 +159,8 @@ export default function FormTest(props) {
                   },
                 }}
               />
-            </CardContent>
+            </LocalizationProvider>
+          </CardContent>
             <CardContent sx={{ paddingTop: "0px", marginLeft: "1px", display: "flex", justifyContent: "flex-start" }}>
               <LocalizationProvider dateAdapter={AdapterMoment}>
                 <MobileDatePicker
@@ -178,59 +188,52 @@ export default function FormTest(props) {
                 />
               </LocalizationProvider>
             </CardContent>
-            <CardContent sx={{ paddingTop: "0px" }}>
-              {selectedImage && (
-                <div>
-                  <div style={{ display: "flex", justifyContent: "center" }}>
-                    {/* <img
-                    alt="not found"
-                    width={'250px'}
-                    src={URL.createObjectURL(selectedImage)}
-                    value={selectedImage}
-                    style={{ paddingTop: "0px" }}
-                  /> */}
-                    {/* <input type='file' name='file' onChange={handleFileChange}></input> */}
-                  </div>
-                  <div style={{ display: "flex", justifyContent: "center", marginTop: "10px" }}>
-                    <Button variant="contained" sx={{ backgroundColor: "red", "&:hover": { backgroundColor: "red" } }} onClick={() => setSelectedImage(null)}>Remove</Button>
-                  </div>
-                </div>
-              )}
-              <input
-                type="file"
-                name="myImage"
-                onChange={(event) => {
-                  const img = {
-                    preview: URL.createObjectURL(event.target.files[0]),
-                    data: event.target.files[0],
-                  };
-                  setSelectedImage(img);
-                }}
-                style={{
-                  color: 'white',
-                  padding: '10px',
-                  border: 'none',
-                  borderRadius: '5px',
-                }}
-              />
-            </CardContent>
-            <CardContent sx={{ padding: '0px' }}>
-              <TextField
-                id="outlined-multiline-static"
-                multiline
-                label="Description"
-                value={description}
-                onChange={(event) => setDescription(event.target.value)}
-                InputProps={{
-                  endAdornment: (
-                    <InputAdornment position="start"></InputAdornment>
-                  ),
-                }}
-                InputLabelProps={{
-                  sx: { color: 'white' },
-                  shrink: true,
-                }}
-                sx={{
+          <CardContent sx={{ paddingTop: "0px" }}>
+          {uploadedImage && (
+  <div>
+    <div style={{ display: "flex", justifyContent: "center" }}>
+      <img
+        alt="Uploaded"
+        width={'250px'}
+        src={uploadedImage}
+        style={{ paddingTop: "0px" }}
+      />
+    </div>
+    <div style={{ display: "flex", justifyContent: "center", marginTop: "10px" }}>
+      <Button
+        variant="contained"
+        sx={{ backgroundColor: "red", "&:hover": { backgroundColor: "red" } }}
+        onClick={() => {
+          setSelectedImage(null);
+          setUploadedImage(null); // Reset the uploaded image
+        }}
+      >
+        Remove
+      </Button>
+    </div>
+  </div>
+)}
+         <div className="upload">
+            <input type="file" onChange={fileOnChange}/>
+        </div>
+          </CardContent>
+          <CardContent sx={{ padding: '0px' }}>
+            <TextField
+              id="outlined-multiline-static"
+              multiline
+              label="Description"
+              value={description}
+              onChange={(event) => setDescription(event.target.value)}
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="start"></InputAdornment>
+                ),
+              }}
+              InputLabelProps={{
+                sx: { color: 'white' },
+                shrink: true,
+              }}
+     sx={{
                   width: '390px',
                   '& .MuiInputBase-input': {
                     fontSize: '13px',
@@ -244,7 +247,6 @@ export default function FormTest(props) {
                     },
                   },
                 }}
-              />
             </CardContent>
             <CardContent>
               <TableContainer component={Paper} sx={{ backgroundColor: '#222' }}>
