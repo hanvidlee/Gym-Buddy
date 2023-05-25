@@ -191,7 +191,7 @@ export default function FormShow({
               <button onClick={() => setImageState(null)}>Remove</button>
             </div>
           )} */}
-              <input
+              {/* <input
                 type="file"
                 name="myImage"
                 onChange={(event) => {
@@ -202,8 +202,8 @@ export default function FormShow({
                   padding: '10px',
                   border: 'none',
                   borderRadius: '5px',
-                }}
-              />
+                }} */}
+              {/* /> */}
             </CardContent>
             <CardContent sx={{ paddingTop: "0px", marginLeft: "1px", display: "flex", justifyContent: "flex-start" }}>
               <LocalizationProvider dateAdapter={AdapterMoment}>

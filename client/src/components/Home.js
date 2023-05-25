@@ -10,6 +10,7 @@ import { Link } from 'react-router-dom';
 import './Home.scss';
 
 export default function Home({ workouts }) {
+  console.log(workouts[0])
   return (
     <CardContent class="home-wrapper">
       <Box sx={{

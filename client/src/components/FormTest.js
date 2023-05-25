@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import InputAdornment from '@mui/material/InputAdornment';
 import TextField from '@mui/material/TextField';
@@ -25,6 +25,10 @@ import Loading from './LoadingIcon';
 
 export default function FormTest(props) {
   const exerciseList = props.exercises.map((e) => e.name);
+
+  // const [, updateState] = React.useState();
+
+  // const forceUpdate = React.useCallback(() => updateState({}), []);
 
   const [selectedImage, setSelectedImage] = useState(null);
 
@@ -57,15 +61,22 @@ export default function FormTest(props) {
   const [image, setImage] = useState({});
 
   const [uploadedImage, setUploadedImage] = useState(null);
+  // const [isLoaded, setIsLoaded] = useState(false);
+
+  // useEffect(() => {
+  //   console.log(uploadedImage);
+  // }, [isLoaded]);
 
   const fileOnChange = (event) => {
     console.log(event.target.files[0]);
     setImage(event.target.files[0]);
-    setUploadedImage(URL.createObjectURL(event.target.files[0]));
+    // setUploadedImage(event.target.files[0]);
   };
 
   const formattedDate = moment(dateState).format('YYYY-MM-DD');
 
+  let response;
+  
   const onSubmit = async (e) => {
     e.preventDefault();
 
@@ -78,14 +89,22 @@ export default function FormTest(props) {
       method: "POST",
       data: formData
     };
-    const response = await axios(options);
+    response = await axios(options);
+    console.log('RESPONSE DATA: ', response.data)
+
+    setUploadedImage(response.data)
+    // setIsLoaded(true, setUploadedImage(response.data));
+
+    // forceUpdate();
+
+    console.log('UPLOADEDIMAGE ', uploadedImage)
 
     setLoading(true);
 
     const addedworkout = await props.addWorkout(
       1,
       formattedDate,
-      uploadedImage,
+      'https://drive.google.com/uc?export=download&id=1L1OtSmYEctnvNgTCKXP1t-4k2ilswrWD',
       description,
       title
     );
@@ -194,7 +213,7 @@ export default function FormTest(props) {
                     <img
                       alt="Uploaded"
                       width={'250px'}
-                      src={uploadedImage}
+                      src={response ? response.data : ''}
                       style={{ paddingTop: "0px" }}
                     />
                   </div>
