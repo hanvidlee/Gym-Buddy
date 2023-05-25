@@ -7,7 +7,7 @@ const express = require('express');
 const morgan = require('morgan');
 const cors = require("cors");
 const cookieSession = require('cookie-session');
-const bodyParser = require('body-parser')
+const bodyParser = require('body-parser');
 
 const PORT = process.env.PORT || 8080;
 const app = express();
@@ -17,15 +17,14 @@ const fs = require('fs');
 const router = express.Router();
 const multer = require('multer');
 const storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-        cb(null, './images/');
-    },
-    filename: (req, file, cb) => {
-        cb(null, file.originalname);
-    },
+  destination: (req, file, cb) => {
+    cb(null, './images/');
+  },
+  filename: (req, file, cb) => {
+    cb(null, file.originalname);
+  },
 });
 const upload = multer({ storage: storage });
-
 
 // Load the logger first so all (static) HTTP requests are logged to STDOUT
 // 'dev' = Concise output colored by response status for development use.
@@ -65,17 +64,41 @@ const imageUpload = require('./routes/imageUpload');
 // upload.js 
 app.use(express.static('./images'));
 
+
+
 app.post('/api/uploadFile', upload.single('avatar'), (req, res) => {
-  console.log('FILE: ', req.file)
+  console.log("REQ BUFFER: ", req.buffer);
 
-  let fileType = req.file.mimetype.split("/")[1]
-  let newFileName = req.file.filename + "." + fileType
-  console.log("newFileName: ", newFileName)
+  const filePath = req.file.path;
 
-  fs.rename(`./images/${req.file.filename}`, `./images/${newFileName}`, function() {
-      res.send("200");
-  })
+  fs.readFile(filePath, (error, data) => {
+    if (error) {
+      console.error('Error reading file: ', error);
+      return;
+    }
+
+    // buffer can be used for sending it over a network/storing it in database/further manipulation
+    const buffer = Buffer.from(data);
+
+    let binary = '';
+
+    const bytes = new Uint8Array(buffer);
+
+    for (let i = 0; i < bytes.length; i++) {
+      binary += String.fromCharCode(bytes[i]);
+    }
+
+    const src = "data:image/jpeg;base64," + btoa(binary);
+
+    let fileType = req.file.mimetype.split("/")[1];
+    let newFileName = req.file.filename + "." + fileType;
+
+    fs.rename(`./images/${req.file.filename}`, `./images/${newFileName}`, function() {
+      res.send(src);
+    });
+  });
 });
+
 
 // Mount all resource routes
 app.use('/api/users', userRoutes);
