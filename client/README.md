@@ -1,70 +1,51 @@
-# Getting Started with Create React App
+# GymBuddy
+GymBuddy is a fitness tracking app that empowers users to monitor their fitness progress.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Quick Glance
+This is the About Us page that introduces the team behind the app.
+!["Screenshot of About Us page"]()
 
-## Available Scripts
+This is what the calendar looks like. The user can maneuver around the calendar to view the days they have worked out, which is indicated by the gym icon.
 
-In the project directory, you can run:
+!["Screenshot of Calendar page"]()
 
-### `npm start`
+A user is first directed to the the home page, which is a dashboard contianing all their workout logs. They can click on "View Details" which will display additional details where they have the ability to edit the information.
+!["Gif of homepage and editing a workout"]()
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Example of how a user can create a workout.
+!["Gif of how to create a workout"]()
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Example of how a user can delete a logged workout.
+!["Gif of how to delete a workout"]()
 
-### `npm test`
+This is the history page displaying all exercises in all logged workouts and filter for specific exercises the user has done.
+!["Gif of the history page functionality"]()
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+This is the analytics page displaying personalized metrics based on the user's workout logs.
+!["Gif of the analytics page functionality "]()
 
-### `npm run build`
+## Dependencies
+- React
+- Express
+- Multer
+- Material UI
+- PostgreSQL
+- Rechart
+- Day.js
+- Moment
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Setup
+### In the project/backend2 directory, you can run:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- 'npm install' to install dependencies
+- Create .env file based on .env.example
+- 'startpostgres' to start up postgres and login
+- 'CREATE DATABASE gymbuddy' and '\c gymbuddy' in order to connect to gymbuddy
+- 'npm run db:reset' to create, load, and seed db
+- 'npm start' to run webpack development server
+- Open [http://localhost:8080](http://localhost:8080) to view the backend routes in your browser
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+### In the project/client directory, you can run: 
+- 'yarn install' to install dependencies
+- 'yarn start' to run the browser
+- Open [http://localhost:3000](http://localhost:3000) to view it in your browser
