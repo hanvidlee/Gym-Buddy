@@ -46,7 +46,6 @@ export default function FormShow({
   const [exercisesState, setExercisesState] = useState(setsPerWorkout);
   const [imageState, setImageState] = useState(workout?.picture_url);
   const [isEditMode, setIsEditMode] = useState(false);
-  const [loading, setLoading] = useState(false);
 
   const onDateChange = (newDate) => {
     setDateState(newDate);
@@ -84,7 +83,6 @@ export default function FormShow({
   };
 
   const onSave = async () => {
-    setLoading(true);
     await updateWorkout(id, imageState, descriptionState, titleState);
     for (const exercise of exercisesState) {
       if (exercise.isShown === false) {
@@ -101,7 +99,6 @@ export default function FormShow({
 
     await new Promise(resolve => setTimeout(resolve, 2000));
     setIsEditMode(false);
-    setLoading(false);
   };
 
   const onAdd = () => {
